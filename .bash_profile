@@ -57,7 +57,7 @@ GIT_PS1="$(__git_ps1 ${DARK_BLUE}%s${RESET})"
 
 PROMPT_SYMBOL_PS1="\n↪ " # ✂ ☎ ☏ ☕ ☞ ☛ | ☠ ☭ ♂ ⚡ ϟ | ♘ ♞ | ♖ ♜ | ♔ ♚ | ♕ ♛ | ♙ ♟ | ♫ ♻ ♺ ⚓ ✎ ✏ ✐ ✑ ↪ ▸ ▹ ► ▻ Ⓧ ⎈ ⧔ ⧕ ⧫ ⬤ ●
 
-export PS1="${USER_PS1} at ${HOST_PS1} in ${PATH_PS1} on ${GIT_PS1} ${PROMPT_SYMBOL_PS1}"
+export PS1="$USER_PS1 at $HOST_PS1 in $PATH_PS1 on $GIT_PS1 $PROMPT_SYMBOL_PS1"
 
 
 ########################
