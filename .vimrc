@@ -66,7 +66,7 @@ set splitright
 " tabs & indentation
 filetype plugin indent on
 set autoindent
-let tabsize = 4
+let tabsize = 2
 autocmd filetype python let tabsize=4
 let &tabstop=tabsize            " tab = 2 spaces
 let &shiftwidth=tabsize         " spaces used by autoindeting
