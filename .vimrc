@@ -99,13 +99,16 @@ set nowb
 
 " shortcuts
 noremap <C-n> :NERDTreeToggle<Return>
+noremap <C-t> :Files<Return>
 
 " nvim specific
 if has('nvim')
   tnoremap <C-[> <C-\><C-n>     " normal mode from nvim term
 endif
 
-
+"============================================================
+"                    
+"============================================================
 set nocompatible
 filetype off
 
@@ -113,11 +116,15 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-surround' " https://github.com/tpope/vim-surround
 Plugin 'scrooloose/nerdtree'
-
-" colorschemes!
-Plugin 'dracula/vim'
-Plugin 'cseelus/vim-colors-lucid'
+Plugin 'scrooloose/nerdcommenter'
+"Plugin 'scrooloose/syntastic'
+Plugin 'junegunn/fzf' " https://github.com/junegunn/fzf.vim
+Plugin 'junegunn/fzf.vim' " https://github.com/junegunn/fzf
+Plugin 'mattn/emmet-vim' "http://docs.emmet.io/cheat-sheet/
+"Plugin 'valloric/youcompleteme'
+"Plugin '
 
 call vundle#end()
 filetype plugin indent on

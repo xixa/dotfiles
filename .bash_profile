@@ -47,7 +47,9 @@ PATH_PS1="${MEDIUM_BLUE}\w${RESET}"
 # git prompt
 if [ -e ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh #loads git-prompt
-  GIT_PS1="on $(__git_ps1 ${DARK_BLUE}%s${RESET})"
+  GIT_PS1_SHOWUNTRACKEDFILES=true
+  GIT_PS1_SHOWUPSTREAM="auto"
+  GITPROMPT_PS1='$(__git_ps1 "on ${DARK_BLUE}%s${RESET}")'
 fi
 
 # colorful pattern
@@ -60,8 +62,8 @@ fi
 
 PROMPT_SYMBOL_PS1="\n↪ " # ✂ ☎ ☏ ☕ ☞ ☛ | ☠ ☭ ♂ ⚡ ϟ | ♘ ♞ | ♖ ♜ | ♔ ♚ | ♕ ♛ | ♙ ♟ | ♫ ♻ ♺ ⚓ ✎ ✏ ✐ ✑ ↪ ▸ ▹ ► ▻ Ⓧ ⎈ ⧔ ⧕ ⧫ ⬤ ●
 
-export PS1="$USER_PS1 at $HOST_PS1 in $PATH_PS1 $GIT_PS1 $PROMPT_SYMBOL_PS1"
-
+PS1="$USER_PS1 at $HOST_PS1 in $PATH_PS1 $GITPROMPT_PS1 $PROMPT_SYMBOL_PS1"
+#PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 
 ########################
 ### COMMANDS/ALIASES ###
