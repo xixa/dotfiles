@@ -100,6 +100,7 @@ set nowb
 " shortcuts
 noremap <C-n> :NERDTreeToggle<Return>
 noremap <C-t> :Files<Return>
+noremap <C-\> :NERDComToggleComment<Return>
 
 " nvim specific
 if has('nvim')
