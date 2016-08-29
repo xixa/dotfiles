@@ -53,13 +53,6 @@ COLOR_0="${YELLOW}"
 COLOR_1="${GREEN}"
 COLOR_2="${LIGHT_BLUE}"
 COLOR_3="${MEDIUM_BLUE}"
-COLOR_4="${DARK_BLUE}",
-
-# colorscheme 2
-COLOR_0="${PINK}"
-COLOR_1="${GREEN}"
-COLOR_2="${LIGHT_BLUE}"
-COLOR_3="${MEDIUM_BLUE}"
 COLOR_4="${DARK_BLUE}"
 
 # structure elements
@@ -73,14 +66,16 @@ if [ -e ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh #loads git-prompt
   GIT_PS1_HIDE_IF_PWD_IGNORED=true #do nothing if dir is .gitignored
   GIT_PS1_SHOWUNTRACKEDFILES=true
-  GIT_PS1_SHOWUPSTREAM="verbose"
+  GIT_PS1_SHOWDIRTYSTATE=true
+  GIT_PS1_SHOWUPSTREAM="git"
   GIT_PS1_DESCRIBE_STYLE="contains"
-  GIT_PS1_SHOWCOLORHINTS=true
-  GIT_PS1_STATESEPARATOR="|"
+  #GIT_PS1_SHOWCOLORHINTS=true
+  GIT_PS1_STATESEPARATOR="${RESET} ${PINK}"
   gitPrompt() {
       case $(__git_ps1) in
-          *"%>"*)   echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ frente untraco/';; # untracked files
-          *"%"*)    echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ untraco/';; # untracked files
+          *"%>"*) #untracked
+            echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ frente untraco/';;
+          *"%"*)    echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ untraco/';; # dirty
           *"<>"*)   echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ briguinha/';; # stream diverged
           *"="*)    echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ tamoai/';; # normal
           *"<"*)    echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ volta/';;
@@ -88,11 +83,18 @@ if [ -e ~/.git-prompt.sh ]; then
       esac
   }
 
+  dirty() {
+    if [[ $1 == *"%"* ]]; then true; fi
+  }
+
   #GITPROMPT_PS1='$(gitPrompt)'
-  GITPROMPT_PS1='$(__git_ps1)'
+  GITPROMPT_PS1='$(__git_ps1 "on ${COLOR_4}%s${RESET}")'
 fi
 
 #http://www.fileformat.info/info/unicode/block/geometric_shapes/list.htm
-PROMPT_SYMBOL_PS1="\n${RESET}↪ " # ✂ ☎ ☏ ☕ ☞ ☛ | ☠ ☭ ♂ ⚡ ϟ | ♘ ♞ | ♖ ♜ | ♔ ♚ | ♕ ♛ | ♙ ♟ | ♫ ♻ ♺ ⚓ ✎ ✏ ✐ ✑ ↪ ▸ ▹ ► ▻ Ⓧ ⎈ ⧔ ⧕ ⧫ ⬤ ●
+PROMPT_SYMBOL_PS1="\n↪ " # ✂ ☎ ☏ ☕ ☞ ☛ | ☠ ☭ ♂ ⚡ ϟ | ♘ ♞ | ♖ ♜ | ♔ ♚ | ♕ ♛ | ♙ ♟ | ♫ ♻ ♺ ⚓ ✎ ✏ ✐ ✑ ↪ ▸ ▹ ► ▻ Ⓧ ⎈ ⧔ ⧕ ⧫ ⬤ ●
+
+# this var executes a command before bash display the prompt
+#PROMPT_COMMAND="echo -n [$(date +%H%M)]"
 
 PS1="$USER_PS1 at $HOST_PS1 in $PATH_PS1 $GITPROMPT_PS1 $PROMPT_SYMBOL_PS1"

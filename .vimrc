@@ -21,6 +21,7 @@ set ruler                       " display info on the right bottom
 set showmode                    " always show the current mode
 set showcmd
 set cursorline                  " highlights the current line
+set relativenumber
 autocmd InsertEnter * :set number               " absolute in insert
 autocmd InsertLeave * :set relativenumber       " relative in normal mode
 
