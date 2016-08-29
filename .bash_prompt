@@ -65,12 +65,12 @@ PATH_PS1="${COLOR_3}\w${RESET}"
 if [ -e ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh #loads git-prompt
   GIT_PS1_HIDE_IF_PWD_IGNORED=true #do nothing if dir is .gitignored
+  GIT_PS1_STATESEPARATOR="${RESET} ${PINK}"
   GIT_PS1_SHOWUNTRACKEDFILES=true
   GIT_PS1_SHOWDIRTYSTATE=true
   GIT_PS1_SHOWUPSTREAM="git"
   GIT_PS1_DESCRIBE_STYLE="contains"
   #GIT_PS1_SHOWCOLORHINTS=true
-  GIT_PS1_STATESEPARATOR="${RESET} ${PINK}"
   gitPrompt() {
       case $(__git_ps1) in
           *"%>"*) #untracked
