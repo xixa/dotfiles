@@ -1,0 +1,98 @@
+#!/bin/bash  ╱  ╱  ╱ ╱ ╱
+# ╱ ╱ ╱ ╱  A   ╱ ╱ ╱ ╱ ╱
+# ╱┳┳╮╭╮┳╮╱╭╮┳╭╮╱ ╱ ╱
+# ╱┃┃┃┣┫┣┻╮┃╱┃┃┃╱ ╱ ╱ ╱ ╱
+# ╱┛┛┛┻┗┻╱┗╰╯┻╰╯╱ ╱ ╱
+# ╱┳┳╭┛┳┓┳┳╮╭╮┏┳┓╭╮┳╭┛
+# ╱┃┣┻╮┣╱┃┃┃┣┫╱┃╱╰╮┃┃
+# ╱┻┗╱┗┗┛┛┛┛┛┗╱┻╱╰╯╰┻
+# ╱ ╱ ╱ ╱ ╱ ╱ ╱ DOTFILE ♡ ╱
+# ╱ ╱ ╱ ╱ ╱ ╱ ╱  ╱ ╱ ╱
+# ╱ ╱ ╱ ╱ ╱ ╱ ╱
+# ╱ ╱ ╱ ╱ ╱ ╱ ╱
+# ╱ ╱ ╱ ╱ ╱
+# ╱ ╱ ╱                      marcio.ikematsu@usp.br
+# ╱
+
+#################
+### VARIABLES ###
+#################
+
+TERM=xterm-256color
+PINK="$(tput setaf 198)"
+RED="$(tput setaf 9)"
+ORANGE="$(tput setaf 214)"
+YELLOW="$(tput setaf 154)"
+GREEN="$(tput setaf 118)"
+CYAN="$(tput setaf 39)"
+LIGHT_BLUE="$(tput setaf 45)"
+MEDIUM_BLUE="$(tput setaf 39)"
+DARK_BLUE="$(tput setaf 33)"
+PURPLE="$(tput setaf 135)"
+GREY="$(tput setaf 248)"
+RESET="$(tput sgr0)"
+
+#############################
+### 3rd PARTY STUFF SETUP ###
+#############################
+
+# virtualenvwrapper settings
+if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
+  export WORKON_HOME=$HOME/.virtualenvs #virtual environments folder
+  export PROJECT_HOME=$HOME/Projects/web/ # projects folder
+  source /usr/local/bin/virtualenvwrapper.sh #location of the script TODO: add this to dotfile
+  # export VIRTUAL_ENV_DISABLE_PROMPT=1 # disables virtualenv in the prompt
+fi
+
+
+#################
+### MY PROMPT ###
+#################
+# colorscheme 1
+COLOR_0="${YELLOW}"
+COLOR_1="${GREEN}"
+COLOR_2="${LIGHT_BLUE}"
+COLOR_3="${MEDIUM_BLUE}"
+COLOR_4="${DARK_BLUE}",
+
+# colorscheme 2
+COLOR_0="${PINK}"
+COLOR_1="${GREEN}"
+COLOR_2="${LIGHT_BLUE}"
+COLOR_3="${MEDIUM_BLUE}"
+COLOR_4="${DARK_BLUE}"
+
+# structure elements
+VENV_PS1="${COLOR_0}"
+VENV_SYMBOL_PS1="●"
+USER_PS1="${COLOR_1}\u${RESET}"
+HOST_PS1="${COLOR_2}\h${RESET}"
+PATH_PS1="${COLOR_3}\w${RESET}"
+# git prompt
+if [ -e ~/.git-prompt.sh ]; then
+  source ~/.git-prompt.sh #loads git-prompt
+  GIT_PS1_HIDE_IF_PWD_IGNORED=true #do nothing if dir is .gitignored
+  GIT_PS1_SHOWUNTRACKEDFILES=true
+  GIT_PS1_SHOWUPSTREAM="verbose"
+  GIT_PS1_DESCRIBE_STYLE="contains"
+  GIT_PS1_SHOWCOLORHINTS=true
+  GIT_PS1_STATESEPARATOR="|"
+  gitPrompt() {
+      case $(__git_ps1) in
+          *"%>"*)   echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ frente untraco/';; # untracked files
+          *"%"*)    echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ untraco/';; # untracked files
+          *"<>"*)   echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ briguinha/';; # stream diverged
+          *"="*)    echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ tamoai/';; # normal
+          *"<"*)    echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ volta/';;
+          *'>'*)    echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ frenta/';; # ahed stream
+      esac
+  }
+
+  #GITPROMPT_PS1='$(gitPrompt)'
+  GITPROMPT_PS1='$(__git_ps1)'
+fi
+
+#http://www.fileformat.info/info/unicode/block/geometric_shapes/list.htm
+PROMPT_SYMBOL_PS1="\n${RESET}↪ " # ✂ ☎ ☏ ☕ ☞ ☛ | ☠ ☭ ♂ ⚡ ϟ | ♘ ♞ | ♖ ♜ | ♔ ♚ | ♕ ♛ | ♙ ♟ | ♫ ♻ ♺ ⚓ ✎ ✏ ✐ ✑ ↪ ▸ ▹ ► ▻ Ⓧ ⎈ ⧔ ⧕ ⧫ ⬤ ●
+
+PS1="$USER_PS1 at $HOST_PS1 in $PATH_PS1 $GITPROMPT_PS1 $PROMPT_SYMBOL_PS1"

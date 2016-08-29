@@ -49,7 +49,11 @@ if [ -e ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh #loads git-prompt
   GIT_PS1_SHOWUNTRACKEDFILES=true
   GIT_PS1_SHOWUPSTREAM="auto"
-  GITPROMPT_PS1='$(__git_ps1 "on ${DARK_BLUE}%s${RESET}")'
+  if [[ $(__git_ps1) == *">"* ]]; then GIT_SYMBOL="♘"; fi
+  if [[ $(__git_ps1) == *"="* ]]; then GIT_SYMBOL="☠"; fi
+  if [[ $(__git_ps1) == *"%>"* ]]; then GIT_SYMBOL="♞"; fi
+
+  GITPROMPT_PS1='$(__git_ps1 "on ${DARK_BLUE}%s${RESET}") $GIT_SYMBOL'
 fi
 
 # colorful pattern
