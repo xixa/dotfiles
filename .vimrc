@@ -115,7 +115,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'nvie/vim-flake8'
 
 call plug#end()
