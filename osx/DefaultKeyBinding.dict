@@ -1,0 +1,10 @@
+// ~/Library/KeyBindings/DefaultKeyBinding.dict
+{
+  "~@a" = ("insertText:", "\U2234");  // ∴ therefore
+  "~@b" = ("insertText:", "\U2235");  // ∵ because (conflict: Opera)
+  "~@=" = ("insertText:", "\U2295");  // ⊕ exclusive disjunction (xor)
+  "~@c" = ("insertText:", "\U2318");  // ⌘ command key
+  "~@o" = ("insertText:", "\U2325");  // ⌥ alt/option key
+  "~@s" = ("insertText:", "\U21E7");  // ⇧ shift key
+  "~@q" = ("insertText:", "\U2388");  // ⌃ control key
+}

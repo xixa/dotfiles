@@ -22,9 +22,10 @@ TERM=xterm-256color
 PINK="$(tput setaf 198)"
 RED="$(tput setaf 9)"
 ORANGE="$(tput setaf 214)"
-YELLOW="$(tput setaf 154)"
+LIME="$(tput setaf 154)"
 GREEN="$(tput setaf 118)"
 CYAN="$(tput setaf 39)"
+YELLOW=$(tput setaf 220)
 LIGHT_BLUE="$(tput setaf 45)"
 MEDIUM_BLUE="$(tput setaf 39)"
 DARK_BLUE="$(tput setaf 33)"
@@ -48,24 +49,41 @@ fi
 #################
 ### MY PROMPT ###
 #################
-# colorscheme 1
-COLOR_0="${YELLOW}"
-COLOR_1="${GREEN}"
-COLOR_2="${LIGHT_BLUE}"
-COLOR_3="${MEDIUM_BLUE}"
-COLOR_4="${DARK_BLUE}"
+# theme: blue sky
+# COLOR_0="${LIME}"
+# COLOR_1="${GREEN}"
+# COLOR_2="${LIGHT_BLUE}"
+# COLOR_3="${MEDIUM_BLUE}"
+# COLOR_4="${DARK_BLUE}"
+
+# theme: warm sky
+# COLOR_5=""
+# COLOR_0=$PINK
+# COLOR_1=$(tput setaf 202)
+# COLOR_2=$(tput setaf 208)
+# COLOR_3=$(tput setaf 214)
+# COLOR_4=$(tput setaf 220)
+
+# theme: 80's space age
+COLOR_0=""
+COLOR_1=$DARK_BLUE
+COLOR_2=$MEDIUM_BLUE
+COLOR_3=$(tput setaf 165)
+COLOR_4=$(tput setaf 207)
+COLOR_5=""
 
 # structure elements
 VENV_PS1="${COLOR_0}"
-VENV_SYMBOL_PS1="●"
+VENV_SYMBOL_PS1="● "
 USER_PS1="${COLOR_1}\u${RESET}"
-HOST_PS1="${COLOR_2}\h${RESET}"
+#HOST_PS1="${COLOR_2}\h${RESET}"
+HOST_PS1="${COLOR_2}$(scutil --get LocalHostName)${PLUS}${RESET}"
 PATH_PS1="${COLOR_3}\w${RESET}"
 # git prompt
 if [ -e ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh #loads git-prompt
   GIT_PS1_HIDE_IF_PWD_IGNORED=true #do nothing if dir is .gitignored
-  GIT_PS1_STATESEPARATOR="${RESET} ${PINK}"
+  GIT_PS1_STATESEPARATOR="${RESET} ${COLOR_5}"
   GIT_PS1_SHOWUNTRACKEDFILES=true
   GIT_PS1_SHOWDIRTYSTATE=true
   GIT_PS1_SHOWUPSTREAM="git"
