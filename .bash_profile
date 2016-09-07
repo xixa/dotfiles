@@ -25,6 +25,9 @@ elif [ "$(uname)" == "Linux" ]; then
 fi
 
 # meta
+realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
 alias srcit='source $HOME/.bash_profile'
 alias edbash='v $HOME/.bash_profile'
 alias edvimrc='v $HOME/.vimrc'
@@ -52,9 +55,10 @@ if [ "command -v tree" != "" ]; then
   alias tree='tree -a -I $(cat ~/dotfiles/.gitignore | grep -v "^#.*$|^[[:space:]]*$" | tr "\\n" "|" | sed "s/.$//")'
 fi
 
-#     ▁▁▁ ╭╮╭┫╳╋╭╮┏╮ ▁▁▁▁
-#     ▔▔▔ ┣┛╰╯┃╰╰╯┣┻╮ ▔▔▔
-#           ╰╯
+# npm
+alias ng='npm list -g --depth=0 2>/dev/null' # lists packages globally, only the first level and throw stderr to the black hole
+alias nl='npm list --depth=0 2>/dev/null' # same, but locally
+
 
 # vim/nvim
 if [ "command -v nvim" != "" ]; then
@@ -83,9 +87,6 @@ if [ "command -v s" != "" ]; then
   }
 fi
 
-
-#     ▁▁▁ ┳╮╭╮┳┓┃ ▁▁▁
-#     ▔▔▔ ┣╯┣┫┃┣┫ ▔▔▔
 
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
 # export PYTHONSTARTUP=$HOME/xixa.py #runs a script when an interactive interpreter session starts

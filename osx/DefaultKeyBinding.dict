@@ -6,5 +6,5 @@
   "~@c" = ("insertText:", "\U2318");  // ⌘ command key
   "~@o" = ("insertText:", "\U2325");  // ⌥ alt/option key
   "~@s" = ("insertText:", "\U21E7");  // ⇧ shift key
-  "~@q" = ("insertText:", "\U2388");  // ⌃ control key
+  "~@q" = ("insertText:", "\U2303");  // ⌃ control key
 }

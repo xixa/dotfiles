@@ -34,3 +34,6 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 
 # DefaultKeyBinding.dict
 alias keybindings="cat $HOME/dotfiles/osx/DefaultKeyBinding.dict" #TODO: make it into a command that shows the actual shortcuts
+
+# silly
+alias funeral=" say -v Bad dum dum dum dum dum dum dum dum dum dum dum"
