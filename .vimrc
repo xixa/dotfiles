@@ -4,6 +4,7 @@
 "
 "    with snippets of code stolen from:
 "       * joshua hogendorn
+"       
 "       *
 
 syntax on
@@ -107,7 +108,7 @@ set mouse=a                                       " enables mouse
 set clipboard=unnamed                             " OS clipboard
 set autoread                                      " auto-reloads files changed outside vi
 set showmatch                                     " shows matching parenthesis
-set scrolloff=8                                   " n lines margin when scrolling
+set scrolloff=24                                   " n lines margin when scrolling
 
 " behind the scenes
 set noswapfile
@@ -134,8 +135,32 @@ let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsSnippetDirectories=["my_snippets"]
 let g:UltiSnipsJumpForwardTrigger= '<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
-"
-" vim specific
+
+"Goyo
+function! s:goyo_enter()
+  set noshowmode
+  set noshowcmd
+  set noruler
+  set nocursorcolumn
+  set nocursorline
+  set scrolloff=999
+  set nonumber
+  set norelativenumber
+  autocmd! InsertEnter
+  autocmd! InsertLeave
+  autocmd! BufWritePost  
+endfunction
+
+function! s:goyo_leave()
+  autocmd InsertEnter * call MyInsertMode()
+  autocmd InsertLeave * call MyNormalMode()
+  autocmd BufWritePost ~/.vimrc so %
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+"nvim specific
 if has('nvim')
 "  tnoremap <C-[> <C-\><C-n>     " normal mode from nvim term
 endif
@@ -154,11 +179,12 @@ Plug 'http://github.com/sirver/ultisnips'
 "Plug 'http://github.com/shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'http://github.com/bling/vim-bufferline'
 Plug 'http://github.com/christoomey/vim-tmux-navigator'
-
+Plug 'http://github.com/junegunn/goyo.vim'
+Plug 'http://github.com/junegunn/limelight.vim'
 "react shit
 Plug 'http://github.com/mxw/vim-jsx'            " syntax highlighter
 Plug 'http://github.com/justinj/vim-react-snippets'
 
 call plug#end()
 
-autocmd! bufwritepost ~/.vimrc source %           " auto-source
+autocmd! BufWritePost ~/.vimrc so %
