@@ -12,19 +12,19 @@ local sizeup = { }
 
 --- Split Screen Actions ---
 -- Send Window Left
-hs.hotkey.bind({"ctrl","alt","cmd"}, "Left", function()
+hs.hotkey.bind({"ctrl","alt","cmd"}, "H", function()
   sizeup.send_window_left()
 end)
 -- Send Window Right
-hs.hotkey.bind({"ctrl","alt","cmd"}, "Right", function()
+hs.hotkey.bind({"ctrl","alt","cmd"}, "L", function()
   sizeup.send_window_right()
 end)
 -- Send Window Up
-hs.hotkey.bind({"ctrl","alt","cmd"}, "Up", function()
+hs.hotkey.bind({"ctrl","alt","cmd"}, "K", function()
   sizeup.send_window_up()
 end)
 -- Send Window Down
-hs.hotkey.bind({"ctrl","alt","cmd"}, "Down", function()
+hs.hotkey.bind({"ctrl","alt","cmd"}, "J", function()
   sizeup.send_window_down()
 end)
 
@@ -73,7 +73,7 @@ hs.hotkey.bind({"cmd","alt","ctrl"}, "M", function()
   sizeup.maximize()
 end)
 -- Send Window Center
-hs.hotkey.bind({"cmd","alt","ctrl"}, "J", function()
+hs.hotkey.bind({"cmd","alt","ctrl"}, "C", function()
   sizeup.move_to_center_absolute({w=800, h=600})
   -- sizeup.move_to_center_relative({w=0.75, h=0.75})
 end)

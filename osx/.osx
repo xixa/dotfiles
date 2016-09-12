@@ -30,10 +30,10 @@ alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 7'"
 
 # system
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend; pmset displaysleepnow"
 
 # DefaultKeyBinding.dict
 alias keybindings="cat $HOME/dotfiles/osx/DefaultKeyBinding.dict" #TODO: make it into a command that shows the actual shortcuts
 
 # silly
-alias funeral=" say -v Bad dum dum dum dum dum dum dum dum dum dum dum"
+alias funeral="seq 20 | xargs -Iz echo 'dum' | say -v Bad"
