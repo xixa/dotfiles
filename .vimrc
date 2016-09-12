@@ -108,11 +108,7 @@ set mouse=a                                       " enables mouse
 set clipboard=unnamed                             " OS clipboard
 set autoread                                      " auto-reloads files changed outside vi
 set showmatch                                     " shows matching parenthesis
-<<<<<<< HEAD
-set scrolloff=24                                   " n lines margin when scrolling
-=======
-set scrolloff=8                                   " n lines margin when scrolling
->>>>>>> cb71b015d10a214b87b0c2b415c0de2cf75492a5
+set scrolloff=12                                   " n lines margin when scrolling
 
 " behind the scenes
 set noswapfile
@@ -129,8 +125,6 @@ nnoremap <silent><A-k> :set paste<Return>m`O<Esc>``:set nopaste<Return>
 noremap <C-n> :NERDTreeToggle<Return>
 noremap <C-t> :Files<Return>
 noremap <C-t> :FZF<Return>
-<<<<<<< HEAD
-
 map <plug>NERDCommenterToggle(n, Toggle)
 
 let g:syntastic_javascript_checkers = ['eslint']
@@ -148,7 +142,6 @@ function! s:goyo_enter()
   set noruler
   set nocursorcolumn
   set nocursorline
-  set scrolloff=999
   set nonumber
   set norelativenumber
   autocmd! InsertEnter
@@ -165,9 +158,6 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-"nvim specific
-=======
-
 map <plug>NERDCommenterToggle(n, Toggle)
 
 let g:syntastic_javascript_checkers = ['eslint']
@@ -179,7 +169,6 @@ let g:UltiSnipsJumpForwardTrigger= '<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
 "
 " vim specific
->>>>>>> cb71b015d10a214b87b0c2b415c0de2cf75492a5
 if has('nvim')
 "  tnoremap <C-[> <C-\><C-n>     " normal mode from nvim term
 endif
@@ -198,20 +187,13 @@ Plug 'http://github.com/sirver/ultisnips'
 "Plug 'http://github.com/shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'http://github.com/bling/vim-bufferline'
 Plug 'http://github.com/christoomey/vim-tmux-navigator'
-<<<<<<< HEAD
 Plug 'http://github.com/junegunn/goyo.vim'
 Plug 'http://github.com/junegunn/limelight.vim'
-=======
 
->>>>>>> cb71b015d10a214b87b0c2b415c0de2cf75492a5
 "react shit
 Plug 'http://github.com/mxw/vim-jsx'            " syntax highlighter
 Plug 'http://github.com/justinj/vim-react-snippets'
 
 call plug#end()
 
-<<<<<<< HEAD
 autocmd! BufWritePost ~/.vimrc so %
-=======
-autocmd! bufwritepost ~/.vimrc source %           " auto-source
->>>>>>> cb71b015d10a214b87b0c2b415c0de2cf75492a5
