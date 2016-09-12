@@ -14,7 +14,12 @@
 # ╱ ╱ ╱                      marcio.ikematsu@usp.br
 # ╱
 
-source .bash_prompt
+source $HOME/.bash_prompt
+
+TERM=screen-256color
+export EDITOR=vim
+
+echo -e -n "\x1b[\x35 q"
 
 # Mac settings
 if [ "$(uname)" == "Darwin" ]; then
@@ -25,9 +30,6 @@ elif [ "$(uname)" == "Linux" ]; then
 fi
 
 # meta
-realpath() {
-    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
-}
 alias srcit='source $HOME/.bash_profile'
 alias edbash='v $HOME/.bash_profile'
 alias edvimrc='v $HOME/.vimrc'
@@ -39,6 +41,10 @@ alias ls="ls -a ${colorflag}" #ls plus colors and dotfiles
 alias l="ls -lF ${colorflag}" # all files, in long format
 alias la="ls -laF ${colorflag}" # all files inc dotfiles, in long format
 alias lsd='ls -lF ${colorflag} | grep "^d"' # only directories
+
+# fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # mk
 alias mkdir='mkdir -p' #forces mkdir to create intermediate directories if a path is specified
@@ -59,10 +65,10 @@ fi
 alias ng='npm list -g --depth=0 2>/dev/null' # lists packages globally, only the first level and throw stderr to the black hole
 alias nl='npm list --depth=0 2>/dev/null' # same, but locally
 
-
 # vim/nvim
 if [ "command -v nvim" != "" ]; then
-  alias v='/usr/local/bin/nvim'
+  #alias v='/usr/local/bin/nvim'
+  alias v='/usr/local/bin/vim'
 fi
 
 # atom
@@ -88,5 +94,5 @@ if [ "command -v s" != "" ]; then
 fi
 
 
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH:$HOME/bin"
 # export PYTHONSTARTUP=$HOME/xixa.py #runs a script when an interactive interpreter session starts

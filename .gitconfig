@@ -1,0 +1,22 @@
+[user]
+  name = Marcio Ikematsu
+  email = marcio.ikematsu@usp.br
+  username = xixa
+
+[core]
+  editor = vim
+
+[web]
+  browser = google-chrome
+
+[diff]
+  tool = vimdiff
+
+[github]
+  user = xixa
+  token = token
+
+[color "status"]
+  added = green
+  changed = yellow
+  untracked = red

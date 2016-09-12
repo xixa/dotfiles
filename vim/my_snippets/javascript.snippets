@@ -1,0 +1,24 @@
+snippet importreact
+import React, { Component } from 'react'
+endsnippet
+
+snippet importdom
+import ReactDOM from 'react-dom'
+endsnippet
+
+snippet exp
+export default ${1:ClassName}
+endsnippet
+
+snippet comp
+class ${1:ClassName} extends Component {
+	${2:constructor(){
+		super(...arguments)
+		this.state = ${3:initial state}
+	}}
+	render() {
+		${4:content}
+		return ${5:something to return}
+	}
+}
+endsnippet

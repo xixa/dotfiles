@@ -89,21 +89,6 @@ if [ -e ~/.git-prompt.sh ]; then
   GIT_PS1_SHOWUPSTREAM="git"
   GIT_PS1_DESCRIBE_STYLE="contains"
   #GIT_PS1_SHOWCOLORHINTS=true
-  gitPrompt() {
-      case $(__git_ps1) in
-          *"%>"*) #untracked
-            echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ frente untraco/';;
-          *"%"*)    echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ untraco/';; # dirty
-          *"<>"*)   echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ briguinha/';; # stream diverged
-          *"="*)    echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ tamoai/';; # normal
-          *"<"*)    echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ volta/';;
-          *'>'*)    echo $(__git_ps1 "on ${COLOR_4}%s") | sed 's/\|.*/ frenta/';; # ahed stream
-      esac
-  }
-
-  dirty() {
-    if [[ $1 == *"%"* ]]; then true; fi
-  }
 
   #GITPROMPT_PS1='$(gitPrompt)'
   GITPROMPT_PS1='$(__git_ps1 "on ${COLOR_4}%s${RESET}")'

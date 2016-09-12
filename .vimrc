@@ -9,26 +9,51 @@
 syntax on
 set t_Co=256
 color vice
+"set background=dark
 "set encoding=utf-8
-set timeoutlen=1000 ttimeoutlen=0         " pensa rapido!
+set guifont=Monaco:h14
+set timeout timeoutlen=1000 ttimeoutlen=0         " pensa rapido!
+let mapleader=","
+set backspace=2                           " so backspace works normally on tmux
 
 set ruler                                 " display info on the right bottom
-"set showmode                             " always show the current mode
-set cursorline                            " highlights the current line
+"set cursorline                           " highlights the current line
 set cursorcolumn                          " highlights cursor column
 set relativenumber                        " show line numbers relative to position
+
+"toggle cursor in normal/insert mode
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" macVim settings
+highlight Cursor guifg=white guibg=black
+highlight iCursor guifg=white guibg=steelblue
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkwait10
 
 " modes
 autocmd InsertEnter * call MyInsertMode()
 autocmd InsertLeave * call MyNormalMode()
 
 function! MyNormalMode()
+  set relativenumber
+  set cursorcolumn
+  set nocursorline
   hi statusline ctermfg=7 guifg=#c0c0c0 ctermbg=0
 endfunction
 
 function! MyInsertMode()
-  :set number
-  :set nohls
+  set number
+  set nohls
+  set cursorline
+  set nocursorcolumn
   hi statusline ctermfg=197 guifg=#ff005f ctermbg=0
 endfunction
 
@@ -48,7 +73,6 @@ set statusline+=\ \ 列%c                          " current column
 set statusline+=\ \ ◼\ %n\                      " Buffer number
 "set statusline+=\ [%b][0x%B]\                    " ASCII and byte code under cursor
 
-
 " buffers
 "highlight TermCursor ctermfg=red guifg=red        " colors terminal cursor
 set splitbelow
@@ -64,7 +88,7 @@ let &tabstop=tabsize                              " tab = 2 spaces
 let &shiftwidth=tabsize                           " spaces used by autoindeting
 let &softtabstop=tabsize                          " backspace remove tabs
 set expandtab                                     " converts tabs into spaces
-set smarttab                                      " 
+set smarttab                                      "
 set smartindent                                   "
 set tw=80
 
@@ -83,34 +107,58 @@ set mouse=a                                       " enables mouse
 set clipboard=unnamed                             " OS clipboard
 set autoread                                      " auto-reloads files changed outside vi
 set showmatch                                     " shows matching parenthesis
-set scrolloff=8                                   " 4 lines margin when scrolling
+set scrolloff=8                                   " n lines margin when scrolling
 
 " behind the scenes
 set noswapfile
 set nobackup
 set nowb
 
-" shortcuts
+" keys
+" adds/remove lines above/below (if empty) from normal mode
+nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<Return>``:noh<Return>
+nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<Return>``:noh<Return>
+nnoremap <silent><A-j> :set paste<Return>m`o<Esc>``:set nopaste<Return>
+nnoremap <silent><A-k> :set paste<Return>m`O<Esc>``:set nopaste<Return>
+
 noremap <C-n> :NERDTreeToggle<Return>
 noremap <C-t> :Files<Return>
-noremap <C-\> :NERDComToggleComment<Return>
+noremap <C-t> :FZF<Return>
 
-let g:deoplete#enable_at_startup = 1
+map <plug>NERDCommenterToggle(n, Toggle)
 
-" nvim specific
+let g:syntastic_javascript_checkers = ['eslint']
+" treats javascript as jsx, for react thingies
+let g:user_emmet_settings = {'javascript' : { 'extends':'jsx',}}
+let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsSnippetDirectories=["my_snippets"]
+let g:UltiSnipsJumpForwardTrigger= '<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
+"
+" vim specific
 if has('nvim')
 "  tnoremap <C-[> <C-\><C-n>     " normal mode from nvim term
 endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'nvie/vim-flake8'
-Plug 'sirver/ultisnips'
-"Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'mattn/emmet-vim'
-Plug 'bling/vim-bufferline'
+Plug 'http://github.com/scrooloose/syntastic'
+Plug 'http://github.com/scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'http://github.com/scrooloose/nerdcommenter'
+Plug 'http://github.com/tpope/vim-surround'
+Plug 'http://github.com/mattn/emmet-vim'
+Plug 'http://github.com/junegunn/fzf.git', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'http://github.com/nvie/vim-flake8'
+Plug 'http://github.com/sirver/ultisnips'
+"Plug 'http://github.com/valloric/youcompleteme'
+"Plug 'http://github.com/shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'http://github.com/bling/vim-bufferline'
+Plug 'http://github.com/christoomey/vim-tmux-navigator'
+
+"react shit
+Plug 'http://github.com/mxw/vim-jsx'            " syntax highlighter
+Plug 'http://github.com/justinj/vim-react-snippets'
 
 call plug#end()
+
+autocmd! bufwritepost ~/.vimrc source %           " auto-source
