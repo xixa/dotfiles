@@ -1,8 +1,8 @@
-snippet importreact
-import React, { Component } from 'react'
+snippet impreact 
+import React, { ${1:Component}${2:, PropTypes} } from 'react'
 endsnippet
 
-snippet importdom
+snippet imprdom
 import ReactDOM from 'react-dom'
 endsnippet
 
@@ -11,14 +11,32 @@ export default ${1:ClassName}
 endsnippet
 
 snippet comp
-class ${1:ClassName} extends Component {
-	${2:constructor(){
+${1:export default }class ${2:ClassName} extends Component {
+	${3:constructor(){
 		super(...arguments)
-		this.state = ${3:initial state}
-	}}
-	render() {
-		${4:content}
-		return ${5:something to return}
+		this.state = ${4:initial state}
 	}
+	}render() {
+		${5:content
+		}return ${6:something to return}
+	}
+}
+endsnippet
+
+snippet propt
+${1:CompName}.propTypes = {
+	${2:first_prop}: PropTypes.${3:type}
+}
+endsnippet
+
+snippet fun
+${1:function }${2:name}(${3:arguments}) {
+	${4:content}
+}
+endsnippet
+
+snippet ob
+{
+	${1:content}
 }
 endsnippet

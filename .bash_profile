@@ -14,7 +14,11 @@
 # ╱ ╱ ╱                      marcio.ikematsu@usp.br
 # ╱
 
+set -o vi
 source $HOME/.bash_prompt
+source $HOME/dotfiles/tmux/tmuxinator.bash
+export PYTHONSTARTUP=$HOME/.pythonrc
+eval "$(rbenv init -)"
 
 TERM=screen-256color
 export EDITOR=vim
@@ -45,6 +49,15 @@ alias lsd='ls -lF ${colorflag} | grep "^d"' # only directories
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+
+# cdfile: cd to the a given file's directory
+cdf() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
 
 # mk
 alias mkdir='mkdir -p' #forces mkdir to create intermediate directories if a path is specified

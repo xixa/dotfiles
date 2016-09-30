@@ -50,11 +50,11 @@ fi
 ### MY PROMPT ###
 #################
 # theme: blue sky
-# COLOR_0="${LIME}"
-# COLOR_1="${GREEN}"
-# COLOR_2="${LIGHT_BLUE}"
-# COLOR_3="${MEDIUM_BLUE}"
-# COLOR_4="${DARK_BLUE}"
+ COLOR_0="${LIME}"
+ COLOR_1="${GREEN}"
+ COLOR_2="${LIGHT_BLUE}"
+ COLOR_3="${MEDIUM_BLUE}"
+ COLOR_4="${DARK_BLUE}"
 
 # theme: warm sky
 # COLOR_5=""
@@ -65,12 +65,12 @@ fi
 # COLOR_4=$(tput setaf 220)
 
 # theme: 80's space age
-COLOR_0=""
-COLOR_1=$DARK_BLUE
-COLOR_2=$MEDIUM_BLUE
-COLOR_3=$(tput setaf 165)
-COLOR_4=$(tput setaf 207)
-COLOR_5=""
+#COLOR_0=""
+#COLOR_1=$DARK_BLUE
+#COLOR_2=$MEDIUM_BLUE
+#COLOR_3=$(tput setaf 165)
+#COLOR_4=$(tput setaf 207)
+#COLOR_5=""
 
 # structure elements
 VENV_PS1="${COLOR_0}"

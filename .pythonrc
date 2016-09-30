@@ -1,0 +1,5 @@
+import readline  
+
+# 2.7 interpreter accepts tabs
+readline.parse_and_bind("set disable-completion on")  
+readline.parse_and_bind("tab: self-insert")
