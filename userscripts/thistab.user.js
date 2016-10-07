@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name         This tab, Mofo.
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/xixa
+// @updateURL    https://github.com/xixa/dotfiles/raw/master/userscripts/thistab.user.js
 // @version      0.1
 // @description  try to take over the world!
 // @author       Marcio Ikematsu
