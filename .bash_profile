@@ -20,10 +20,15 @@ source $HOME/dotfiles/tmux/tmuxinator.bash
 export PYTHONSTARTUP=$HOME/.pythonrc
 eval "$(rbenv init -)"
 
-TERM=screen-256color
-export EDITOR=vim
+export CLICOLOR=1
+export TERM=screen-256color
+#TERM=xterm-256color
+#export $TERM
 
-echo -e -n "\x1b[\x35 q"
+export EDITOR=nvim
+
+# vertical bar cursor
+#echo -e -n "\x1b[\x35 q"
 
 # Mac settings
 if [ "$(uname)" == "Darwin" ]; then
@@ -40,7 +45,7 @@ alias edvimrc='v $HOME/.vimrc'
 
 # ls
 colorflag="-G"
-export LSCOLORS=GeFxCxDxBxegedabagGcGb
+export LSCOLORS=GxFxCxDxBxegedabagGcGb
 alias ls="ls -a ${colorflag}" #ls plus colors and dotfiles
 alias l="ls -lF ${colorflag}" # all files, in long format
 alias la="ls -laF ${colorflag}" # all files inc dotfiles, in long format
@@ -79,8 +84,9 @@ alias ng='npm list -g --depth=0 2>/dev/null' # lists packages globally, only the
 alias nl='npm list --depth=0 2>/dev/null' # same, but locally
 
 # vim/nvim
-if [ "command -v nvim" != "" ]; then
-  #alias v='/usr/local/bin/nvim'
+if [ $EDITOR == 'nvim' ]; then
+  alias v='/usr/local/bin/nvim'
+else
   alias v='/usr/local/bin/vim'
 fi
 

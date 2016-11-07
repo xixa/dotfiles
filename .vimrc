@@ -9,8 +9,10 @@
 
 syntax on
 set t_Co=256
+hi clear
 color vice
 "set background=dark
+"hi Normal ctermbg=none
 "set encoding=utf-8
 set guifont=Monaco:h14
 set timeoutlen=1000 ttimeoutlen=0         " pensa rapido!
@@ -22,15 +24,6 @@ set cursorcolumn                          " highlights cursor column
 set number
 set relativenumber                        " show line numbers relative to position
 "setlocal foldmethod=syntax
-
-"toggle cursor in normal/insert mode
-"if exists('$TMUX')
-    "let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    "let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-"else
-    "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    "let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-"endif
 
 " macVim settings
 "highlight Cursor guifg=white guibg=black
@@ -53,15 +46,16 @@ endfunction
 
 function! MyInsertMode()
   set number
-  set nohls
   set cursorline
   set nocursorcolumn
+  :noh
   hi statusline ctermfg=197 guifg=#ff005f ctermbg=0
 endfunction
 
 
 " status line
-set ruler                                 " display info on the right bottom
+set ruler                                         " display info on the right bottom
+set showmode
 set laststatus=2                                  " shows status bar (
                                                   " 0=never, 1=if 2+ windows, 2=always)
 set statusline=%f                                 " file name
@@ -91,16 +85,18 @@ let &shiftwidth=tabsize                           " spaces used by autoindeting
 let &softtabstop=tabsize                          " backspace remove tabs
 set autoindent
 set cindent
-set smarttab                                      "
-set smartindent                                   "
+set smarttab                                      " behaves according to context
+set smartindent                                   " 
 set expandtab                                     " converts tabs into spaces
-set tw=80
+retab
+set tw=79
+set wrap linebreak nolist                         " soft line breaking
 
 " search
 set ignorecase                                    " ignore case when search
 set smartcase                                     " ignore case when the query is lowercase
 set wildmenu                                      " bash-like auto-completion
-set incsearch                                    " show search matches
+set incsearch                                     " show search matches
 set hlsearch
 
 " behavior
@@ -117,6 +113,16 @@ set noswapfile
 set nobackup
 set nowb
 
+" auto completion
+set complete=.,w,b,u,t,i,kspell
+set omnifunc=syntaxcomplete#Complete
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setloca omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
 """""""""""""""""""
 "  keys bindings  "
 """""""""""""""""""
@@ -128,10 +134,10 @@ set nowb
 "nmap <silent><A-k> :set paste<Return>m`O<Esc>``:set nopaste<Return>
 imap <silent><C-l> <right>
 
-
 " vim/nvim specific
 if has('nvim')
-"  tnoremap <C-[> <C-\><C-n>     " normal mode from nvim term
+  " deoplete
+  let g:deoplete#enable_at_startup = 1
 else
   " neocomplete
   let g:acp_enableAtStartup = 0
@@ -174,11 +180,6 @@ else
   "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
   
   " Enable omni completion.
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setloca omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
   " Enable heavy omni completion.
   if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -196,8 +197,6 @@ else
   let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 endif
 
- 
-
 " popupmenu-keys config
 "function! OmniPopup(action)
     "if pumvisible()
@@ -214,7 +213,6 @@ endif
 "inoremap <silent><c-k> <C-R>=OmniPopup('k')<CR>
 
 
-
 " PLUGINS
 
 " NERDTree, NERDCommenter
@@ -224,8 +222,7 @@ map <plug>NERDCommenterToggle(n, Toggle)
 " fzf
 noremap <C-t> :FZF<Return>
 "noremap <C-t> :Files<Return>
-
-
+let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore-dir=bin --ignore-dir="*.pyc"'
 
 "ack vimrc
 "the silver searcher in place of ack
@@ -253,7 +250,12 @@ let g:UltiSnipsJumpForwardTrigger= '<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
 
 "Goyo
+autocmd FileType markdown call s:goyo_enter()
+let g:goyo_linenr=1
+let g:goyo_width=80
+
 function! s:goyo_enter()
+  SoftPencil
   set noshowmode
   set noshowcmd
   set noruler
@@ -261,12 +263,14 @@ function! s:goyo_enter()
   set nocursorline
   set nonumber
   set norelativenumber
+  set spell spelllang=en_us
   autocmd! InsertEnter
   autocmd! InsertLeave
   autocmd! BufWritePost
 endfunction
 
 function! s:goyo_leave()
+  set nospell
   autocmd InsertEnter * call MyInsertMode()
   autocmd InsertLeave * call MyNormalMode()
   autocmd BufWritePost ~/.vimrc so %
@@ -275,7 +279,8 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-
+"Vim Markdown
+let g:vim_markdown_folding_disabled = 1
 
 " PLUGGED
 
@@ -283,8 +288,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'junegunn/fzf.git', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/goyo.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
@@ -294,7 +299,7 @@ Plug 'mattn/emmet-vim'
 Plug 'sirver/ultisnips'
 "Plug 'valloric/youcompleteme'
 Plug 'shougo/neocomplete.vim'
-"Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'bling/vim-bufferline'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mileszs/ack.vim'
@@ -312,6 +317,12 @@ Plug 'othree/yajs.vim'
 "react shit
 Plug 'mxw/vim-jsx'            " syntax highlighter
 Plug 'justinj/vim-react-snippets'
+
+"vim for writing
+Plug 'junegunn/goyo.vim'
+Plug 'reedes/vim-pencil'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
