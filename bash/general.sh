@@ -78,6 +78,5 @@ if [ "command -v s" != "" ]; then
   }
 fi
 
+source $HOME/dotfiles/bash/path.sh
 
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH:$HOME/bin:$(brew --prefix coreutils)/libexec/gnubin"
-# export PYTHONSTARTUP=$HOME/xixa.py #runs a script when an interactive interpreter session starts
