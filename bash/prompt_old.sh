@@ -14,11 +14,6 @@
 # ╱ ╱ ╱                      marcio.ikematsu@usp.br
 # ╱
 
-#################
-### VARIABLES ###
-#################
-
-TERM=xterm-256color
 PINK="$(tput setaf 198)"
 RED="$(tput setaf 9)"
 ORANGE="$(tput setaf 214)"
@@ -33,9 +28,28 @@ PURPLE="$(tput setaf 135)"
 GREY="$(tput setaf 248)"
 RESET="$(tput sgr0)"
 
-#############################
-### 3rd PARTY STUFF SETUP ###
-#############################
+#################
+### MY PROMPT ###
+#################
+# theme: blue sky
+
+ COLOR_ARRAY[0]="${LIME}"
+ COLOR_ARRAY[1]="${GREEN}"
+ COLOR_ARRAY[2]="${LIGHT_BLUE}" 
+ COLOR_ARRAY[3]="${MEDIUM_BLUE}"
+ COLOR_ARRAY[4]="${DARK_BLUE}"
+ COLOR_ARRAY[5]="${PURPLE}"
+
+# theme: ascii
+#COLOR_ARRAY[0]="${LIME}" 
+#COLOR_ARRAY[1]="\e[0;31m"
+#COLOR_ARRAY[2]="\e[0;35m"
+#COLOR_ARRAY[3]="\e[0;95m"
+#COLOR_ARRAY[4]="\e[0;96m"
+#COLOR_ARRAY[5]="\e[0;96m"
+##http://misc.flogisoft.com/bash/tip_colors_and_formatting
+
+I=0
 
 # virtualenvwrapper settings
 if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
@@ -45,53 +59,23 @@ if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
   # export VIRTUAL_ENV_DISABLE_PROMPT=1 # disables virtualenv in the prompt
 fi
 
+VENV_PS1="${COLOR_ARRAY[I++]}"
+USER_PS1="${COLOR_ARRAY[I++]}\u${RESET}"
+HOST_PS1="${COLOR_ARRAY[I++]}$(scutil --get LocalHostName)${RESET}"
+PATH_PS1="${COLOR_ARRAY[I++]}\w${RESET}"
 
-#################
-### MY PROMPT ###
-#################
-# theme: blue sky
- COLOR_0="${LIME}"
- COLOR_1="${GREEN}"
- COLOR_2="${LIGHT_BLUE}"
- COLOR_3="${MEDIUM_BLUE}"
- COLOR_4="${DARK_BLUE}"
-
-# theme: warm sky
-# COLOR_5=""
-# COLOR_0=$PINK
-# COLOR_1=$(tput setaf 202)
-# COLOR_2=$(tput setaf 208)
-# COLOR_3=$(tput setaf 214)
-# COLOR_4=$(tput setaf 220)
-
-# theme: 80's space age
-#COLOR_0=""
-#COLOR_1=$DARK_BLUE
-#COLOR_2=$MEDIUM_BLUE
-#COLOR_3=$(tput setaf 165)
-#COLOR_4=$(tput setaf 207)
-#COLOR_5=""
-
-# structure elements
-VENV_PS1="${COLOR_0}"
-VENV_SYMBOL_PS1="● "
-USER_PS1="${COLOR_1}\u${RESET}"
-#HOST_PS1="${COLOR_2}\h${RESET}"
-HOST_PS1="${COLOR_2}$(scutil --get LocalHostName)${PLUS}${RESET}"
-PATH_PS1="${COLOR_3}\w${RESET}"
 # git prompt
-if [ -e ~/.git-prompt.sh ]; then
-  source ~/.git-prompt.sh #loads git-prompt
+if [ -e .git-prompt.sh ]; then
+  source .git-prompt.sh #loads git-prompt
   GIT_PS1_HIDE_IF_PWD_IGNORED=true #do nothing if dir is .gitignored
-  GIT_PS1_STATESEPARATOR="${RESET} ${COLOR_5}"
   GIT_PS1_SHOWUNTRACKEDFILES=true
   GIT_PS1_SHOWDIRTYSTATE=true
   GIT_PS1_SHOWUPSTREAM="git"
   GIT_PS1_DESCRIBE_STYLE="contains"
-  #GIT_PS1_SHOWCOLORHINTS=true
-
-  #GITPROMPT_PS1='$(gitPrompt)'
-  GITPROMPT_PS1='$(__git_ps1 "on ${COLOR_4}%s${RESET}")'
+  GIT_PS1_SHOWCOLORHINTS=true
+  
+  GITPROMPT_PS1='$(__git_ps1 "on ${COLOR_ARRAY[I++]}%s${RESET}")'
+  GIT_PS1_STATESEPARATOR=" ${RESET}"
 fi
 
 #http://www.fileformat.info/info/unicode/block/geometric_shapes/list.htm

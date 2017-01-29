@@ -1,4 +1,3 @@
-"
 "    copyleft (Ↄ) marcio ikematsu
 "    marcio.ikematsu@usp.br
 "
@@ -8,10 +7,11 @@
 "
 
 syntax on
+language en_US
 set t_Co=256
 hi clear
-color vice
-"set background=dark
+color agathe
+" set background=dark
 "hi Normal ctermbg=none
 "set encoding=utf-8
 set guifont=Monaco:h14
@@ -48,7 +48,6 @@ function! MyInsertMode()
   set number
   set cursorline
   set nocursorcolumn
-  :noh
   hi statusline ctermfg=197 guifg=#ff005f ctermbg=0
 endfunction
 
@@ -76,21 +75,6 @@ set statusline+=\ \ ◼\ %n\                        " Buffer number
 set splitbelow
 set splitright
 
-" tabs & indentation
-filetype plugin indent on
-let tabsize=2
-autocmd filetype python let tabsize=4
-let &tabstop=tabsize                              " tab = 2 spaces
-let &shiftwidth=tabsize                           " spaces used by autoindeting
-let &softtabstop=tabsize                          " backspace remove tabs
-set autoindent
-set cindent
-set smarttab                                      " behaves according to context
-set smartindent                                   " 
-set expandtab                                     " converts tabs into spaces
-retab
-set tw=79
-set wrap linebreak nolist                         " soft line breaking
 
 " search
 set ignorecase                                    " ignore case when search
@@ -133,11 +117,19 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "nmap <silent><A-j> :set paste<Return>m`o<Esc>``:set nopaste<Return>
 "nmap <silent><A-k> :set paste<Return>m`O<Esc>``:set nopaste<Return>
 imap <silent><C-l> <right>
+nnoremap <CR> :noh<CR><CR>
+
+"make
+nnoremap <leader>m :w<CR> :silent make\|redraw!\|cc<CR>
+:command! Makenode :set makeprg=tmux\ send-key\ -t\ 1\ node\\\ %\ Enter
+:command! Makejasmine :set makeprg=tmux\ send-key\ -t\ 1\ npm\\\ test\ Enter
 
 " vim/nvim specific
 if has('nvim')
   " deoplete
   let g:deoplete#enable_at_startup = 1
+  " a hack for vim-tmux-navigator
+  nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 else
   " neocomplete
   let g:acp_enableAtStartup = 0
@@ -212,6 +204,21 @@ endif
 "inoremap <silent><c-j> <C-R>=OmniPopup('j')<CR>
 "inoremap <silent><c-k> <C-R>=OmniPopup('k')<CR>
 
+" tabs & indentation
+filetype plugin indent on
+let tabsize=2
+autocmd filetype python let tabsize=4
+let &tabstop=tabsize                              " tab = 2 spaces
+let &shiftwidth=tabsize                           " spaces used by autoindeting
+let &softtabstop=tabsize                          " backspace remove tabs
+set autoindent
+set cindent
+set smarttab                                      " behaves according to context
+set smartindent                                   " 
+set expandtab                                     " converts tabs into spaces
+retab
+set tw=79
+set wrap linebreak nolist                         " soft line breaking
 
 " PLUGINS
 
@@ -223,6 +230,7 @@ map <plug>NERDCommenterToggle(n, Toggle)
 noremap <C-t> :FZF<Return>
 "noremap <C-t> :Files<Return>
 let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore-dir=bin --ignore-dir="*.pyc"'
+set rtp+=/usr/local/opt/fzf
 
 "ack vimrc
 "the silver searcher in place of ack
@@ -245,8 +253,9 @@ let g:user_emmet_settings = {'javascript' : { 'extends':'jsx',}}
 
 " UltiSnips
 let g:UltiSnipsUsePythonVersion = 2
-let g:UltiSnipsSnippetDirectories=["my_snippets"]
+let g:UltiSnipsSnippetDirectories=["~/dotfiles/vim/my_snippets", "my_snippets"]
 let g:UltiSnipsJumpForwardTrigger= '<tab>'
+let g:UltiSnipsListSnippets='<c-tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
 
 "Goyo
@@ -279,20 +288,27 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-"Vim Markdown
+
+let indent_guides_auto_colors = 0
+let indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=black
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=darkgrey
+
+"Markdow
 let g:vim_markdown_folding_disabled = 1
 
 " PLUGGED
-
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'scrooloose/nerdcommenter'
+"Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
 "Plug 'nvie/vim-flake8'
@@ -306,6 +322,8 @@ Plug 'mileszs/ack.vim'
 Plug 'terryma/vim-multiple-cursors'
 "Plug 'raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'michaeljsmith/vim-indent-object'
 
 "python
 Plug 'mitsuhiko/vim-python-combined'
@@ -313,16 +331,17 @@ Plug 'mitsuhiko/vim-python-combined'
 "javascript
 Plug 'pangloss/vim-javascript'
 Plug 'othree/yajs.vim'
+Plug 'ternjs/tern_for_vim'
 
 "react shit
 Plug 'mxw/vim-jsx'            " syntax highlighter
 Plug 'justinj/vim-react-snippets'
 
 "vim for writing
-Plug 'junegunn/goyo.vim'
-Plug 'reedes/vim-pencil'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+" Plug 'junegunn/goyo.vim'
+" Plug 'reedes/vim-pencil'
+" Plug 'godlygeek/tabular'
+" Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 

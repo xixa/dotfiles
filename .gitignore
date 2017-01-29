@@ -6,3 +6,5 @@ Thumbs.db
 .git
 *.pyc
 *.swp
+node_modules
+npm-debug.log

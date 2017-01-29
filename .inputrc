@@ -1,1 +1,15 @@
-set editing-mode vi
+#set editing-mode vi
+
+set expand-tilde on
+set completion-ignore-case
+set show-all-if-ambiguous on
+set convert-meta off
+set input-meta on
+set output-meta on
+set visible-stats on
+
+#Meta-Rubout: backward-kill-word
+Control-n: menu-complete
+Control-p: menu-complete-backward
+Control-l: clear-screen
+"\C-u": kill-whole-line
