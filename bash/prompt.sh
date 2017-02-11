@@ -29,12 +29,9 @@ if [ -e .git-prompt.sh ]; then
   GIT_PS1_SHOWUPSTREAM="git"
   GIT_PS1_DESCRIBE_STYLE="contains"
   GIT_PS1_SHOWCOLORHINTS=true
-  
-  GITPROMPT_PS1='$(__git_ps1 "on ${COLOR_ARRAY[I++]}%s${RESET}")'
-  GIT_PS1_STATESEPARATOR=" ${RESET}"
 fi
 
-PS1="\u @ \h in \w\n$ "
+PS1="\n\n\w $__git_ps1\n$ "
 export PS1
 
 PS2="\[${yellow}\]→ \[${reset}\]";

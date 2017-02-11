@@ -9,8 +9,20 @@ elif [ $(uname) == "Linux" ]; then
 fi
 
 # ls
-colorflag="-G"
-export LSCOLORS=GxFxCxDxBxegedabagGcGb
+colorflag="--color"
+export LSCOLORS='di=5;1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'
+#GxFxCxDxBxegedabagGcGb
+# di = directory
+# fi = file
+# ln = symlinks
+# pi = fifo file (?)
+# so = socket file
+# bd = block (buffered)
+# cd = character (unbuffered)
+# or = orphan symlink (points to inexistent file)
+# mi = non-existent file pointed to by a symlink
+# ex = file which is executable (chmod -x)
+
 alias ls="ls -a ${colorflag}" #ls plus colors and dotfiles
 alias l="ls -lF ${colorflag}" # all files, in long format
 alias la="ls -laF ${colorflag}" # all files inc dotfiles, in long format
@@ -79,4 +91,8 @@ if [ "command -v s" != "" ]; then
 fi
 
 source $HOME/dotfiles/bash/path.sh
+
+# pi
+alias sshpi='ssh pi@192.168.1.100'
+alias sshfspi_ext='sshfs pi@192.168.1.100:/home/pi/mnt'
 

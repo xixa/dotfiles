@@ -19,7 +19,7 @@ set -o emacs
 source $HOME/dotfiles/bash/prompt.sh
 source $HOME/dotfiles/tmux/tmuxinator.bash
 export PYTHONSTARTUP=$HOME/.pythonrc
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
 export CLICOLOR=1
 export TERM=screen-256color

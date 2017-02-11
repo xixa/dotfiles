@@ -1,3 +1,73 @@
+# shorthand
+# snippet "(\w+)\)\)" "Parenthesis (postfix)" r
+# (`!p snip.rv = match.group(1)`$1)$0
+# endsnippet
+
+# graphql stuff
+snippet graphql "Imports graphQL stuff" b
+import {
+	GraphQLObjectType,
+	GraphQLSchema,
+	${1:GraphQLInt,}
+	${2:GraphQLString,}
+	${3:GraphQLBoolean,}
+} from 'graphql'
+endsnippet
+
+snippet gtype "Creates a graphQL type" b
+const ${1:<TypeName>} = new GraphQLObjectType({
+	name: '$1',
+	description: '${2:...}',
+	fields: () => {
+		return {
+			${3:gfield}$0
+		}
+	}
+})
+endsnippet
+
+snippet gfield "Creates a graphQL field"
+${1:<field>}: {
+	type: `!p if "(" in t[2]: snip.rv = "new "`GraphQL${2:<Type>},
+	resolve(${3:<type>}) {
+		return $4`!p
+if "root" in t[3]:
+	snip.rv = ""
+else:
+	snip.rv = "%s.%s" % (t[3],t[1])`
+	}
+}${5:,}$0
+endsnippet
+
+# importing & exporting
+snippet exportclass "Description" b
+export default ${1:ClassName} {
+	${2:...}
+}
+endsnippet
+
+snippet exp
+export default ${1:ClassName}
+endsnippet
+
+snippet imp "automatize imports" b
+import $1 from '${2:./}${1/(\w)/\l$1/}'
+endsnippet
+
+# functions, classes and objects
+snippet -> "arrow function" i
+(${1:args}) => {
+	${2:...}
+}
+endsnippet
+
+snippet ob "creates an object"
+{
+	${1:content}
+}
+endsnippet
+
+# react
 snippet react "imports React (with options for Comps and PropTypes)" b
 import React, { ${1:Component}${2:, PropTypes} } from 'react'
 endsnippet
@@ -6,19 +76,15 @@ snippet dom "imports ReactDOM" b
 import ReactDOM from 'react-dom'
 endsnippet
 
-snippet exp
-export default ${1:ClassName}
-endsnippet
-
-snippet comp
+snippet comp "creates a react component" b
 ${1:export default }class ${2:ClassName} extends Component {
 	${3:constructor(){
 		super(...arguments)
 		this.state = ${4:initial state}
 	}
 	}render() {
-		${5:content
-		}return ${6:something to return}
+		${5:...
+		}return ${6:...}
 	}
 }
 endsnippet
@@ -35,8 +101,3 @@ ${1:function }${2:name}(${3:arguments}) {
 }
 endsnippet
 
-snippet ob
-{
-	${1:content}
-}
-endsnippet

@@ -53,6 +53,7 @@ endfunction
 
 
 " status line
+set title
 set ruler                                         " display info on the right bottom
 set showmode
 set laststatus=2                                  " shows status bar (
@@ -75,7 +76,6 @@ set statusline+=\ \ ◼\ %n\                        " Buffer number
 set splitbelow
 set splitright
 
-
 " search
 set ignorecase                                    " ignore case when search
 set smartcase                                     " ignore case when the query is lowercase
@@ -85,7 +85,7 @@ set hlsearch
 
 " behavior
 set visualbell                                    " prevents buzz
-set nowrap                                        " don't wrap lines
+"set nowrap                                        " don't wrap lines
 set mouse=a                                       " enables mouse
 set clipboard=unnamed                             " OS clipboard
 set autoread                                      " auto-reloads files changed outside vi
@@ -116,8 +116,10 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "nmap <silent><C-k> O<Esc>
 "nmap <silent><A-j> :set paste<Return>m`o<Esc>``:set nopaste<Return>
 "nmap <silent><A-k> :set paste<Return>m`O<Esc>``:set nopaste<Return>
-imap <silent><C-l> <right>
+"imap <silent><C-l> <right>
 nnoremap <CR> :noh<CR><CR>
+" shift+tab to jump outside enclosing chars
+imap <silent><S-Tab> <C-o>A
 
 "make
 nnoremap <leader>m :w<CR> :silent make\|redraw!\|cc<CR>
@@ -158,10 +160,10 @@ else
 
   inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
   inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-  
+
   " Close popup by <Space>.
   "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-  
+
   " AutoComplPop like behavior.
   "let g:neocomplete#enable_auto_select = 1
 
@@ -170,7 +172,7 @@ else
   "let g:neocomplete#enable_auto_select = 1
   "let g:neocomplete#disable_auto_complete = 1
   "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-  
+
   " Enable omni completion.
 
   " Enable heavy omni completion.
@@ -183,7 +185,7 @@ else
   "   *\t]\%(\.\|->\)'
   "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:]
   "   *\t]\%(\.\|->\)\|\h\w*::'
-  
+
   " For perlomni.vim setting.
   " https://github.com/c9s/perlomni.vim
   let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
@@ -214,11 +216,20 @@ let &softtabstop=tabsize                          " backspace remove tabs
 set autoindent
 set cindent
 set smarttab                                      " behaves according to context
-set smartindent                                   " 
+set smartindent                                   "
 set expandtab                                     " converts tabs into spaces
 retab
 set tw=79
 set wrap linebreak nolist                         " soft line breaking
+
+fun! <sid>striptrailingwhitespaces()
+  let l = line('.')
+  let c = col('.')
+  %s/\s\+$//e
+  call cursor(l,c)
+endfun
+
+autocmd BufWritePre * :call <sid>striptrailingwhitespaces()
 
 " PLUGINS
 
@@ -247,6 +258,29 @@ let g:ackpreview = 1
 
 " Syntastic
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_html_tidy_exec = 'tidy5'
+let g:syntastic_enable_signs   = 1
+let g:syntastic_error_symbol = '×'
+let g:syntastic_warning_symbol = '▲'
+let g:syntastic_style_error_symbol = '×'
+let g:syntastic_style_warning_symbol = '×'
+let g:syntastic_html_tidy_ignore_errors = [
+      \ "<poll-include-fragment> is not recognized!",
+      \ "discarding unexpected <poll-include-fragment>",
+      \ "discarding unexpected </poll-include-fragment>",
+      \ "trimming empty <span>",
+      \ "<svg> is not recognized!",
+      \ "discarding unexpected <svg>",
+      \ "discarding unexpected </svg>",
+      \ "<a> escaping malformed URI reference",
+      \ "plain text isn't allowed in <head> elements",
+      \ "<li> isn't allowed in <body> elements",
+      \ "inserting implicit <ul>",
+      \ "missing </ul> before <div>",
+      \ "trimming empty <li>",
+      \ "trimming empty <ul>",
+      \ "missing quote mark for attribute value",
+      \ ]
 
 " Emmet
 let g:user_emmet_settings = {'javascript' : { 'extends':'jsx',}}
@@ -257,39 +291,40 @@ let g:UltiSnipsSnippetDirectories=["~/dotfiles/vim/my_snippets", "my_snippets"]
 let g:UltiSnipsJumpForwardTrigger= '<tab>'
 let g:UltiSnipsListSnippets='<c-tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
+let g:UltiSnipsEditSplit='horizontal'
 
 "Goyo
-autocmd FileType markdown call s:goyo_enter()
-let g:goyo_linenr=1
-let g:goyo_width=80
+" autocmd FileType markdown call s:goyo_enter()
+" let g:goyo_linenr=1
+" let g:goyo_width=80
 
-function! s:goyo_enter()
-  SoftPencil
-  set noshowmode
-  set noshowcmd
-  set noruler
-  set nocursorcolumn
-  set nocursorline
-  set nonumber
-  set norelativenumber
-  set spell spelllang=en_us
-  autocmd! InsertEnter
-  autocmd! InsertLeave
-  autocmd! BufWritePost
-endfunction
+" function! s:goyo_enter()
+"   SoftPencil
+"   set noshowmode
+"   set noshowcmd
+"   set noruler
+"   set nocursorcolumn
+"   set nocursorline
+"   set nonumber
+"   set norelativenumber
+"   set spell spelllang=en_us
+"   autocmd! InsertEnter
+"   autocmd! InsertLeave
+"   autocmd! BufWritePost
+" endfunction
 
-function! s:goyo_leave()
-  set nospell
-  autocmd InsertEnter * call MyInsertMode()
-  autocmd InsertLeave * call MyNormalMode()
-  autocmd BufWritePost ~/.vimrc so %
-endfunction
+" function! s:goyo_leave()
+"   set nospell
+"   autocmd InsertEnter * call MyInsertMode()
+"   autocmd InsertLeave * call MyNormalMode()
+"   autocmd BufWritePost ~/.vimrc so %
+" endfunction
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
+" autocmd! User GoyoEnter nested call <SID>goyo_enter()
+" autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-
-let indent_guides_auto_colors = 0
+" indent guides!
+let indent_guides_auto_colors = 1
 let indent_guides_guide_size = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=black
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=darkgrey
@@ -305,7 +340,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/limelight.vim'
-Plug 'junegunn/vim-easy-align'
+"Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -329,13 +364,18 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'mitsuhiko/vim-python-combined'
 
 "javascript
-Plug 'pangloss/vim-javascript'
-Plug 'othree/yajs.vim'
-Plug 'ternjs/tern_for_vim'
+" Plug 'pangloss/vim-javascript'
+" Plug 'othree/yajs.vim'
+Plug 'neomake/neomake'
+" Plug 'ternjs/tern_for_vim'
+Plug 'digitaltoad/vim-pug'
 
 "react shit
 Plug 'mxw/vim-jsx'            " syntax highlighter
 Plug 'justinj/vim-react-snippets'
+
+"html5
+Plug 'othree/html5.vim'
 
 "vim for writing
 " Plug 'junegunn/goyo.vim'
@@ -347,3 +387,8 @@ call plug#end()
 
 "auto-source virmc
 autocmd! BufWritePost ~/.vimrc so %
+
+source ~/dotfiles/vim/syntax/svg.vim
+
+"auto save hidden buffers!
+:set hidden
