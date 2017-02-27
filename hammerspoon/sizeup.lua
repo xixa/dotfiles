@@ -30,19 +30,19 @@ end)
 
 --- Quarter Screen Actions ---
 -- Send Window Upper Left
-hs.hotkey.bind({"ctrl", "alt", "shift"}, "Left", function()
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "Left", function()
   sizeup.send_window_upper_left()
 end)
 -- Send Window Upper Right
-hs.hotkey.bind({"ctrl","alt", "shift"}, "Up", function()
+hs.hotkey.bind({"ctrl","alt", "cmd"}, "Up", function()
   sizeup.send_window_upper_right()
 end)
 -- Send Window Lower Left
-hs.hotkey.bind({"ctrl", "alt", "shift"}, "Down", function()
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "Down", function()
   sizeup.send_window_lower_left()
 end)
 -- Send Window Lower Right
-hs.hotkey.bind({"ctrl", "alt", "shift"}, "Right", function()
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "Right", function()
   sizeup.send_window_lower_right()
 end)
 
@@ -271,7 +271,7 @@ end
 -- Internal API --
 ------------------
 
--- SizeUp uses no animations 
+-- SizeUp uses no animations
 hs.window.animation_duration = 0.0
 -- Initialize Snapback state
 sizeup.snapback_window_state = { }

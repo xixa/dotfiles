@@ -2,14 +2,20 @@
 
 set expand-tilde on
 set completion-ignore-case
+set page-completions on
 set show-all-if-ambiguous on
+# set show-all-if-unmodified off
 set convert-meta off
 set input-meta on
 set output-meta on
 set visible-stats on
+set mark-symlinked-directories on
 
 #Meta-Rubout: backward-kill-word
-Control-n: menu-complete
-Control-p: menu-complete-backward
-Control-l: clear-screen
-"\C-u": kill-whole-line
+Tab: menu-complete
+# shift+tab shows all option (show-all-if-ambiguous is enabled)
+"\e[Z": complete
+"\C-l": clear-screen
+# "\C-u": kill-whole-line
+
+# C-x C-r to source this file!

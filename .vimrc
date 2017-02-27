@@ -5,11 +5,11 @@
 "       * joshua hogendorn
 "       * nikolay frantsev
 "
-
 syntax on
 language en_US
 set t_Co=256
 hi clear
+set termguicolors
 color agathe
 " set background=dark
 "hi Normal ctermbg=none
@@ -50,7 +50,6 @@ function! MyInsertMode()
   set nocursorcolumn
   hi statusline ctermfg=197 guifg=#ff005f ctermbg=0
 endfunction
-
 
 " status line
 set title
@@ -131,7 +130,7 @@ if has('nvim')
   " deoplete
   let g:deoplete#enable_at_startup = 1
   " a hack for vim-tmux-navigator
-  nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+  " nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 else
   " neocomplete
   let g:acp_enableAtStartup = 0
@@ -158,8 +157,8 @@ else
    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
   endfunction
 
-  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+  " inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+  " inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
   " Close popup by <Space>.
   "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
@@ -221,6 +220,7 @@ set expandtab                                     " converts tabs into spaces
 retab
 set tw=79
 set wrap linebreak nolist                         " soft line breaking
+set formatoptions-=t
 
 fun! <sid>striptrailingwhitespaces()
   let l = line('.')
@@ -285,6 +285,8 @@ let g:syntastic_html_tidy_ignore_errors = [
 " Emmet
 let g:user_emmet_settings = {'javascript' : { 'extends':'jsx',}}
 
+" Auto-pairs
+
 " UltiSnips
 let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsSnippetDirectories=["~/dotfiles/vim/my_snippets", "my_snippets"]
@@ -348,11 +350,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
 "Plug 'nvie/vim-flake8'
 Plug 'sirver/ultisnips'
-"Plug 'valloric/youcompleteme'
 Plug 'shougo/neocomplete.vim'
 Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'bling/vim-bufferline'
-Plug 'christoomey/vim-tmux-navigator'
+" Plug 'christoomey/vim-tmux-navigator'
 Plug 'mileszs/ack.vim'
 Plug 'terryma/vim-multiple-cursors'
 "Plug 'raimondi/delimitMate'
@@ -376,6 +377,9 @@ Plug 'justinj/vim-react-snippets'
 
 "html5
 Plug 'othree/html5.vim'
+
+"clojure
+Plug 'tpope/vim-fireplace'
 
 "vim for writing
 " Plug 'junegunn/goyo.vim'

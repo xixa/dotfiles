@@ -3,6 +3,18 @@
 # (`!p snip.rv = match.group(1)`$1)$0
 # endsnippet
 
+snippet aphro "Imports aphrodite" b
+import { StyleSheet, css } from 'aphrodite'
+endsnippet
+
+snippet style "Creates an aphrodite style" b
+const styles = StyleSheet.create({
+	${1:<...>}: {
+		${2:...}
+	}
+})
+endsnippet
+
 # graphql stuff
 snippet graphql "Imports graphQL stuff" b
 import {
@@ -77,14 +89,16 @@ import ReactDOM from 'react-dom'
 endsnippet
 
 snippet comp "creates a react component" b
-${1:export default }class ${2:ClassName} extends Component {
-	${3:constructor(){
-		super(...arguments)
-		this.state = ${4:initial state}
-	}
-	}render() {
-		${5:...
-		}return ${6:...}
+${1:export default }class ${2:ClassName} extends Component {${3:
+	constructor(){
+		super(...arguments)${4:
+		...}
+	}}
+	render() {${5:
+		...}
+		return (
+			${6:...}
+		)
 	}
 }
 endsnippet
@@ -92,6 +106,13 @@ endsnippet
 snippet propt
 ${1:CompName}.propTypes = {
 	${2:first_prop}: PropTypes.${3:type}
+}
+endsnippet
+
+snippet constructor "Creates a React comp constructor" b
+constructor(props) {
+	super(props)
+	${0:...}
 }
 endsnippet
 
