@@ -19,6 +19,10 @@ set -o emacs
 source $HOME/dotfiles/bash/prompt.sh
 source $HOME/dotfiles/tmux/tmuxinator.bash
 export PYTHONSTARTUP=$HOME/.pythonrc
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
 #eval "$(rbenv init -)"
 
 export CLICOLOR=1

@@ -1,0 +1,44 @@
+snippet sch "Creates the basis for a schema" b
+DROP DATABASE IF EXISTS ${1:<database name> };
+CREATE DATABASE $1;
+
+USE $1;
+endsnippet
+
+snippet tbl "Creates a table" b
+DROP TABLE IF EXISTS ${1:<table name>};
+CREATE TABLE $1 (
+	id								INT NOT NULL AUTO_INCREMENT,
+	created						TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	$0
+	PRIMARY KEY (id)
+);
+endsnippet
+
+snippet fk "Creates a foreign key"
+FOREIGN KEY (${1:<key>}) REFERENCES ${2:<table>}(${3:<field>})
+endsnippet
+
+snippet auto "Creates an auto incrementing field"
+${1:<field name>} $0${2:<data type>} AUTO_INCREMENT,
+endsnippet
+
+snippet vc "Creates a varchar field"
+${1:<field>} $0VARCHAR(255),
+endsnippet
+
+snippet date "Creates a date field"
+${1:<field>} $0TIMESTAMP,
+endsnippet
+
+snippet txt "Creates a text field"
+${1:<field>} $0TEXT,
+endsnippet
+
+snippet int "Crates an int field"
+${1:<field>} $0INT,
+endsnippet
+
+snippet nn "Description"
+NOT NULL
+endsnippet

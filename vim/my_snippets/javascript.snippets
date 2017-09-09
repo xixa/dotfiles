@@ -1,3 +1,21 @@
+snippet it "creates a test case" b
+it('${1:description}', () => {
+	expect(${2:...})
+})
+endsnippet
+
+# to use this, 'viw' to select a word, then tab, then the snippet!
+snippet $ "surrounds a selection in ${}"
+${${VISUAL}}
+endsnippet
+
+snippet time "creates a setTimeout"
+setTimeout((${VISUAL:<args>}) => ${2:<something>}, ${3:<time>})
+endsnippet
+
+snippet log "creates a console.log"
+console.log($1)$0
+endsnippet
 # shorthand
 # snippet "(\w+)\)\)" "Parenthesis (postfix)" r
 # (`!p snip.rv = match.group(1)`$1)$0
@@ -66,6 +84,10 @@ snippet imp "automatize imports" b
 import $1 from '${2:./}${1/(\w)/\l$1/}'
 endsnippet
 
+snippet req "automatize commonjs 'import'" b
+const $1 = require('${1/(\w)/\l$1/}')
+endsnippet
+
 # functions, classes and objects
 snippet -> "arrow function" i
 (${1:args}) => {
@@ -80,15 +102,9 @@ snippet ob "creates an object"
 endsnippet
 
 # react
-snippet react "imports React (with options for Comps and PropTypes)" b
+snippet react "react component boilerplate (with options for Comps and PropTypes)" b
 import React, { ${1:Component}${2:, PropTypes} } from 'react'
-endsnippet
 
-snippet dom "imports ReactDOM" b
-import ReactDOM from 'react-dom'
-endsnippet
-
-snippet comp "creates a react component" b
 ${1:export default }class ${2:ClassName} extends Component {${3:
 	constructor(){
 		super(...arguments)${4:
@@ -101,6 +117,20 @@ ${1:export default }class ${2:ClassName} extends Component {${3:
 		)
 	}
 }
+endsnippet
+
+snippet reacts "react boilerplate (simple)" b
+const React = require('react')
+
+export default (props) => (
+	<$1>
+		$0
+	</$1>
+)
+endsnippet
+
+snippet dom "imports ReactDOM" b
+import ReactDOM from 'react-dom'
 endsnippet
 
 snippet propt
@@ -121,4 +151,3 @@ ${1:function }${2:name}(${3:arguments}) {
 	${4:content}
 }
 endsnippet
-

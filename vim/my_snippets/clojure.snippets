@@ -1,0 +1,17 @@
+snippet if "Description"
+(if (${1:condition})
+	(${2:true})
+	(${3:false}))$0
+endsnippet
+snippet fn "creates a function" i
+(fn ${1:name?}
+	${2:[${3:args}]})$0
+endsnippet
+
+snippet args "creates args"
+([${1:args}] $0)
+endsnippet
+
+snippet req "require!" b
+(require '$1)$0
+endsnippet

@@ -16,6 +16,7 @@
 
 # icloud drive
 alias icloud='cd $HOME/Library/Mobile\ Documents/com~apple~CloudDocs'
+
 # sublime text
 alias s='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 

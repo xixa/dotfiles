@@ -1,0 +1,21 @@
+{
+  /* to be symlinked to ~/Library/KeyBindings/DefaultKeyBinding.dict
+     this is mostly stolen from Jacob Rus
+  */
+
+  /* Emacs bindings */
+  "~v"	    = "pageUp:";                      /* one screenful up	      default: √ */
+  "~b"      = "moveWordBackward:";            /* one word backward      default: ∫ */
+  "~f"      = "moveWordForward:";             /* one word forward       default: ƒ */
+  "~<"      = "moveToBeginningOfDocument:";   /* to the start of doc    default: ¯ */
+  "~>"      = "moveToEndOfDocument:";         /* to the end of doc      default: ˘ */
+  "~d"      = "deleteWordForward:";           /* delete word forward    defautl: ∂ */
+  "~/"      = "complete:";                    /* autocomplete           default: ÷ */
+  "~\U007F" = "deleteWordBackward:";
+  "~\@"	    = ("setMark:", "moveWordForward:", "swapWithMark");
+  "~h"	    = ("setMark:", "moveToendOfParagraph:", "swapWithMark");	 /* default: ˙*/
+
+  "^x" = {
+    "u"  = "undo:";
+  };
+}

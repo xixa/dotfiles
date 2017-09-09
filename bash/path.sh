@@ -3,6 +3,7 @@ export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin"
 export PATH="/usr/local/mysql/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # Mac settings
 if [[ $(uname) == "Darwin" ]]; then
