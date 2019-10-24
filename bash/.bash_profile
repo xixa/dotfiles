@@ -35,9 +35,5 @@ export EDITOR=nvim
 # vertical bar cursor
 #echo -e -n "\x1b[\x35 q"
 
-alias srcit='source $HOME/.bash_profile'
-alias edbash='v $HOME/.bash_profile'
-alias git='LANG=en_US git'
-alias youtube-dl='youtube-dl -o "~/Movies/youtube-dl/%(title)s.%(ext)s"'
-
-source $HOME/dotfiles/bash/general.sh
+source $HOME/dotfiles/bash/settings.sh
+source $HOME/dotfiles/bash/aliases.sh
