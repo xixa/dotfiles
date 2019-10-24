@@ -1,3 +1,19 @@
+snippet if "Creates an if statement"
+if ($1) {
+
+} else {
+
+}
+endsnippet
+
+snippet try "creates a try"
+try {
+	${0:<...>}
+} catch (err) {
+	${1:<throw error>}
+}
+endsnippet
+
 snippet it "creates a test case" b
 it('${1:description}', () => {
 	expect(${2:...})
@@ -80,12 +96,20 @@ snippet exp
 export default ${1:ClassName}
 endsnippet
 
+snippet expc
+module.exports $0
+endsnippet
+
 snippet imp "automatize imports" b
 import $1 from '${2:./}${1/(\w)/\l$1/}'
 endsnippet
 
 snippet req "automatize commonjs 'import'" b
-const $1 = require('${1/(\w)/\l$1/}')
+const $1 = require("${2:${1/(\w)/\l$1/}}")
+endsnippet
+
+snippet req. "automatize commonjs 'import'" b
+const $1 = require("./${2:${1/(\w)/\l$1/}}")
 endsnippet
 
 # functions, classes and objects
@@ -102,25 +126,27 @@ snippet ob "creates an object"
 endsnippet
 
 # react
-snippet react "react component boilerplate (with options for Comps and PropTypes)" b
-import React, { ${1:Component}${2:, PropTypes} } from 'react'
+snippet react "react component boilerplate (with options for Comps)" b
+import React from "react"
 
-${1:export default }class ${2:ClassName} extends Component {${3:
+class ${1:<ClassName>} extends React.Component {${2:
 	constructor(){
-		super(...arguments)${4:
-		...}
+		super(...arguments)${3:
+		<state>}
 	}}
-	render() {${5:
-		...}
+	render() {${4:
+		<methods>}
 		return (
-			${6:...}
+			$0
 		)
 	}
 }
+
+export default $1
 endsnippet
 
 snippet reacts "react boilerplate (simple)" b
-const React = require('react')
+const React = require("react")
 
 export default (props) => (
 	<$1>
@@ -130,7 +156,7 @@ export default (props) => (
 endsnippet
 
 snippet dom "imports ReactDOM" b
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom"
 endsnippet
 
 snippet propt

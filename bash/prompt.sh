@@ -12,14 +12,6 @@ else
 	hostStyle="${yellow}";
 fi;
 
-# virtualenvwrapper settings
-if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
-  export WORKON_HOME=$HOME/.virtualenvs #virtual environments folder
-  export PROJECT_HOME=$HOME/Projects/web/ # projects folder
-  source /usr/local/bin/virtualenvwrapper.sh #location of the script TODO: add this to dotfile
-  # export VIRTUAL_ENV_DISABLE_PROMPT=1 # disables virtualenv in the prompt
-fi
-
 # git prompt
 if [ -e .git-prompt.sh ]; then
   source .git-prompt.sh #loads git-prompt
@@ -29,10 +21,29 @@ if [ -e .git-prompt.sh ]; then
   GIT_PS1_SHOWUPSTREAM="git"
   GIT_PS1_DESCRIBE_STYLE="contains"
   GIT_PS1_SHOWCOLORHINTS=true
-fi
+fi;
 
-PS1="\n\n\w $__git_ps1\n$ "
-export PS1
+# venv
+function virtualenv_info(){
+    # Get Virtual Env
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        # Strip out the path and just leave the env name
+        venv="${VIRTUAL_ENV##*/}";
+    else
+        # In case you don't have one activated
+        venv=''
+    fi
+    [[ -n "$venv" ]] && echo "($venv) ";
+}
+
+# disable the default virtualenv prompt change
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# VENV="\$(virtualenv_info)";
+
+#prompt
+PS1="\n\n$VENV\w  $__git_ps1 \n$ "
+export PS1;
 
 PS2="\[${yellow}\]→ \[${reset}\]";
 export PS2;

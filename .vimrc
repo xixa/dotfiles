@@ -1,4 +1,4 @@
-"
+
 "    copyleft (Ↄ) marcio ikematsu
 "    marcio.ikematsu@usp.br
 "
@@ -8,15 +8,27 @@
 "
 syntax on
 language en_US
-set t_Co=256
-hi clear
-set termguicolors
+set t_Co=258
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+highlight Normal ctermbg=NONE
+" hi clear
+" let g:dracula_italic = 0
+" colorscheme dracula
+highlight Normal ctermbg=None
 color agathe
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+set background=dark
+" colorscheme solarized8
+" highlight Normal cterm=NONE term=NONE
+" highlight Normal ctermbg=NONE
 set guifont=Monaco:h14
 set timeoutlen=1000 ttimeoutlen=0         " pensa rapido!
 let mapleader=","
 set backspace=2                           " so backspace works normally on tmux
-
 set cursorcolumn                          " highlights cursor column
 set number
 set relativenumber                        " show line numbers relative to position
@@ -88,6 +100,8 @@ set nowb
 " auto completion
 set complete=.,w,b,u,t,i,kspell
 set omnifunc=syntaxcomplete#Complete
+"" enter inserts the option from a list instead of breaking a line
+set completeopt+=noinsert
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setloca omnifunc=htmlcomplete#CompleteTags
@@ -104,8 +118,8 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "nmap <silent><C-k> O<Esc>
 "nmap <silent><A-j> :set paste<Return>m`o<Esc>``:set nopaste<CR>
 "nmap <silent><A-k> :set paste<Return>m`O<Esc>``:set nopaste<CR>
-"imap <silent><C-l> <right>
-nnoremap <CR> :noh<CR><CR>
+imap <silent><C-l> <right>
+" nnoremap <CR>:noh<CR><CR>
 " shift+tab to jump outside enclosing chars
 imap <silent><S-Tab> <C-o>A
 
@@ -114,96 +128,7 @@ nnoremap <leader>m :w<CR> :silent make\|redraw!\|cc<CR>
 :command! Makenode :set makeprg=tmux\ send-key\ -t\ 1\ node\\\ %\ Enter
 :command! Makejasmine :set makeprg=tmux\ send-key\ -t\ 1\ npm\\\ test\ Enter
 
-" vim/nvim specific
-if has('nvim')
-  " deoplete
-  let g:deoplete#enable_at_startup = 1
-  " a hack for vim-tmux-navigator
-  " nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
-else
-  " neocomplete
-  let g:acp_enableAtStartup = 0
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#enable_smart_case = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
-  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-  if !exists('g:neocomplete#keyword_patterns')
-      let g:neocomplete#keyword_patterns = {}
-  endif
-
-  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-  " Plugin key-mappings.
-  " inoremap <expr><C-g>     neocomplete#undo_completion()
-  " inoremap <expr><C-l>     neocomplete#complete_common_string()
-  "
-  " " Recommended key-mappings.
-  " " <CR>: close popup and save indent.
-
-  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-  function! s:my_cr_function()
-   return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  endfunction
-
-  " inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-  " inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-  " Close popup by <Space>.
-  "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-  " AutoComplPop like behavior.
-  "let g:neocomplete#enable_auto_select = 1
-
-  " Shell like behavior(not recommended).
-  "set completeopt+=longest
-  "let g:neocomplete#enable_auto_select = 1
-  "let g:neocomplete#disable_auto_complete = 1
-  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-  " Enable omni completion.
-
-  " Enable heavy omni completion.
-  if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-  endif
-
-
-
-  "let g:neocomplete#sources#omni#input_patterns.php = '[^.
-  "   \t]->\h\w*\|\h\w*::'
-  "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:]
-  "   *\t]\%(\.\|->\)'
-  "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:]
-  "   *\t]\%(\.\|->\)\|\h\w*::'
-
-  " For perlomni.vim setting.
-  " https://github.com/c9s/perlomni.vim
-  let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-endif
-
-" popupmenu-keys config
-"function! OmniPopup(action)
-    "if pumvisible()
-        "if a:action == 'j'
-            "return "\<C-N>"
-        "elseif a:action == 'k'
-            "return "\<C-P>"
-        "endif
-    "endif
-    "return a:action
-"endfunction
-
-"inoremap <silent><c-j> <C-R>=OmniPopup('j')<CR>
-"inoremap <silent><c-k> <C-R>=OmniPopup('k')<CR>
-
-
-
-
-
-" tabs & indentation
-filetype plugin indent on
+"tabs & indentation
 let tabsize=2
 autocmd filetype python let tabsize=4
 let &tabstop=tabsize                              " tab = 2 spaces
@@ -254,44 +179,70 @@ let g:ackpreview = 1
 "let g:ack_autofold_results = 1
 
 " Syntastic
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_html_tidy_exec = 'tidy5'
-let g:syntastic_enable_signs   = 1
-let g:syntastic_error_symbol = '×'
-let g:syntastic_warning_symbol = '▲'
-let g:syntastic_style_error_symbol = '×'
-let g:syntastic_style_warning_symbol = '×'
-let g:syntastic_html_tidy_ignore_errors = [
-\ "<poll-include-fragment> is not recognized!",
-\ "discarding unexpected <poll-include-fragment>",
-\ "discarding unexpected </poll-include-fragment>",
-\ "trimming empty <span>",
-\ "<svg> is not recognized!",
-\ "discarding unexpected <svg>",
-\ "discarding unexpected </svg>",
-\ "<a> escaping malformed URI reference",
-\ "plain text isn't allowed in <head> elements",
-\ "<li> isn't allowed in <body> elements",
-\ "inserting implicit <ul>",
-\ "missing </ul> before <div>",
-\ "trimming empty <li>",
-\ "trimming empty <ul>",
-\ "missing quote mark for attribute value",
-\ ]
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 1
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_html_tidy_exec = 'tidy5'
+" let g:syntastic_enable_signs   = 1
+" let g:syntastic_error_symbol = '×'
+" let g:syntastic_warning_symbol = '⎔'
+" let g:syntastic_style_error_symbol = '×'
+" let g:syntastic_style_warning_symbol = '×'
+" let g:syntastic_html_tidy_ignore_errors = [
+" \ "<poll-include-fragment> is not recognized!",
+" \ "discarding unexpected <poll-include-fragment>",
+" \ "discarding unexpected </poll-include-fragment>",
+" \ "trimming empty <span>",
+" \ "<svg> is not recognized!",
+" \ "discarding unexpected <svg>",
+" \ "discarding unexpected </svg>",
+" \ "<a> escaping malformed URI reference",
+" \ "plain text isn't allowed in <head> elements",
+" \ "<li> isn't allowed in <body> elements",
+" \ "inserting implicit <ul>",
+" \ "missing </ul> before <div>",
+" \ "trimming empty <li>",
+" \ "trimming empty <ul>",
+" \ "missing quote mark for attribute value",
+" \ ]
+" ctrl w E to find errors and ctrl w F to hide them
+" let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+" nnoremap <C-w>E :SyntasticCheck<CR>
+" nnoremap <C-w>F :SyntasticToggleMode<CR>
 
-" Emmet
+"Ale
+let g:ale_completion_enabled = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = ['eslint', 'prettier']
+let g:ale_linters = {
+      \ 'javascript': ['eslint'],
+      \ 'jsx': ['eslint'],
+      \}
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+
+"Prettier
+" let g:prettier#config#semi = 'false'
+" let g:prettier#config#single_quote = 'false'
+" let g:prettier#config#bracket_spacing = 'true'
+
+"Emmet
 let g:user_emmet_settings = {'javascript' : { 'extends':'jsx',}}
 
 " Auto-pairs
 au FileType clojure let b:autopairs_loaded=1
 
 " UltiSnips
-let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsSnippetDirectories=["~/dotfiles/vim/my_snippets", "my_snippets"]
-let g:UltiSnipsJumpForwardTrigger= '<tab>'
+" let g:UltiSnipsSnippetsDir="~/xixa/dotfiles/vim/my_snippets"
+" let g:UltiSnipsSnippetDirectories=["my_snippets"]
+let g:UltiSnipsJumpForwardTrigger= "<Tab>"
 let g:UltiSnipsListSnippets='<c-tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
-let g:UltiSnipsEditSplit='horizontal'
+let g:UltiSnipsEditSplit='vertical'
 
 " Neosnippet
 " let g:neosnippet#disable_runtime_snippets = 1
@@ -370,16 +321,20 @@ function! s:split_line_text_at_cursor()
 endfunction
 
 " slime
-let g:slime_target = "tmux"
-let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.3"}
+" let g:slime_target = "tmux"
+" let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.3"}
 
 " paredit
 let g:paredit_electric_return=0
 
 " PLUGGED
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+" Plug 'scrooloose/syntastic'
+Plug 'dense-analysis/ale'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
+"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -389,11 +344,13 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
 Plug 'mattn/emmet-vim'
-"Plug 'nvie/vim-flake8'
+Plug 'nvie/vim-flake8'
 Plug 'sirver/ultisnips'
 " Plug 'shougo/neocomplete.vim'
 Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'shougo/neco-vim'
 " Plug 'Shougo/neosnippet'
 Plug 'bling/vim-bufferline'
 " Plug 'christoomey/vim-tmux-navigator'
@@ -402,22 +359,35 @@ Plug 'terryma/vim-multiple-cursors'
 "Plug 'raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jpalardy/vim-slime'
+Plug 'metakirby5/codi.vim'
+
+"looks
+Plug 'tpope/vim-sensible'
 
 "python
 Plug 'mitsuhiko/vim-python-combined'
+Plug 'davidhalter/jedi'
+Plug 'deoplete-plugins/deoplete-jedi'
 
 "javascript
-Plug 'flowtype/vim-flow', { 'autoload': { 'filetypes': 'javascript'}}
-Plug 'wokalski/autocomplete-flow'
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 " Plug 'othree/yajs.vim'
-Plug 'neomake/neomake'
-" Plug 'ternjs/tern_for_vim'
+" Plug 'neomake/neomake'
 " Plug 'digitaltoad/vim-pug'
+" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+
+" flow
+" Plug 'flowtype/vim-flow', { 'autoload': { 'filetypes': 'javascript'}}
+" Plug 'wokalski/autocomplete-flow'
 
 "react shit
 Plug 'mxw/vim-jsx'            " syntax highlighter
 Plug 'justinj/vim-react-snippets'
+Plug 'styled-components/vim-styled-components'
+
+"graphql
+
+Plug 'jparise/vim-graphql'
 
 "html5
 Plug 'othree/html5.vim'
@@ -426,6 +396,9 @@ Plug 'othree/html5.vim'
 Plug 'tpope/vim-fireplace'
 Plug 'kovisoft/paredit'
 Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-highlight'
+Plug 'clojure-vim/async-clj-omni'
+" Plug 'eraserhd/parinfer-rust'
 " Plug 'kovisoft/slimv'
 
 "vim for writing
@@ -443,7 +416,14 @@ Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 " Plug 'godlygeek/tabular'
 " Plug 'plasticboy/vim-markdown'
 
+Plug 'dracula/vim', { 'as': 'dracula' }
+
 call plug#end()
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#ternjs#tern_bin = '/usr/local/bin/ternjs'
+let g:deoplete#sources#ternjs#docs = 1
+let g:deoplete#sources#ternjs#omit_object_prototype = 0
 
 "auto-source virmc
 autocmd! BufWritePost ~/.vimrc so %
@@ -452,3 +432,4 @@ source ~/dotfiles/vim/syntax/svg.vim
 
 "auto save hidden buffers!
 :set hidden
+filetype plugin indent on

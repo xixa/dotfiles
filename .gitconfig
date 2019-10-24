@@ -4,7 +4,7 @@
   username = xixa
 
 [core]
-  editor = vim
+  editor = v
 
 [web]
   browser = google-chrome
@@ -20,3 +20,8 @@
   added = green
   changed = yellow
   untracked = red
+
+[alias]
+  s = status
+  c = commit
+  pom = push origin master

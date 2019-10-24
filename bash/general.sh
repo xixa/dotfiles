@@ -68,31 +68,11 @@ else
   alias v='/usr/local/bin/vim'
 fi
 
-# atom
-if [ "command -v atom" != "" ]; then
-  alias a='/usr/local/bin/atom'
-
-  # touch & atom (creates a file and opens it in atom)
-  ta()
-  {
-    touch $1;
-    a $1;
-  }
-fi
-
-# sublime text
-if [ "command -v s" != "" ]; then
-  # touch & sublime (creates a file and opens it in sublime text)
-  ts()
-  {
-      touch $1;
-      s $1;
-  }
-fi
-
 source $HOME/dotfiles/bash/path.sh
 
 # pi
 alias sshpi='ssh pi@192.168.1.100'
 alias sshfspi_ext='sshfs pi@192.168.1.100:/home/pi/mnt'
 
+#docker
+alias dockill="docker rm -f \$(docker ps -aq)"

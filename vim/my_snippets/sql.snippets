@@ -1,11 +1,11 @@
-snippet sch "Creates the basis for a schema" b
+snippet 'schema|sch' "Creates the basis for a schema" rb
 DROP DATABASE IF EXISTS ${1:<database name> };
 CREATE DATABASE $1;
 
 USE $1;
 endsnippet
 
-snippet tbl "Creates a table" b
+snippet 'tbl|table' "Creates a table" rb
 DROP TABLE IF EXISTS ${1:<table name>};
 CREATE TABLE $1 (
 	id								INT NOT NULL AUTO_INCREMENT,
@@ -16,7 +16,8 @@ CREATE TABLE $1 (
 endsnippet
 
 snippet fk "Creates a foreign key"
-FOREIGN KEY (${1:<key>}) REFERENCES ${2:<table>}(${3:<field>})
+fk_${1:<key>}	$0INT NOT NULL,
+FOREIGN KEY (fk_$1) REFERENCES ${2:<table>}(${3:id}),
 endsnippet
 
 snippet auto "Creates an auto incrementing field"
@@ -24,21 +25,29 @@ ${1:<field name>} $0${2:<data type>} AUTO_INCREMENT,
 endsnippet
 
 snippet vc "Creates a varchar field"
-${1:<field>} $0VARCHAR(255),
+${1:<field>} $0VARCHAR(255)${2: NOT NULL},
+endsnippet
+
+snippet bool "Creates a boolean field"
+${1:<field>} $0BOOLEAN${2: NOT NULL},
 endsnippet
 
 snippet date "Creates a date field"
-${1:<field>} $0TIMESTAMP,
+${1:<field>} $0TIMESTAMP${2: NOT NULL},
 endsnippet
 
 snippet txt "Creates a text field"
-${1:<field>} $0TEXT,
+${1:<field>} $0TEXT${2: NOT NULL},
 endsnippet
 
-snippet int "Crates an int field"
-${1:<field>} $0INT,
+snippet int "Creates an int field"
+${1:<field>} $0INT${2: NOT NULL},
 endsnippet
 
-snippet nn "Description"
+snippet nn "shorthand for NOT NULL"
 NOT NULL
+endsnippet
+
+snippet in "Insert stuff to a table"
+INSERT INTO ${1:<table>} (${2:<fields>}) values (${3:<values>});
 endsnippet

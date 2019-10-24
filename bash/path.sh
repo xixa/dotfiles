@@ -13,7 +13,7 @@ elif [ $(uname) == "Linux" ]; then
   export PATH="$HOME/.linuxbrew/bin:$PATH"
 fi
 
-export PYTHONSTARTUP=$HOME/xixa.py #runs a script when an interactive interpreter session starts
+# export PYTHONSTARTUP=$HOME/xixa.py #runs a script when an interactive interpreter session starts
 
 
 

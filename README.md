@@ -14,7 +14,8 @@
 ╱ ╱ ╱              marcio.ikematsu@usp.br<br>
 ╱<br>
 
-
+### Dependencies
+pygments
 ### MacOS
 #### Filters
 Custom quartz filters, used by, for instance, Preview and ColorSync Utility

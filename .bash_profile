@@ -16,7 +16,7 @@
 
 set -o emacs
 
-source $HOME/dotfiles/bash/prompt.sh
+source $HOME/dotfiles/bash/prompt_old.sh
 source $HOME/dotfiles/tmux/tmuxinator.bash
 export PYTHONSTARTUP=$HOME/.pythonrc
 export GOPATH=$HOME/go
@@ -37,5 +37,7 @@ export EDITOR=nvim
 
 alias srcit='source $HOME/.bash_profile'
 alias edbash='v $HOME/.bash_profile'
+alias git='LANG=en_US git'
+alias youtube-dl='youtube-dl -o "~/Movies/youtube-dl/%(title)s.%(ext)s"'
 
 source $HOME/dotfiles/bash/general.sh
