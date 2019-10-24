@@ -18,6 +18,7 @@ set -o emacs
 
 source $HOME/dotfiles/bash/prompt_old.sh
 source $HOME/dotfiles/tmux/tmuxinator.bash
+
 export PYTHONSTARTUP=$HOME/.pythonrc
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
@@ -37,3 +38,5 @@ export EDITOR=nvim
 
 source $HOME/dotfiles/bash/settings.sh
 source $HOME/dotfiles/bash/aliases.sh
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

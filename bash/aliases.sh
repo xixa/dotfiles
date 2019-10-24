@@ -1,7 +1,8 @@
 #!/bin/bash
 
 alias srcit='source $HOME/.bashrc'
-alias edbash='v $HOME/dotfiles/.bash_profile'
+alias edbash='v $HOME/dotfiles/bash/.bash_profile'
+alias edalias='v $HOME/dotfiles/bash/aliases.sh'
 
 # ls
 colorflag="--color"
@@ -37,6 +38,8 @@ alias git='LANG=en_US git'
 
 #docker
 alias dockill="docker rm -f \$(docker ps -aq)"
+alias dockup='docker-compose up -d'
+alias dcomp='docker-compose'
 
 # npm
 alias ng='npm list -g --depth=0 2>/dev/null' # lists packages globally, only the first level and throw stderr to the black hole
@@ -44,3 +47,7 @@ alias nl='npm list --depth=0 2>/dev/null' # same, but locally
 
 alias youtube-dl='youtube-dl -o "~/Movies/youtube-dl/%(title)s.%(ext)s"'
 
+# boilerplate
+alias bpyarn="yarn add -D eslint babel-eslint eslint-config-prettier eslint-plugin-prettier jest prettier"
+alias bpeslint="ln -s $HOME/dotfiles/rc/.eslintrc.json ."
+alias bpjs='bpyarn; bpeslint'
