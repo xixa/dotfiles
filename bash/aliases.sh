@@ -40,6 +40,11 @@ alias git='LANG=en_US git'
 alias dockill="docker rm -f \$(docker ps -aq)"
 alias dockup='docker-compose up -d'
 alias dcomp='docker-compose'
+alias dockip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
+alias dockimgclean="docker rmi -f \$(docker images -f dangling=true -q)"
+
+#kubernetes
+alias k8="kubectl"
 
 # npm
 alias ng='npm list -g --depth=0 2>/dev/null' # lists packages globally, only the first level and throw stderr to the black hole

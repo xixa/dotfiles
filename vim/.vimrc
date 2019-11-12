@@ -15,13 +15,19 @@ highlight Normal ctermbg=NONE
 " hi clear
 " let g:dracula_italic = 0
 " colorscheme dracula
+" color agathe
+color vice
 highlight Normal ctermbg=None
-color agathe
+set background=dark
+syntax on
+
+"" if you use lightline
+" Lightline
+
 set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-set background=dark
 " colorscheme solarized8
 " highlight Normal cterm=NONE term=NONE
 " highlight Normal ctermbg=NONE
@@ -217,6 +223,7 @@ let g:ale_fixers = ['eslint', 'prettier']
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'jsx': ['eslint'],
+      \ 'typescript': ['tslint'],
       \}
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
@@ -334,7 +341,7 @@ Plug 'dense-analysis/ale'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
-"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'

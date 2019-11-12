@@ -29,6 +29,7 @@ brew:
 
 brew-apps:
 	brew install\
+		python3\
 		tree\
 		make\
 		ack\

@@ -24,7 +24,6 @@ export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
-#eval "$(rbenv init -)"
 
 export CLICOLOR=1
 export TERM=screen-256color
@@ -39,4 +38,3 @@ export EDITOR=nvim
 source $HOME/dotfiles/bash/settings.sh
 source $HOME/dotfiles/bash/aliases.sh
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

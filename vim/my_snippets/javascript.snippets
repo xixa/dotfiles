@@ -1,3 +1,14 @@
+snippet async "create async function"
+async ${1:<args>} => {
+	try {
+		${0}
+	} catch (err) {
+		throw err
+	}
+}
+
+endsnippet
+
 snippet if "Creates an if statement"
 if ($1) {
 
