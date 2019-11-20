@@ -1,4 +1,4 @@
-
+"
 "    copyleft (Ↄ) marcio ikematsu
 "    marcio.ikematsu@usp.br
 "
@@ -38,6 +38,8 @@ set backspace=2                           " so backspace works normally on tmux
 set cursorcolumn                          " highlights cursor column
 set number
 set relativenumber                        " show line numbers relative to position
+set cmdheight=1
+
 
 " modes
 autocmd InsertEnter * call MyInsertMode()
@@ -161,10 +163,6 @@ autocmd BufWritePre * :call <sid>striptrailingwhitespaces()
 
 " PLUGINS
 
-" NERDTree, NERDCommenter
-noremap <C-\> :NERDTreeToggle<CR>
-" map <plug>NERDCommenterToggle(n, Toggle)
-
 " fzf
 noremap <C-t> :FZF<CR>
 "noremap <C-t> :Files<CR>
@@ -217,18 +215,6 @@ let g:ackpreview = 1
 " nnoremap <C-w>F :SyntasticToggleMode<CR>
 
 "Ale
-let g:ale_completion_enabled = 1
-let g:ale_fix_on_save = 1
-let g:ale_fixers = ['eslint', 'prettier']
-let g:ale_linters = {
-      \ 'javascript': ['eslint'],
-      \ 'jsx': ['eslint'],
-      \ 'typescript': ['tslint'],
-      \}
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = '⚠'
-highlight ALEErrorSign ctermbg=NONE ctermfg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 "Prettier
 " let g:prettier#config#semi = 'false'
@@ -240,16 +226,6 @@ let g:user_emmet_settings = {'javascript' : { 'extends':'jsx',}}
 
 " Auto-pairs
 au FileType clojure let b:autopairs_loaded=1
-
-" UltiSnips
-let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsSnippetDirectories=["~/dotfiles/vim/my_snippets", "my_snippets"]
-" let g:UltiSnipsSnippetsDir="~/xixa/dotfiles/vim/my_snippets"
-" let g:UltiSnipsSnippetDirectories=["my_snippets"]
-let g:UltiSnipsJumpForwardTrigger= "<Tab>"
-let g:UltiSnipsListSnippets='<c-tab>'
-let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
-let g:UltiSnipsEditSplit='vertical'
 
 " Neosnippet
 " let g:neosnippet#disable_runtime_snippets = 1
@@ -334,14 +310,36 @@ endfunction
 " paredit
 let g:paredit_electric_return=0
 
+" providers
+" let g:python3_host_prog='/usr/local/bin/python3'
+" let g:loaded_python3_provider=1
+
 " PLUGGED
 call plug#begin('~/.vim/plugged')
 " Plug 'scrooloose/syntastic'
-Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale' "{{{
+  let g:ale_completion_enabled = 1
+  let g:ale_fix_on_save = 1
+  let g:ale_fixers = ['eslint', 'prettier']
+  let g:ale_linters = {
+        \ 'javascript': ['eslint'],
+        \ 'jsx': ['eslint'],
+        \ 'typescript': ['tslint'],
+        \}
+  let g:ale_sign_error = '✘'
+  let g:ale_sign_warning = '⚠'
+  highlight ALEErrorSign ctermbg=NONE ctermfg=red
+  highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+"}}}
+
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+Plug 'scrooloose/nerdtree' "{{{
+  noremap <C-\> :NERDTreeToggle<CR>
+"}}} , { 'on': 'NERDTreeToggle' }
+
 "Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -354,7 +352,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'mattn/emmet-vim'
 Plug 'nvie/vim-flake8'
-Plug 'sirver/ultisnips'
+
+Plug 'SirVer/ultisnips' "{{{
+  let g:UltiSnipsUsePythonVersion = 3
+  let g:UltiSnipsSnippetDirectories=["~/dotfiles/vim/my_snippets"]
+  let g:UltiSnipsJumpForwardTrigger= "<Tab>"
+  let g:UltiSnipsListSnippets='<c-tab>'
+  let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
+  let g:UltiSnipsEditSplit='vertical'
+"}}}
+
 " Plug 'shougo/neocomplete.vim'
 Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'shougo/neco-vim'
@@ -367,6 +374,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jpalardy/vim-slime'
 Plug 'metakirby5/codi.vim'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc-snippets'
 
 "looks
 Plug 'tpope/vim-sensible'
@@ -374,7 +383,7 @@ Plug 'tpope/vim-sensible'
 "python
 Plug 'mitsuhiko/vim-python-combined'
 Plug 'davidhalter/jedi'
-Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'deoplete-plugins/deoplete-jedi'
 
 "javascript
 " Plug 'pangloss/vim-javascript'
@@ -408,6 +417,11 @@ Plug 'clojure-vim/async-clj-omni'
 " Plug 'eraserhd/parinfer-rust'
 " Plug 'kovisoft/slimv'
 
+"elixir
+Plug 'elixir-editors/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+" Plug 'amiralies/coc-elixir'
+
 "vim for writing
 function! BuildComposer(info)
   if a:info.status != 'unchanged' || a:info.force
@@ -423,7 +437,7 @@ Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 " Plug 'godlygeek/tabular'
 " Plug 'plasticboy/vim-markdown'
 
-Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
 

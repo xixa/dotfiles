@@ -1,0 +1,47 @@
+snippet mod "declares a module" b
+defmodule ${1:<module_name>} do
+  $0
+end
+endsnippet
+
+snippet def "declares a function within a module"
+def ${1:<function_name & condition>} do
+	$0
+end
+endsnippet
+
+snippet defp "declares a private function within a module"
+defp ${1:<function_name & condition>} do
+	$0
+end
+endsnippet
+
+snippet if "if/2 structure"
+if ${1:<condition>} do
+	$0
+else
+
+end
+endsnippet
+
+snippet cond "cond/1 structure"
+cond do
+	${1:<cond>} -> ${2:<return>}
+end
+endsnippet
+
+snippet case "case/2 structure"
+case ${1:<condition>} do
+	$0
+end
+endsnippet
+
+snippet try "try/rescue|catch structure"
+try do
+
+end
+endsnippet
+
+snippet match "match structure"
+${1:<condition>} -> ${2:<result>}
+endsnippet
