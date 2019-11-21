@@ -54,7 +54,8 @@ autocmd FileType html,markdown setloca omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
+au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
+au BufRead,BufNewFile *.eex set filetype=eelixir
 
 fun! <sid>striptrailingwhitespaces()
   let l = line('.')
@@ -68,12 +69,6 @@ autocmd BufWritePre * :call <sid>striptrailingwhitespaces()
 " providers
 " let g:python3_host_prog='/usr/local/bin/python3'
 " let g:loaded_python3_provider=1
-
-" fzf
-noremap <C-t> :FZF<CR>
-"noremap <C-t> :Files<CR>
-let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore-dir=bin --ignore-dir="*.pyc"'
-set rtp+=/usr/local/opt/fzf
 
 function! s:home()
   let start_col = col('.')
@@ -101,9 +96,94 @@ function! s:split_line_text_at_cursor()
   return [text_before_cursor, text_after_cursor]
 endfunction
 
-" PLUGGED
+
+
+
+
+
+
+
+
+
+
+
+
+
 call plug#begin('~/.vim/plugged')
 
+" VIM++
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
+
+Plug 'bling/vim-bufferline'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'jiangmiao/auto-pairs' "{{{
+  au FileType clojure let b:autopairs_loaded=1
+"}}}
+Plug 'jpalardy/vim-slime' "{{{
+" let g:slime_target = "tmux"
+" let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.3"}
+"}}}
+Plug 'metakirby5/codi.vim'
+Plug 'scrooloose/nerdtree' "{{{
+  noremap <C-\> :NERDTreeToggle<CR>
+"}}} , { 'on': 'NERDTreeToggle' }
+
+" snippets
+Plug 'SirVer/ultisnips' "{{{
+  let g:UltiSnipsUsePythonVersion = 3
+  let g:UltiSnipsSnippetDirectories=["~/dotfiles/vim/my_snippets"]
+  let g:UltiSnipsJumpForwardTrigger= "<Tab>"
+  " let g:UltiSnipsListSnippets='<c-tab>'
+  let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
+  let g:UltiSnipsEditSplit='vertical'
+"}}}
+
+" deoplete
+" Plug 'shougo/deoplete.nvim' "{{{
+"  let g:deoplete#enable_at_startup = 1
+"  let g:deoplete#sources#ternjs#tern_bin = '/usr/local/bin/ternjs'
+"  let g:deoplete#sources#ternjs#docs = 1
+"  let g:deoplete#sources#ternjs#omit_object_prototype = 0
+""}}}, { 'do': ':UpdateRemotePlugins' }
+"Plug 'shougo/neco-vim'
+
+
+" INTEGRATION
+" with git
+Plug 'tpope/vim-fugitive'
+
+" with fzf, silver searcher
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim' "{{{
+noremap <C-t> :FZF<CR>
+  " noremap <C-t> :Files<CR>
+  let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore-dir=bin --ignore-dir="*.pyc"'
+  set rtp+=/usr/local/opt/fzf
+"}}}
+
+" with ack, silver searcher
+Plug 'mileszs/ack.vim' "{{{
+  "the silver searcher in place of ack
+  if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+  endif
+
+  nmap <leader>a :tab split<CR>:Ack ""<Left>
+  nmap <leader>A :Ack <C-r><C-w><CR>
+  let g:ackhighlight = 1
+  let g:ackpreview = 1
+  "let g:ack_autoclose = 1
+  "let g:ack_autofold_results = 1
+"}}}
+
+
+
+
+" LANGUAGES
 Plug 'dense-analysis/ale' "{{{
   let g:ale_completion_enabled = 1
   let g:ale_fix_on_save = 1
@@ -123,8 +203,7 @@ Plug 'dense-analysis/ale' "{{{
   let g:ale_sign_warning = '⚠'
   highlight ALEErrorSign ctermbg=NONE ctermfg=red
   highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
-  " let g:ale_elixir_elixir_ls_release='$HOME/.vim/plugged/elixir-ls/apps/elixir_ls_utils/priv'
-  let g:ale_elixi_elixir_ls_release=$HOME . '.vim/plugged/elixir_ls/apps/elixir_ls_utils/priv'
+  " let g:ale_elixir_elixir_ls_release=$HOME . '/.vim/plugged/elixir-ls/apps/elixir_ls_utils/priv'
 "}}}
 
 Plug 'prettier/vim-prettier' "{{{
@@ -135,83 +214,13 @@ Plug 'prettier/vim-prettier' "{{{
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
 
-Plug 'scrooloose/nerdtree' "{{{
-  noremap <C-\> :NERDTreeToggle<CR>
-"}}} , { 'on': 'NERDTreeToggle' }
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-unimpaired'
-Plug 'mattn/emmet-vim' "{{{
-  let g:user_emmet_settings = {'javascript' : { 'extends':'jsx',}}
-"}}}
-Plug 'nvie/vim-flake8'
-
-Plug 'SirVer/ultisnips' "{{{
-  let g:UltiSnipsUsePythonVersion = 3
-  let g:UltiSnipsSnippetDirectories=["~/dotfiles/vim/my_snippets"]
-  let g:UltiSnipsJumpForwardTrigger= "<Tab>"
-  " let g:UltiSnipsListSnippets='<c-tab>'
-  let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
-  let g:UltiSnipsEditSplit='vertical'
-"}}}
-
-Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'shougo/neco-vim'
-Plug 'bling/vim-bufferline'
-Plug 'mileszs/ack.vim' "{{{
-  "the silver searcher in place of ack
-  if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-  endif
-
-  nmap <leader>a :tab split<CR>:Ack ""<Left>
-  nmap <leader>A :Ack <C-r><C-w><CR>
-  let g:ackhighlight = 1
-  let g:ackpreview = 1
-  "let g:ack_autoclose = 1
-  "let g:ack_autofold_results = 1
-"}}}
-
-Plug 'terryma/vim-multiple-cursors'
-Plug 'jiangmiao/auto-pairs' "{{{
-  au FileType clojure let b:autopairs_loaded=1
-"}}}
-Plug 'jpalardy/vim-slime' "{{{
-" let g:slime_target = "tmux"
-" let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.3"}
-"}}}
-Plug 'metakirby5/codi.vim'
-
-"looks
-Plug 'tpope/vim-sensible'
 
 "python
 Plug 'mitsuhiko/vim-python-combined'
+Plug 'nvie/vim-flake8'
 Plug 'davidhalter/jedi'
-Plug 'deoplete-plugins/deoplete-jedi'
-
-"javascript
-" Plug 'pangloss/vim-javascript'
-" Plug 'othree/yajs.vim'
-" Plug 'neomake/neomake'
-" Plug 'digitaltoad/vim-pug'
-" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-
-"react shit
-Plug 'mxw/vim-jsx'            " syntax highlighter
-Plug 'justinj/vim-react-snippets'
-Plug 'styled-components/vim-styled-components'
-
-"graphql
-Plug 'jparise/vim-graphql'
-
-"html5
-Plug 'othree/html5.vim'
+" Plug 'deoplete-plugins/deoplete-jedi'
 
 "clojure
 Plug 'tpope/vim-fireplace'
@@ -223,10 +232,32 @@ Plug 'guns/vim-clojure-highlight'
 Plug 'clojure-vim/async-clj-omni'
 
 "elixir
-" Plug 'elixir-editors/vim-elixir'
+Plug 'elixir-editors/vim-elixir'
 " Plug 'slashmili/alchemist.vim'
 Plug 'JakeBecker/elixir-ls'
-" Plug 'amiralies/coc-elixir'
+
+"graphql
+Plug 'jparise/vim-graphql'
+
+"javascript
+" Plug 'pangloss/vim-javascript'
+" Plug 'othree/yajs.vim'
+" Plug 'neomake/neomake'
+" Plug 'digitaltoad/vim-pug'
+" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+
+" front-end stuff
+Plug 'mattn/emmet-vim' "{{{
+  let g:user_emmet_settings = {'javascript' : { 'extends':'jsx',}}
+"}}}
+
+"react shit
+Plug 'mxw/vim-jsx'            " syntax highlighter
+Plug 'justinj/vim-react-snippets'
+Plug 'styled-components/vim-styled-components'
+
+"html5
+Plug 'othree/html5.vim'
 
 "vim for writing
 function! BuildComposer(info)
@@ -240,11 +271,6 @@ Plug 'euclio/vim-markdown-composer', "{{{
 "}}} { 'do': function('BuildComposer') }
 
 call plug#end()
-
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#ternjs#tern_bin = '/usr/local/bin/ternjs'
-let g:deoplete#sources#ternjs#docs = 1
-let g:deoplete#sources#ternjs#omit_object_prototype = 0
 
 "auto-source virmc
 autocmd! BufWritePost ~/.vimrc so %

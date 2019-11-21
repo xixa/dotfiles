@@ -1,7 +1,7 @@
 MY_DIR := $(realpath ./)
 MY_OS := $(shell uname)
 
-install: bash tmux vim rc
+install: bash tmux vim rc base-apps
 
 # necessary apps
 base-apps: xcode ruby brew brew-apps brew-cask
@@ -81,7 +81,7 @@ tmux: .tmux.conf
 
 # vim & neovim
 NEOVIM := ~/.config/nvim
-vim: .vimrc init.vim my_snippets
+vim: .vimrc init.vim my_snippets vimplugins
 
 .vimrc: $(MY_DIR)/vim/.vimrc
 	@echo -ne 'creates .vimrc symlink at the root: '
@@ -97,6 +97,11 @@ my_snippets: $(MY_DIR)/vim/my_snippets
 	@echo -ne 'creates a symlink for my snippets collection for neovim: '
 	ln -s $(MY_DIR)/vim/my_snippets $(NEOVIM)/my_snippets
 	@echo ✓
+
+vimplugins:
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
+		nvim -c ':PlugInstall' -c 'qa!'
 
 # rc files
 rc: .inputrc .eslintrc.json .gemrc
