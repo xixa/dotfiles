@@ -28,6 +28,7 @@ alias mkdir='mkdir -p' #forces mkdir to create intermediate directories if a pat
 
 # vim/nvim
 alias edvimrc='v ~/.vimrc'
+alias edvimplug='v ~/dotfiles/vim/plugins.vim'
 
 # pi
 alias sshpi='ssh pi@192.168.1.100'
