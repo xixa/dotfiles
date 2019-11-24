@@ -15,24 +15,6 @@ source ~/dotfiles/vim/layout.vim
 
 source ~/dotfiles/vim/mappings.vim
 
-" modes
-autocmd InsertEnter * call MyInsertMode()
-autocmd InsertLeave * call MyNormalMode()
-
-function! MyNormalMode()
-  set relativenumber
-  set cursorcolumn
-  set nocursorline
-  hi statusline ctermfg=7 guifg=#c0c0c0 ctermbg=0
-endfunction
-
-function! MyInsertMode()
-  set number
-  set cursorline
-  set nocursorcolumn
-  hi statusline ctermfg=197 guifg=#ff005f ctermbg=0
-endfunction
-
 " buffers
 "highlight TermCursor ctermfg=red guifg=red        " colors terminal cursor
 set splitbelow
@@ -44,18 +26,12 @@ set nobackup
 set nowb
 
 " auto completion
+filetype plugin on
 set complete=.,w,b,u,t,i,kspell
 set omnifunc=syntaxcomplete#Complete
+set completeopt=menu,menuone,preview,noselect,noinsert
 "" enter inserts the option from a list instead of breaking a line
-set completeopt+=noinsert
-
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setloca omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
-au BufRead,BufNewFile *.eex set filetype=eelixir
+" set completeopt+=noinsert
 
 fun! <sid>striptrailingwhitespaces()
   let l = line('.')
@@ -65,10 +41,6 @@ fun! <sid>striptrailingwhitespaces()
 endfun
 
 autocmd BufWritePre * :call <sid>striptrailingwhitespaces()
-
-" providers
-" let g:python3_host_prog='/usr/local/bin/python3'
-" let g:loaded_python3_provider=1
 
 function! s:home()
   let start_col = col('.')
@@ -96,22 +68,18 @@ function! s:split_line_text_at_cursor()
   return [text_before_cursor, text_after_cursor]
 endfunction
 
+"------------------------------------------- L A N G U A G E S
+" recognize files
+au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
+au BufRead,BufNewFile *.eex set filetype=eelixir
+" au BufRead,BufNewFile *.svelte set syntax=html filetype svelte
 
 
-
-
-
-
-
-
-
-
-
-
+"------------------------------------------- P L U G I N S
 
 call plug#begin('~/.vim/plugged')
 
-" VIM++
+"------------------------------------------- VIM++
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -151,15 +119,16 @@ Plug 'SirVer/ultisnips' "{{{
 ""}}}, { 'do': ':UpdateRemotePlugins' }
 "Plug 'shougo/neco-vim'
 
-
-" INTEGRATION
+"------------------------------------------- INTEGRATION
 " with git
 Plug 'tpope/vim-fugitive'
 
 " with fzf, silver searcher
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' "{{{
-noremap <C-t> :FZF<CR>
+  " changes focus if nerdtree is open
+  nnoremap <silent> <expr> <C-t> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZF\<cr>"
+
   " noremap <C-t> :Files<CR>
   let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore-dir=bin --ignore-dir="*.pyc"'
   set rtp+=/usr/local/opt/fzf
@@ -180,41 +149,46 @@ Plug 'mileszs/ack.vim' "{{{
   "let g:ack_autofold_results = 1
 "}}}
 
+"------------------------------------------- LANGUAGES
+Plug 'sheerun/vim-polyglot' "{{{
+  " let g:polyglot_disabled = ['svelte']
+"}}}
 
-
-
-" LANGUAGES
 Plug 'dense-analysis/ale' "{{{
   let g:ale_completion_enabled = 1
   let g:ale_fix_on_save = 1
   let g:ale_fixers = {
         \ 'javascript': ['eslint', 'prettier'],
         \ 'jsx': ['eslint'],
-        \ 'typescript': ['tslint'],
+        \ 'typescript': ['tslint', 'eslint'],
         \ 'elixir': ['mix_format'],
+        \ 'svelte': ['eslint'],
         \}
   let g:ale_linters = {
         \ 'javascript': ['eslint'],
         \ 'jsx': ['eslint'],
-        \ 'typescript': ['tslint'],
+        \ 'typescript': ['tslint', 'tsserver'],
         \ 'elixir': ['elixir-ls'],
+        \ 'svelte': ['eslint'],
         \}
   let g:ale_sign_error = '✘'
   let g:ale_sign_warning = '⚠'
-  highlight ALEErrorSign ctermbg=NONE ctermfg=red
-  highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
-  " let g:ale_elixir_elixir_ls_release=$HOME . '/.vim/plugged/elixir-ls/apps/elixir_ls_utils/priv'
+  highlight ALEErrorSign ctermbg=NONE cterm=bold ctermfg=160 ctermbg=235 gui=bold guifg=#e0211d
+  highlight ALEWarningSign ctermbg=NONE cterm=bold ctermfg=100 ctermbg=235 gui=bold guifg=#ffdb58
+  let g:ale_elixir_elixir_ls_release=$HOME . '/.vim/plugged/elixir-ls/rel'
+  let g:ale_typescript_tsserver_executable=$HOME . '/.vim/plugged/javascript-typescript-langserver/lib'
+  nnoremap <silent> K :ALEHover <CR>
+  nnoremap <silent> ,d :ALEGoToDefinitionInSplit <CR>
 "}}}
 
 Plug 'prettier/vim-prettier' "{{{
   let g:prettier#config#semi = 'false'
   let g:prettier#config#single_quote = 'false'
   let g:prettier#config#bracket_spacing = 'true'
+  nnoremap <silent> ,p :Prettier <CR>
 "}}}, {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
-
-
 
 "python
 Plug 'mitsuhiko/vim-python-combined'
@@ -234,7 +208,7 @@ Plug 'clojure-vim/async-clj-omni'
 "elixir
 Plug 'elixir-editors/vim-elixir'
 " Plug 'slashmili/alchemist.vim'
-Plug 'JakeBecker/elixir-ls'
+Plug 'JakeBecker/elixir-ls', {'do': 'mix deps.get && mix compile && mix elixir_ls.release -o rel'}
 
 "graphql
 Plug 'jparise/vim-graphql'
@@ -245,6 +219,9 @@ Plug 'jparise/vim-graphql'
 " Plug 'neomake/neomake'
 " Plug 'digitaltoad/vim-pug'
 " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'sourcegraph/javascript-typescript-langserver', { 'do': 'npm install && npm run watch' }
 
 " front-end stuff
 Plug 'mattn/emmet-vim' "{{{

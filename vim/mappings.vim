@@ -3,11 +3,22 @@ imap <C-p> <Up>
 imap <C-n> <Down>
 imap <C-b> <Left>
 imap <C-f> <Right>
-imap <C-a> <C-o>:call <SID>home()<CR>
+inoremap <C-a> <esc>^i
 imap <C-e> <End>
 imap <C-d> <Del>
 imap <C-h> <BS>
 imap <C-k> <C-r>=<SID>kill_line()<CR>
+
+function! s:kill_line()
+  let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
+  if len(text_after_cursor) == 0
+    normal! J
+  else
+    call setline(line('.'), text_before_cursor)
+  endif
+  return ''
+endfunction
+
 
 " command line mode
 " adds/remove lines above/below (if empty) from normal mode
@@ -33,3 +44,4 @@ cnoremap <C-k> <C-f>D<C-c><C-c>:<Up>
 nnoremap <leader>m :w<CR> :silent make\|redraw!\|cc<CR>
 :command! Makenode :set makeprg=tmux\ send-key\ -t\ 1\ node\\\ %\ Enter
 :command! Makejasmine :set makeprg=tmux\ send-key\ -t\ 1\ npm\\\ test\ Enter
+

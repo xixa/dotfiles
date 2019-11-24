@@ -56,3 +56,7 @@ retab
 set tw=79
 set wrap linebreak nolist                         " soft line breaking
 set formatoptions-=t
+
+" providers
+" let g:python3_host_prog='/usr/local/bin/python3'
+" let g:loaded_python3_provider=1
