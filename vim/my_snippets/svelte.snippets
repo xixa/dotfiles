@@ -1,0 +1,21 @@
+snippet if "creates if statement"
+{#if ${1:<condition>}}
+	$0
+{/if}
+endsnippet
+
+snippet else "creates else"
+{:else}
+	$0
+endsnippet
+
+snippet elif "creates else if"
+{:else if ${1:<condition>}}
+	$0
+endsnippet
+
+snippet each "creates an each structure"
+{#each ${1:<iterable> as ${2:<item>}${$3:, ${4:<index>}}}}
+	$0
+{/each}
+endsnippet
