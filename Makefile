@@ -73,12 +73,15 @@ bash: .bash_profile .bashrc
 	@echo ✓
 
 # tmux
-tmux: .tmux.conf
+tmux: .tmux.conf tpm
 
 .tmux.conf: $(MY_DIR)/tmux/.tmux.conf
 	@echo -ne 'creates .tmux.conf symlink at the root: '
 	ln -s $(MY_DIR)/tmux/.tmux.conf ~
 	@echo ✓
+
+tpm:
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # vim & neovim
 NEOVIM := ~/.config/nvim

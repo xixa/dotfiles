@@ -124,6 +124,7 @@ Plug 'SirVer/ultisnips' "{{{
 "------------------------------------------- INTEGRATION
 " with git
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " with fzf, silver searcher
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
