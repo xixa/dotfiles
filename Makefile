@@ -1,7 +1,7 @@
 MY_DIR := $(realpath ./)
 MY_OS := $(shell uname)
 
-install: bash tmux vim rc base-apps
+install: bash tmux vim rc base-apps config
 
 # necessary apps
 base-apps: xcode ruby brew brew-apps brew-cask
@@ -129,9 +129,19 @@ clean:
 	rm ~/.vimrc || true;
 	rm ~/.config/nvim/init.vim || true;
 	rm ~/.config/nvim/my_snippets || true;
-	rm ~/.eslintrc.json
-	rm ~/.gemrc
+	rm ~/.eslintrc.json;
+	rm ~/.gemrc;
 	rm ~/.inputrc
+
+config:
+	defaults write -g ApplePressAndHoldEnabled -bool false;
+	defaults write com.apple.finder AppleShowAllFiles true;
+	defaults write com.apple.screencapture type PNG;
+	defaults write com.apple.finder _FXShowPosixPathInTitle -bool true;
+	mkdir ~/Documents/screenshots;
+	defaults write com.apple.screencapture location "~/Documents/screenshots";
+	defaults write com.apple.finder CreateDesktop false;
+	defaults write -g WebAutomaticTextReplacementEnabled -bool true;
 
 .PHONY: list
 list:
