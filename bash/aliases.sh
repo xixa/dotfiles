@@ -1,8 +1,10 @@
 #!/bin/bash
 
 alias srcit='source $HOME/.bashrc'
-alias edbash='v $HOME/dotfiles/bash/.bash_profile'
-alias edalias='v $HOME/dotfiles/bash/aliases.sh'
+alias edbash='$EDITOR $HOME/dotfiles/bash/.bash_profile'
+alias edalias='$EDITOR $HOME/dotfiles/bash/aliases.sh'
+
+alias ipl='ifconfig en0 | grep inet | grep -v inet6 | awk "{print \$2}"'
 
 # ls
 colorflag="--color"
@@ -26,8 +28,11 @@ alias lsd='ls -lF ${colorflag} | grep "^d"' # only directories
 #mkdir
 alias mkdir='mkdir -p' #forces mkdir to create intermediate directories if a path is specified
 
+# tmux
+alias edtmux='$EDITOR ~/.tmux.conf'
+
 # vim/nvim
-alias edvimrc='v ~/.vimrc'
+alias edvimrc='$EDITOR ~/.vimrc'
 
 # pi
 alias sshpi='ssh pi@192.168.1.100'

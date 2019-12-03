@@ -52,3 +52,13 @@ snippet end "closes a structure"
 	$0
 end
 endsnippet
+
+snippet doc "creates a module doc"
+@moduledoc """
+$0
+"""
+endsnippet
+
+snippet fn "creates an anonymous function"
+	fn ${1:<params>} -> ${2:<return>} end
+endsnippet

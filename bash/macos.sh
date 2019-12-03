@@ -40,3 +40,7 @@ alias keybindings="cat $HOME/dotfiles/osx/DefaultKeyBinding.dict" #TODO: make it
 
 # silly
 alias funeral="seq 20 | xargs -Iz echo 'dum' | say -v Bad"
+
+if [ -f /sw/etc/bash_completion ]; then
+   . /sw/etc/bash_completion
+fi

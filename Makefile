@@ -60,7 +60,7 @@ brew-cask:
 		nvalt
 
 # bash
-bash: .bash_profile .bashrc
+bash: .bash_profile .bashrc iterm_shell_integration
 
 .bash_profile: $(MY_DIR)/bash/.bash_profile
 	@echo -ne 'creates .bash_profile symlink at the root: '
@@ -71,6 +71,10 @@ bash: .bash_profile .bashrc
 	@echo -ne 'creates .bashrc symlink at the root: '
 	ln -s $(MY_DIR)/bash/.bashrc ~
 	@echo ✓
+
+iterm-shell-integration:
+	curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash &&\
+		source ~/.iterm2_shell_integration.bash
 
 # tmux
 tmux: .tmux.conf tpm
@@ -105,7 +109,8 @@ my_snippets: $(MY_DIR)/vim/my_snippets
 vimplugins:
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
-		nvim -c ':PlugInstall' -c 'qa!'
+		nvim +PlugInstall +UpdateRemotePlugins +qa
+		# nvim -c ':PlugInstall' -c 'qa!'
 
 # rc files
 rc: .inputrc .eslintrc.json .gemrc
