@@ -3,13 +3,12 @@ language en_US
 set t_Co=258
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-highlight Normal ctermbg=NONE
 " hi clear
 " let g:dracula_italic = 0
 " colorscheme dracula
 " color agathe
-color vice
-highlight Normal ctermbg=None
+color agathe
+" highlight Normal ctermbg=None
 set background=dark
 syntax on
 

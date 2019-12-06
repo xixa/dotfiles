@@ -1,3 +1,8 @@
+"nap
+" nnoremap <silent> <leader>c :e <cfile><CR>
+" map <silent> <leader>cf :call writefile([], expand("<cfile>"), "t")<cr>
+map <silent> <leader>cf :!touch <c-r><c-p><cr><cr>
+
 "Be a little more like Emacs when on insert mode, will you?
 imap <C-p> <Up>
 imap <C-n> <Down>
@@ -40,7 +45,17 @@ cnoremap <C-d> <Del>
 cnoremap <C-h> <BS>
 cnoremap <C-k> <C-f>D<C-c><C-c>:<Up>
 
-"make
+" V I S U A L  M O D E
+xnoremap <C-h> <C-w>h
+xnoremap <C-j> <C-w>j
+xnoremap <C-k> <C-w>k
+xnoremap <C-l> <C-w>l
+
+""move lines
+xnoremap K :move '<-2<CR>gv=gv
+xnoremap J :move '>+1<CR>gv=gv
+
+" make
 nnoremap <leader>m :w<CR> :silent make\|redraw!\|cc<CR>
 :command! Makenode :set makeprg=tmux\ send-key\ -t\ 1\ node\\\ %\ Enter
 :command! Makejasmine :set makeprg=tmux\ send-key\ -t\ 1\ npm\\\ test\ Enter

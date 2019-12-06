@@ -1,3 +1,7 @@
+extends javascript
+extends css
+extends html
+
 snippet comp "creates a base component structure" b
 <script>
 	$0
@@ -27,4 +31,8 @@ snippet each "creates an each structure"
 {#each ${1:<iterable>} as ${2:<item>}${3:, ${4:<index>}}}
 	$0
 {/each}
+endsnippet
+
+snippet com "creates comment tags for html"
+<!-- $0 -->
 endsnippet

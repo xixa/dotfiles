@@ -15,6 +15,8 @@ source ~/dotfiles/vim/layout.vim
 
 source ~/dotfiles/vim/mappings.vim
 
+packadd! matchit
+
 " buffers
 "highlight TermCursor ctermfg=red guifg=red        " colors terminal cursor
 set splitbelow
@@ -72,6 +74,7 @@ endfunction
 " recognize files
 au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
 au BufRead,BufNewFile *.eex set filetype=eelixir
+au BufRead,BufNewFile *.svelte set filetype=svelte
 " au BufRead,BufNewFile *.svelte set syntax=html filetype svelte
 
 
@@ -85,6 +88,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
+Plug 'wincent/loupe'
+Plug 'Yggdroot/indentLine' "{{{
+  let g:indentLine_fileTypeExclude=['help', 'text']
+  let g:indentLine_char = "│" "│ ⎸['|', '¦', '┆', '┊']
+" }}}
 
 Plug 'bling/vim-bufferline'
 Plug 'terryma/vim-multiple-cursors'
@@ -101,8 +109,8 @@ Plug 'scrooloose/nerdtree' "{{{
   " C changes directory and root directory
   let g:NERDTreeChDirMode = 2
   " open NERDTree on vim startup if no file is specified
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  " autocmd StdinReadPre * let s:std_in=1
+  " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
   " closes Vim if NERDTree is the only window open
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "}}} , { 'on': 'NERDTreeToggle' }
@@ -149,8 +157,9 @@ Plug 'mileszs/ack.vim' "{{{
   if executable('ag')
     let g:ackprg = 'ag --vimgrep'
   endif
-  nmap <leader>a :tab split<CR>:Ack ""<Left>
-  nmap <leader>A :Ack <C-r><C-w><CR>
+  " nmap <leader>a :tab split<CR>:Ack! ""<Left>
+  nnoremap <Leader>a :Ack!<Space>
+  " nmap <leader>A :Ack! <C-r><C-w><CR>
   let g:ackhighlight = 1
   let g:ackpreview = 1
   "let g:ack_autoclose = 1
@@ -185,13 +194,13 @@ Plug 'sheerun/vim-polyglot' "{{{
 
 
 Plug 'dense-analysis/ale' "{{{
- let g:ale_completion_enabled = 1
- let g:ale_fix_on_save = 1
- let g:ale_linter_aliases = {
+  let g:ale_completion_enabled = 1
+  let g:ale_fix_on_save = 1
+  let g:ale_linter_aliases = {
        \ 'jsx': ['css', 'javascript'],
        \ 'svelte': ['css', 'javascript']
        \ }
- let g:ale_fixers = {
+  let g:ale_fixers = {
        \ 'javascript': ['eslint', 'prettier'],
        \ 'jsx': ['eslint'],
        \ 'typescript': ['tslint', 'eslint'],
@@ -199,7 +208,7 @@ Plug 'dense-analysis/ale' "{{{
        \ 'svelte': ['eslint', 'prettier'],
        \ 'python': ['autopep8'],
        \ }
- let g:ale_linters = {
+  let g:ale_linters = {
        \ 'javascript': ['eslint', 'tsserver'],
        \ 'jsx': ['eslint'],
        \ 'typescript': ['tslint', 'tsserver'],
@@ -207,8 +216,8 @@ Plug 'dense-analysis/ale' "{{{
        \ 'svelte': ['eslint'],
        \ 'python': ['flake8'],
        \ }
- let g:ale_sign_error = '✘'
- let g:ale_sign_warning = '⚠'
+  let g:ale_sign_error = '✘'
+  let g:ale_sign_warning = '⚠'
   let g:ale_list_window_size = 5
   highlight ALEErrorSign ctermbg=NONE cterm=bold ctermfg=160 ctermbg=235 gui=bold guifg=#e0211d
   highlight ALEWarningSign ctermbg=NONE cterm=bold ctermfg=100 ctermbg=235 gui=bold guifg=#ffdb58
@@ -216,8 +225,8 @@ Plug 'dense-analysis/ale' "{{{
   let g:ale_python_auto_pipenv = 1
   nnoremap <silent> K :ALEHover <CR>
   nnoremap <silent> gd :ALEGoToDefinitionInSplit <CR>
-  nnoremap <silent> ,e :ALEDetail <CR>
-  nnoremap <silent> ,p :ALEFix <CR>
+  nnoremap <silent> <leader>e :ALEDetail <CR>
+  nnoremap <silent> <leader>p :ALEFix <CR>
 "}}}
 
 "Plug 'prettier/vim-prettier' "{{{
@@ -269,7 +278,7 @@ Plug 'styled-components/vim-styled-components'
 
 " html
 Plug 'othree/html5.vim'
-Plug 'mattn/emmet-vim', {'for': ['html', 'eelixir']} "{{{
+Plug 'mattn/emmet-vim', {'for': ['html', 'eelixir', 'svelte']} "{{{
   let g:user_emmet_settings = {'javascript' : { 'extends':'jsx',}}
 "}}}
 
@@ -295,7 +304,8 @@ autocmd! User goyo.vim echom 'Goyo is now loaded!'
 call plug#end()
 
 "auto-source virmc
-autocmd! BufWritePost ~/.vimrc so %
+autocmd! BufWritePost $MYVIMRC so %
+nnoremap <silent> ,s :so $MYVIMRC<CR>:e<CR>
 
 source ~/dotfiles/vim/syntax/svg.vim
 
