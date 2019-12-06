@@ -132,7 +132,7 @@ fi
 # fi
 
 #http://www.fileformat.info/info/unicode/block/geometric_shapes/list.htm
-PROMPT_SYMBOL_PS1="\n↳ " # ↪⇢⌥⇉✂ ☎ ☏ ☕ ☞ ☛ | ☠ ☭ ♂ ⚡ ϟ | ♘ ♞ | ♖ ♜ | ♔ ♚ | ♕ ♛ | ♙ ♟ | ♫ ♻ ♺ ⚓ ✎ ✏ ✐ ✑ ↪ ▸ ▹ ► ▻ Ⓧ ⎈ ⧔ ⧕ ⧫ ⬤ ●
+PROMPT_SYMBOL_PS1="\nλ " # ↳↪⇢⌥⇉✂ ☎ ☏ ☕ ☞ ☛ | ☠ ☭ ♂ ⚡ ϟ | ♘ ♞ | ♖ ♜ | ♔ ♚ | ♕ ♛ | ♙ ♟ | ♫ ♻ ♺ ⚓ ✎ ✏ ✐ ✑ ↪ ▸ ▹ ► ▻ Ⓧ ⎈ ⧔ ⧕ ⧫ ⬤ ●
 
 # this var executes a command before bash display the prompt
 # PROMPT_COMMAND="$VENV_PS1"

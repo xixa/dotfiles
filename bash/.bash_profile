@@ -16,7 +16,7 @@
 
 set -o emacs
 
-source $HOME/dotfiles/bash/prompt_old.sh
+source $HOME/dotfiles/bash/prompt.sh
 source $HOME/dotfiles/tmux/tmuxinator.bash
 
 export PYTHONSTARTUP=$HOME/.pythonrc
