@@ -1,6 +1,15 @@
 MY_DIR := $(realpath ./)
 MY_OS := $(shell uname)
 
+# feedback
+GREEN=\x1b[32;01m
+RED=\x1b[31;01m
+NO_COLOR=\x1b[0m
+
+define output_result
+	@echo "$(GREEN)$(1)$(NO_COLOR) ✓\n"
+endef
+
 install: bash tmux vim rc base-apps config
 
 # necessary apps
@@ -63,14 +72,12 @@ brew-cask:
 bash: .bash_profile .bashrc iterm_shell_integration
 
 .bash_profile: $(MY_DIR)/bash/.bash_profile
-	@echo -ne 'creates .bash_profile symlink at the root: '
 	ln -s $(MY_DIR)/bash/.bash_profile ~
-	@echo ✓
+	$(call output_result,Symlink to .bash_profile created!)
 
 .bashrc: $(MY_DIR)/bash/.bashrc
-	@echo -ne 'creates .bashrc symlink at the root: '
 	ln -s $(MY_DIR)/bash/.bashrc ~
-	@echo ✓
+	$(call output_result,Symlink to .bashrc created!)
 
 iterm-shell-integration:
 	curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash &&\
@@ -80,9 +87,8 @@ iterm-shell-integration:
 tmux: .tmux.conf tpm
 
 .tmux.conf: $(MY_DIR)/tmux/.tmux.conf
-	@echo -ne 'creates .tmux.conf symlink at the root: '
 	ln -s $(MY_DIR)/tmux/.tmux.conf ~
-	@echo ✓
+	$(call output_result,Symlink to .tmux.conf created!)
 
 tpm:
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -92,19 +98,16 @@ NEOVIM := ~/.config/nvim
 vim: .vimrc init.vim my_snippets vimplugins
 
 .vimrc: $(MY_DIR)/vim/.vimrc
-	@echo -ne 'creates .vimrc symlink at the root: '
 	ln -s $(MY_DIR)/vim/.vimrc ~
-	@echo ✓
+	$(call output_result,Symlink to .vimrc created!)
 
 init.vim: $(MY_DIR)/vim/.vimrc
-	@echo -ne 'creates .vimrc symlink at neovim folder as init.vim: '
 	ln -s $(MY_DIR)/vim/.vimrc $(NEOVIM)/init.vim
-	@echo ✓
+	$(call output_result,Symlink to init.vim created!)
 
 my_snippets: $(MY_DIR)/vim/my_snippets
-	@echo -ne 'creates a symlink for my snippets collection for neovim: '
 	ln -s $(MY_DIR)/vim/my_snippets $(NEOVIM)/my_snippets
-	@echo ✓
+	$(call output_result,Symlink to snippets directory created!)
 
 vimplugins:
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -140,6 +143,7 @@ clean:
 	rm ~/.eslintrc.json;
 	rm ~/.gemrc;
 	rm ~/.inputrc
+	$(call output_result,All dotfiles removed!)
 
 config:
 	defaults write -g ApplePressAndHoldEnabled -bool false;
