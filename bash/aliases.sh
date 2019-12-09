@@ -40,6 +40,7 @@ alias sshfspi_ext='sshfs pi@192.168.1.100:/home/pi/mnt'
 
 #git
 alias git='LANG=en_US git'
+alias glog='git log --oneline'
 
 #docker
 alias dockill="docker rm -f \$(docker ps -aq)"

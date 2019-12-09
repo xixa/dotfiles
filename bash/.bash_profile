@@ -37,7 +37,3 @@ export EDITOR=nvim
 
 source $HOME/dotfiles/bash/settings.sh
 source $HOME/dotfiles/bash/aliases.sh
-
-
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash" || true
-
