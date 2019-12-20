@@ -1,3 +1,5 @@
+extends javascript
+
 snippet react "Creates a functional component React boilerplate" b
 import React from 'react'
 
@@ -7,14 +9,34 @@ type ${1/(\W)/\l$1/}Type = {
 
 const ${1:<ComponentName>} = (props:${1/(\W)/\l$1/}Type) =>
 	return (
-		${0}
+		$0
 	)
 
 export default ${1/(\W)/\l$1/}
 endsnippet
 
 snippet type "Creates a type definition" b
-type ${1:<Type>}= {
-	${0}
+type ${1:TypeName} = {
+	$0
 }
+endsnippet
+
+snippet comp "creates a react component" b
+const ${1:ComponentName} = props => (
+	$0
+)
+endsnippet
+
+snippet main "creates the main component of the file" b
+export default function ${1:ComponentName}() {
+	return (
+		$0
+	)
+}
+endsnippet
+
+snippet < "Description" b
+<>
+	$0
+</>
 endsnippet

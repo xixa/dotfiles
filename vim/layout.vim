@@ -36,3 +36,8 @@ function! MyInsertMode()
   hi statusline ctermfg=197 guifg=#ff005f ctermbg=0
 endfunction
 
+if has('linebreak')
+  let &showbreak='↳  '
+endif
+
+execute 'highlight link EndOfBuffer ColorColumn'

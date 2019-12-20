@@ -77,7 +77,6 @@ au BufRead,BufNewFile *.eex set filetype=eelixir
 au BufRead,BufNewFile *.svelte set filetype=svelte
 " au BufRead,BufNewFile *.svelte set syntax=html filetype svelte
 
-
 "------------------------------------------- P L U G I N S
 
 call plug#begin('~/.vim/plugged')
@@ -197,20 +196,19 @@ Plug 'dense-analysis/ale' "{{{
   let g:ale_completion_enabled = 1
   let g:ale_fix_on_save = 1
   let g:ale_linter_aliases = {
-       \ 'jsx': ['css', 'javascript'],
-       \ 'svelte': ['css', 'javascript']
+       \ 'svelte': ['css', 'javascript'],
+       \ 'javascriptreact': ['javascript', 'javascript.tsx'],
+       \ 'typescriptreact': ['typescript', 'typescript.tsx']
        \ }
   let g:ale_fixers = {
        \ 'javascript': ['eslint', 'prettier'],
-       \ 'jsx': ['eslint'],
-       \ 'typescript': ['tslint', 'eslint'],
+       \ 'typescript': ['tslint', 'eslint', 'prettier'],
        \ 'elixir': ['mix_format'],
        \ 'svelte': ['eslint', 'prettier'],
        \ 'python': ['autopep8'],
        \ }
   let g:ale_linters = {
        \ 'javascript': ['eslint', 'tsserver'],
-       \ 'jsx': ['eslint'],
        \ 'typescript': ['tslint', 'tsserver'],
        \ 'elixir': ['elixir-ls'],
        \ 'svelte': ['eslint'],
@@ -268,8 +266,8 @@ Plug 'davidhalter/jedi', { 'for': 'python' }
 
 " javascript
 " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'peitalin/vim-jsx-typescript', { 'for': ['javascript', 'typescript', 'jsx'] }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
+Plug 'peitalin/vim-jsx-typescript', { 'for': ['javascript', 'typescript', 'javascript.jsx', 'typescript.tsx'] }
 
 " react
 Plug 'mxw/vim-jsx'
@@ -278,8 +276,8 @@ Plug 'styled-components/vim-styled-components'
 
 " html
 Plug 'othree/html5.vim'
-Plug 'mattn/emmet-vim', {'for': ['html', 'eelixir', 'svelte']} "{{{
-  let g:user_emmet_settings = {'javascript' : { 'extends':'jsx',}}
+Plug 'mattn/emmet-vim', {'for': ['html', 'eelixir', 'svelte', 'typescript', 'typescript.tsx']} "{{{
+  let g:user_emmet_settings = {'javascript' : { 'extends':'javascript.jsx'}}
 "}}}
 
 " graphql

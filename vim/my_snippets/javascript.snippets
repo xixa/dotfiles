@@ -137,54 +137,10 @@ snippet ob "creates an object"
 endsnippet
 
 # react
-snippet react "react component boilerplate (with options for Comps)" b
-import React from "react"
-
-class ${1:<ClassName>} extends React.Component {${2:
-	constructor(){
-		super(...arguments)${3:
-		<state>}
-	}}
-	render() {${4:
-		<methods>}
-		return (
-			$0
-		)
-	}
-}
-
-export default $1
-endsnippet
-
-snippet reacts "react boilerplate (simple)" b
-const React = require("react")
-
-export default (props) => (
-	<$1>
-		$0
-	</$1>
-)
-endsnippet
-
-snippet dom "imports ReactDOM" b
-import ReactDOM from "react-dom"
-endsnippet
-
-snippet propt
-${1:CompName}.propTypes = {
-	${2:first_prop}: PropTypes.${3:type}
-}
-endsnippet
-
-snippet constructor "Creates a React comp constructor" b
-constructor(props) {
-	super(props)
-	${0:...}
-}
-endsnippet
-
-snippet fun
-${1:function }${2:name}(${3:arguments}) {
-	${4:content}
+snippet comp "create a component" b
+export default function ${1:ComponentName}() {
+	return (
+		${2}
+	)
 }
 endsnippet
