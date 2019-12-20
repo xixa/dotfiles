@@ -35,7 +35,9 @@ else
 fi;
 
 # git prompt
+export PS1="\u@\[\033[32m\]\w\[\033[33m\]\$(git_branch)\[\033[00m\]\$ "
 if [ -f ~/git-prompt.sh ]; then
+  source ~/git-prompt.sh
   GIT_PS1_SHOWDIRTYSTATE=true
   GIT_PS1_SHOWSTASHSTATE=true
   GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -43,17 +45,6 @@ if [ -f ~/git-prompt.sh ]; then
   GIT_PS1_HIDE_IF_PWD_IGNORED=true
   GIT_PS1_DESCRIBE_STYLE="contains"
   GIT_PS1_SHOWCOLORHINTS=true
-  . ~/git-prompt.sh
-fi
-
-if [[ "$(__git_ps1)" =~ "*" ]]; then     # if repository is dirty
-    __git_branch_color="GREEN"
-elif [[ "$(__git_ps1)" =~ "$" ]]; then   # if there is something stashed
-    __git_branch_color="$YELLOW"
-elif [[ "$(__git_ps1)" =~ "%" ]]; then   # if there are only untracked files
-    __git_branch_color="$LIGHT_GRAY"
-elif [[ "$(__git_ps1)" =~ "+" ]]; then   # if there are staged files
-    __git_branch_color="$CYAN"
 fi
 
 # venv

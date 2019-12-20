@@ -30,6 +30,9 @@ alias mkdir='mkdir -p' #forces mkdir to create intermediate directories if a pat
 
 # tmux
 alias edtmux='$EDITOR ~/.tmux.conf'
+function sk {
+  tmux send-keys -t bottom-right $@ Enter
+}
 
 # vim/nvim
 alias edvimrc='$EDITOR ~/.vimrc'

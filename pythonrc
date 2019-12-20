@@ -1,0 +1,6 @@
+try:
+  import collections
+except:
+    print("\nCouldn't import module collections")
+else:
+    print("\nImported collections module.")

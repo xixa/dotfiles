@@ -16,6 +16,8 @@
 
 set -o emacs
 
+export LC_ALL=en_US.UTF-8
+
 source $HOME/dotfiles/bash/prompt.sh
 source $HOME/dotfiles/tmux/tmuxinator.bash
 
