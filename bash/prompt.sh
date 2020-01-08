@@ -66,7 +66,7 @@ VENV="\$(virtualenv_info)";
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 #prompt
-PS1="${VENV}\w$(__git_ps1)\nλ "
+PS1="${VENV}\w$(__git_ps1)\n▲ "
 export PS1;
 
 # PS2="\[${yellow}\]→ \[${reset}\]";

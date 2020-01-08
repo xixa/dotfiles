@@ -1,10 +1,6 @@
 "
-"    copyleft (Ↄ) marcio ikematsu
+"    marcio ikematsu
 "    marcio.ikematsu@usp.br
-"
-"    with snippets of code stolen from:
-"       * joshua hogendorn
-"       * nikolay frantsev
 "
 
 let mapleader=","
@@ -15,7 +11,29 @@ source ~/dotfiles/vim/layout.vim
 
 source ~/dotfiles/vim/mappings.vim
 
+source ~/dotfiles/vim/folds.vim
+
 packadd! matchit
+
+" set nosmartindent
+
+" function! DocstringFold()
+"     let second_line = getline(v:foldstart + 1)
+"     let doc_txt = substitute(second_line, '^\s*', '', 'g')
+"     let indentlen = indent(v:foldstart)
+"     let folded_lines = v:foldend-v:foldstart
+"     let indent = repeat(' ', indent_len)
+"     let prefix = '≡ '
+"     let end_filler = ' (+'. folded_lines . ')  '
+"     let offset = 4
+"     let max_len = winwidth(0) - (indent_len + len(prefix) + len(end_filler) + offset)
+"     let text =  doc_txt[:max_len]
+"     let filler = repeat(' ', winwidth(0) - indent_len - len(prefix) - len(end_filler) - len(text) - offset + 1)
+"     return indent . prefix . text . filler . end_filler
+" endfunction
+
+" set foldtext=DocstringFold()
+
 
 " buffers
 "highlight TermCursor ctermfg=red guifg=red        " colors terminal cursor
@@ -26,6 +44,29 @@ set splitright
 set noswapfile
 set nobackup
 set nowb
+
+" Background colors for active vs inactive windows
+hi ActiveWindow guibg=#17252c
+" hi InactiveWindow guibg=#0D1B22
+hi InactiveWindow guibg=#333333
+hi PreviewWindow guibg=#000000
+
+" Call method on window enter
+augroup WindowManagement
+  autocmd!
+  autocmd WinEnter * call Handle_Win_Enter()
+augroup END
+
+" Change highlight group of active/inactive windows
+function! Handle_Win_Enter()
+  if &previewwindow
+    setlocal winhighlight=Normal:PreviewWindow
+  else
+    setlocal winhighlight=Normal:WarningMsg,NormalNC:InactiveWindow
+    setlocal winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+  endif
+endfunction
+
 
 " auto completion
 " filetype plugin on
@@ -166,33 +207,28 @@ Plug 'mileszs/ack.vim' "{{{
 "}}}
 
 "------------------------------------------- LANGUAGES
-Plug 'sheerun/vim-polyglot' "{{{
-  " let g:polyglot_disabled = ['svelte']
-"}}}
-
-"function! BuildLanguageClient(info)
-"  if a:info.status != 'installed' || a:info.force
-"    !bash install.sh -y
-"    :UpdateRemotePlugins
-"  endif
-"endfunction
-
-"Plug 'autozimu/LanguageClient-neovim', {
-"      \ 'branch': 'next',
-"      \ 'do': function('BuildLanguageClient'),
-"      \ } "{{{
-"  set hidden
-"  let g:LanguageClient_autoStart = 1
-"  let g:LanguageClient_serverCommands = {
-"        \ 'elixir': ['~/.vim/plugged/elixir-ls/release/language_server.sh'],
-"        \}
-"  nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-"  nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-"  nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+"Plug 'sheerun/vim-polyglot' "{{{
+"  " let g:polyglot_disabled = ['svelte']
 ""}}}
 
+" Plug 'autozimu/LanguageClient-neovim', {
+"       \ 'for': ['elixir'],
+"       \ 'branch': 'next',
+"       \ 'do': 'bash install.sh'
+"       \ }
+"   let g:LanguageClient_autoStart = 1
+"   let g:LanguageClient_serverCommands = {
+"         \ 'elixir': ['~/.vim/plugged/elixir-ls/release/language_server.sh'],
+"         \}
+"   let g:LanguageClient_useFloatingHover=1
+"   let g:LanguageClient_hoverPreview='Always'
 
-Plug 'dense-analysis/ale' "{{{
+"   set hidden
+"   nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+"   nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+"   nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+Plug 'dense-analysis/ale', { 'for': ['javascript', 'typescript', 'typescript.tsx', 'python', 'svelte', 'elixir'] } "{{{
   let g:ale_completion_enabled = 1
   let g:ale_fix_on_save = 1
   let g:ale_linter_aliases = {
@@ -201,6 +237,7 @@ Plug 'dense-analysis/ale' "{{{
        \ 'typescriptreact': ['typescript', 'typescript.tsx']
        \ }
   let g:ale_fixers = {
+       \ '*': ['trim_whitespace'],
        \ 'javascript': ['eslint', 'prettier'],
        \ 'typescript': ['tslint', 'eslint', 'prettier'],
        \ 'elixir': ['mix_format'],
@@ -209,7 +246,7 @@ Plug 'dense-analysis/ale' "{{{
        \ }
   let g:ale_linters = {
        \ 'javascript': ['eslint', 'tsserver'],
-       \ 'typescript': ['tslint', 'tsserver'],
+       \ 'typescript': ['tsserver'],
        \ 'elixir': ['elixir-ls'],
        \ 'svelte': ['eslint'],
        \ 'python': ['flake8'],
@@ -217,6 +254,9 @@ Plug 'dense-analysis/ale' "{{{
   let g:ale_sign_error = '✘'
   let g:ale_sign_warning = '⚠'
   let g:ale_list_window_size = 5
+  let g:ale_set_balloons=1
+  "errors
+  let g:ale_cursor_detail=1 "show on preview if cursor on top
   highlight ALEErrorSign ctermbg=NONE cterm=bold ctermfg=160 ctermbg=235 gui=bold guifg=#e0211d
   highlight ALEWarningSign ctermbg=NONE cterm=bold ctermfg=100 ctermbg=235 gui=bold guifg=#ffdb58
   let g:ale_elixir_elixir_ls_release=$HOME . '/.vim/plugged/elixir-ls/release'
@@ -249,18 +289,17 @@ Plug 'kovisoft/paredit', { 'for': 'clojure' } "{{{
 " Plug 'clojure-vim/async-clj-omni', { 'for': 'clojure' }
 
 " elixir
-Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
+Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
 " Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
-Plug 'JakeBecker/elixir-ls', {
-      \'for': 'elixir',
+Plug 'elixir-lsp/elixir-ls', {
+      \'for': ['elixir'],
       \'do': 'mix deps.get && mix compile && mix elixir_ls.release -o release'
       \}
 
 
-
 " python
 Plug 'mitsuhiko/vim-python-combined', { 'for': 'python' }
-Plug 'nvie/vim-flake8', { 'for': 'python' }
+Plug 'nvie/vim-flake8', { 'for': ['python'] }
 Plug 'davidhalter/jedi', { 'for': 'python' }
 " Plug 'deoplete-plugins/deoplete-jedi'
 
@@ -270,9 +309,9 @@ Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
 Plug 'peitalin/vim-jsx-typescript', { 'for': ['javascript', 'typescript', 'javascript.jsx', 'typescript.tsx'] }
 
 " react
-Plug 'mxw/vim-jsx'
-Plug 'justinj/vim-react-snippets'
-Plug 'styled-components/vim-styled-components'
+Plug 'mxw/vim-jsx', { 'for': ['javacript', 'typescript'] }
+" Plug 'justinj/vim-react-snippets'
+Plug 'styled-components/vim-styled-components', { 'for': ['javascript', 'typescript'] }
 
 " html
 Plug 'othree/html5.vim'

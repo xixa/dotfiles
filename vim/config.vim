@@ -6,7 +6,6 @@ let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 " hi clear
 " let g:dracula_italic = 0
 " colorscheme dracula
-" color agathe
 color agathe
 " highlight Normal ctermbg=None
 set background=dark

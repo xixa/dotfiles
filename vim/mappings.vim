@@ -59,4 +59,3 @@ xnoremap J :move '>+1<CR>gv=gv
 nnoremap <leader>m :w<CR> :silent make\|redraw!\|cc<CR>
 :command! Makenode :set makeprg=tmux\ send-key\ -t\ 1\ node\\\ %\ Enter
 :command! Makejasmine :set makeprg=tmux\ send-key\ -t\ 1\ npm\\\ test\ Enter
-
