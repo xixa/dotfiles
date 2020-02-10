@@ -41,3 +41,27 @@ endfunction
 " endif
 
 execute 'highlight link EndOfBuffer ColorColumn'
+
+" Background colors for active vs inactive windows
+hi ActiveWindow guibg=#17252c
+" hi InactiveWindow guibg=#0D1B22
+hi InactiveWindow guibg=#333333
+hi PreviewWindow guibg=#000000
+" Call method on window enter
+augroup WindowManagement
+  autocmd!
+  autocmd WinEnter * call Handle_Win_Enter()
+augroup END
+
+" Change highlight group of active/inactive windows
+function! Handle_Win_Enter()
+  if &previewwindow
+    setlocal winhighlight=Normal:PreviewWindow
+  else
+    setlocal winhighlight=Normal:WarningMsg,NormalNC:InactiveWindow
+    setlocal winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+  endif
+endfunction
+
+autocmd FileType typescript.tsx,typescriptreact,javascript.jsx,javascriptreact source ~/dotfiles/vim/layout-react.vim
+

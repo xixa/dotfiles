@@ -13,11 +13,6 @@ inoremap <C-a> <esc>
 imap <C-e> <End>
 imap <C-d> <Del>
 imap <C-h> <BS>
-imap <C-k> <C-r>=<SID>kill_line()<CR>
-
-" cycle between line number layouts
-nnoremap <silent> <Leader>l :call mappings#cycle_numbering()<CR>
-
 function! s:kill_line()
   let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
   if len(text_after_cursor) == 0
@@ -27,7 +22,9 @@ function! s:kill_line()
   endif
   return ''
 endfunction
+imap <C-k> <C-r>=<SID>kill_line()<CR>
 
+" cycle between line number layouts
 function! mappings#cycle_numbering() abort
   if exists('+relativenumber')
     execute {
@@ -39,6 +36,8 @@ function! mappings#cycle_numbering() abort
     set number!<CR>
   endif
 endfunction
+
+nnoremap <silent> <Leader>l :call mappings#cycle_numbering()<CR>
 
 " command line mode
 " adds/remove lines above/below (if empty) from normal mode
@@ -86,7 +85,17 @@ function! mappings#langserver()
     nnoremap <silent> <leader>e :ALEDetail <CR>
     nnoremap <silent> <leader>p :ALEFix <CR>
   endif
+
+  if &runtimepath =~ "NERDTree"
+    noremap <c-\> :NERDTreeToggle<cr>
+  endif
+
+  if &runtimepath =~ "fzf.vim"
+    " changes focus to main window if NERDTree is open
+    nnoremap <silent> <expr> <C-t> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZF\<cr>"
+  endif
+
+
 endfunction
 
 autocmd BufNewFile,BufRead * :call mappings#langserver()
-
