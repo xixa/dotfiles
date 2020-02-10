@@ -1,8 +1,4 @@
-extends javascript
-
 snippet react "Creates a functional component React boilerplate" b
-import React from 'react'
-
 type ${1/(\W)/\l$1/}Type = {
 
 }
@@ -15,7 +11,7 @@ const ${1:<ComponentName>} = (props:${1/(\W)/\l$1/}Type) =>
 export default ${1/(\W)/\l$1/}
 endsnippet
 
-snippet type "Creates a type definition" b
+snippet type "Creates a type definition"
 type ${1:TypeName} = {
 	$0
 }
@@ -35,8 +31,22 @@ export default function ${1:ComponentName}() {
 }
 endsnippet
 
-snippet < "Description" b
+snippet < "Description"
 <>
 	$0
 </>
+endsnippet
+
+snippet imp "Creates import" b
+import ${2:{${3:...}}} from '${1:lib}'
+endsnippet
+
+snippet log "console.log it!"
+console.log($0)
+endsnippet
+
+snippet doc "creates doc"
+/**
+ * $0
+ */
 endsnippet

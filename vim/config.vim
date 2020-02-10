@@ -14,11 +14,11 @@ syntax on
 set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 
-set guifont=Monaco:h14
+" set guifont=Monaco:h14
 set timeoutlen=1000 ttimeoutlen=0         " pensa rapido!
 set backspace=2                           " so backspace works normally on tmux
 set cursorcolumn                          " highlights cursor column
-set number
+set number                                " show current line number
 set relativenumber                        " show line numbers relative to position
 set cmdheight=1
 

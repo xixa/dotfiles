@@ -2,17 +2,21 @@
 " nnoremap <silent> <leader>c :e <cfile><CR>
 " map <silent> <leader>cf :call writefile([], expand("<cfile>"), "t")<cr>
 map <silent> <leader>cf :!touch <c-r><c-p><cr><cr>
-
+" inoremap <Nul> <C-x><C-o>
+inoremap <Nul> <C-N>
 "Be a little more like Emacs when on insert mode, will you?
 imap <C-p> <Up>
 imap <C-n> <Down>
 imap <C-b> <Left>
 imap <C-f> <Right>
-inoremap <C-a> <esc>^i
+inoremap <C-a> <esc>
 imap <C-e> <End>
 imap <C-d> <Del>
 imap <C-h> <BS>
 imap <C-k> <C-r>=<SID>kill_line()<CR>
+
+" cycle between line number layouts
+nnoremap <silent> <Leader>l :call mappings#cycle_numbering()<CR>
 
 function! s:kill_line()
   let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
@@ -24,6 +28,17 @@ function! s:kill_line()
   return ''
 endfunction
 
+function! mappings#cycle_numbering() abort
+  if exists('+relativenumber')
+    execute {
+      \ '00': 'set relativenumber | set number',
+      \ '01': 'set norelativenumber | set number',
+      \ '10': 'set norelativenumber | set nonumber',
+      \ '11': 'set norelativenumber | set number' }[&number . &relativenumber]
+  else
+    set number!<CR>
+  endif
+endfunction
 
 " command line mode
 " adds/remove lines above/below (if empty) from normal mode
@@ -59,3 +74,19 @@ xnoremap J :move '>+1<CR>gv=gv
 nnoremap <leader>m :w<CR> :silent make\|redraw!\|cc<CR>
 :command! Makenode :set makeprg=tmux\ send-key\ -t\ 1\ node\\\ %\ Enter
 :command! Makejasmine :set makeprg=tmux\ send-key\ -t\ 1\ npm\\\ test\ Enter
+
+" langclients
+function! mappings#langserver()
+  if &runtimepath =~ 'coc.nvim'
+    source ~/dotfiles/vim/mappings-coc.vim
+  elseif &runtimepath =~ 'ale'
+    nnoremap <silent> K :ALEHover <CR>
+    nnoremap <silent> gd :ALEGoToDefinitionInSplit <CR>
+    nnoremap <silent> <leader>r :ALERename <CR>
+    nnoremap <silent> <leader>e :ALEDetail <CR>
+    nnoremap <silent> <leader>p :ALEFix <CR>
+  endif
+endfunction
+
+autocmd BufNewFile,BufRead * :call mappings#langserver()
+

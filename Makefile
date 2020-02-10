@@ -115,6 +115,14 @@ vimplugins:
 		nvim +PlugInstall +UpdateRemotePlugins +qa
 		# nvim -c ':PlugInstall' -c 'qa!'
 
+# dev
+linters:
+	npm install --global\
+		prettier\
+		stylelint\
+		stylelint-config-recommended\
+		stylelint-config-css-modules
+
 # rc files
 rc: .inputrc .eslintrc.json .gemrc
 

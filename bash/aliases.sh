@@ -52,6 +52,9 @@ alias dcomp='docker-compose'
 alias dockip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 alias dockimgclean="docker rmi -f \$(docker images -f dangling=true -q)"
 
+#postgresql
+alias fixpostgres="rm -f /usr/local/var/postgres/postmaster.pid && brew services restart postgres"
+
 #kubernetes
 alias k8="kubectl"
 
@@ -65,3 +68,14 @@ alias youtube-dl='youtube-dl -o "~/Movies/youtube-dl/%(title)s.%(ext)s"'
 alias bpyarn="yarn add -D eslint babel-eslint eslint-config-prettier eslint-plugin-prettier jest prettier"
 alias bpeslint="ln -s $HOME/dotfiles/rc/.eslintrc.json ."
 alias bpjs='bpyarn; bpeslint'
+
+#fake s3
+alias fs3="fakes3 -r /mnt/fakes3_root -p 4567 --license 6690125985"
+
+#ffmpeg
+function ffmpeg_convert_to_vp9webm {
+  ffmpeg -i $1 -c:v libvpx-vp9 -b:v 2M output.webm
+}
+alias towebm=ffmpeg_convert_to_vp9webm
+
+alias towebm8="ffmpeg -c:v libvpx -b:v 1M -c:a libvorbis outpute.webm -i "
