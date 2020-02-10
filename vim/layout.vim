@@ -62,6 +62,3 @@ function! Handle_Win_Enter()
     setlocal winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
   endif
 endfunction
-
-autocmd FileType typescript.tsx,typescriptreact,javascript.jsx,javascriptreact source ~/dotfiles/vim/layout-react.vim
-

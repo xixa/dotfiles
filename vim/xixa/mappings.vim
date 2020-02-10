@@ -13,6 +13,23 @@ inoremap <C-a> <esc>
 imap <C-e> <End>
 imap <C-d> <Del>
 imap <C-h> <BS>
+
+function! s:home()
+  let start_col = col('.')
+  normal! ^
+  if col('.') == start_col
+    normal! 0
+  endif
+  return ''
+endfunction
+
+function! s:split_line_text_at_cursor()
+  let line_text = getline(line('.'))
+  let text_after_cursor  = line_text[col('.')-1 :]
+  let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
+  return [text_before_cursor, text_after_cursor]
+endfunction
+
 function! s:kill_line()
   let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
   if len(text_after_cursor) == 0
@@ -23,6 +40,15 @@ function! s:kill_line()
   return ''
 endfunction
 imap <C-k> <C-r>=<SID>kill_line()<CR>
+
+fun! <sid>striptrailingwhitespaces()
+  let l = line('.')
+  let c = col('.')
+  %s/\s\+$//e
+  call cursor(l,c)
+endfun
+
+autocmd BufWritePre * :call <sid>striptrailingwhitespaces()
 
 " cycle between line number layouts
 function! mappings#cycle_numbering() abort
@@ -74,18 +100,9 @@ nnoremap <leader>m :w<CR> :silent make\|redraw!\|cc<CR>
 :command! Makenode :set makeprg=tmux\ send-key\ -t\ 1\ node\\\ %\ Enter
 :command! Makejasmine :set makeprg=tmux\ send-key\ -t\ 1\ npm\\\ test\ Enter
 
-" langclients
-function! mappings#langserver()
-  if &runtimepath =~ 'coc.nvim'
-    source ~/dotfiles/vim/mappings-coc.vim
-  elseif &runtimepath =~ 'ale'
-    nnoremap <silent> K :ALEHover <CR>
-    nnoremap <silent> gd :ALEGoToDefinitionInSplit <CR>
-    nnoremap <silent> <leader>r :ALERename <CR>
-    nnoremap <silent> <leader>e :ALEDetail <CR>
-    nnoremap <silent> <leader>p :ALEFix <CR>
-  endif
-
+" general plugins
+"
+function! xixa#mappings#plugins() abort
   if &runtimepath =~ "NERDTree"
     noremap <c-\> :NERDTreeToggle<cr>
   endif
@@ -95,7 +112,28 @@ function! mappings#langserver()
     nnoremap <silent> <expr> <C-t> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZF\<cr>"
   endif
 
+  if &runtimepath =~ "ack.vim"
+    " nmap <leader>a :tab split<CR>:Ack! ""<Left>
+    nnoremap <Leader>a :Ack!<Space>
+    " nmap <leader>A :Ack! <C-r><C-w><CR>
+  endif
+endfunction
+
+" langclients
+function! xixa#mappings#langserver()
+  if &runtimepath =~ 'coc.nvim'
+    source ~/dotfiles/vim/xixa/mappings-coc.vim
+    echo "coc mappings loaded!"
+  elseif &runtimepath =~ 'ale'
+    echo "ale mappings loaded!"
+    nnoremap <silent> K :ALEHover <CR>
+    nnoremap <silent> gd :ALEGoToDefinitionInSplit <CR>
+    nnoremap <silent> <leader>r :ALERename <CR>
+    nnoremap <silent> <leader>e :ALEDetail <CR>
+    nnoremap <silent> <leader>p :ALEFix <CR>
+  endif
 
 endfunction
 
-autocmd BufNewFile,BufRead * :call mappings#langserver()
+autocmd BufEnter * :call xixa#mappings#plugins()
+autocmd BufEnter,BufNewFile,BufRead * :call xixa#mappings#langserver()

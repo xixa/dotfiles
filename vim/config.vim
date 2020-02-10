@@ -55,6 +55,16 @@ set tw=79
 set wrap linebreak nolist                         " soft line breaking
 set formatoptions-=t
 
+highlight TermCursor ctermfg=red guifg=red        " colors terminal cursor
+set splitbelow
+set splitright
+
+" behind the scenes
+set noswapfile
+set nobackup
+set nowb
+
+
 " providers
 " let g:python3_host_prog='/usr/local/bin/python3'
 " let g:loaded_python3_provider=1

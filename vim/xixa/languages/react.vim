@@ -1,6 +1,12 @@
-"jsx stuff
-autocmd FileType typescript.tsx setlocal commentstring={/*\ %s\ */}
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+
+let g:context#commentstring#table['typescript.jsx'] = {
+			\ 'jsComment': '// %s',
+			\ 'jsImport': '// %s',
+			\ 'jsxStatment': '// %s',
+			\ 'jsxRegion': '{/*%s*/}'
+      \ }
+
 " dark red
 hi tsxTagName guifg=#E06C75
 

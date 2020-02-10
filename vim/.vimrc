@@ -7,16 +7,12 @@ let mapleader=","
 
 " GENERAL CONFIG
 source ~/dotfiles/vim/config.vim
-
 source ~/dotfiles/vim/layout.vim
-
-source ~/dotfiles/vim/mappings.vim
-
 source ~/dotfiles/vim/folds.vim
-
 source ~/dotfiles/vim/plugins.vim
+source ~/dotfiles/vim/xixa/mappings.vim
+source ~/dotfiles/vim/syntax/svg.vim
 
-"------------------------------------------- L A N G U A G E S
 " RECOGNIZE FILETYPES
 au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
 au BufRead,BufNewFile *.eex set filetype=eelixir
@@ -24,20 +20,10 @@ au BufRead,BufNewFile *.svelte set filetype=svelte
 " au BufRead,BufNewFile *.svelte set syntax=html filetype svelte
 
 " LANGUAGE SPECIFIC CONFIG
-autocmd FileType clojure source ~/dotfiles/vim/layout-lisp.vim
-autocmd FileType typescript.tsx,typescriptreact,javascript.jsx,javascriptreact source ~/dotfiles/vim/layout-react.vim
+autocmd FileType clojure source ~/dotfiles/vim/xixa/languages/lisp.vim
+autocmd FileType typescript.tsx,typescriptreact,javascript.jsx,javascriptreact source ~/dotfiles/vim/xixa/languages/react.vim
 
-packadd! matchit
-
-" buffers
-"highlight TermCursor ctermfg=red guifg=red        " colors terminal cursor
-set splitbelow
-set splitright
-
-" behind the scenes
-set noswapfile
-set nobackup
-set nowb
+" packadd! matchit
 
 " auto completion
 " filetype plugin on
@@ -47,99 +33,54 @@ set nowb
 "" enter inserts the option from a list instead of breaking a line
 " set completeopt+=noinsert
 
-fun! <sid>striptrailingwhitespaces()
-  let l = line('.')
-  let c = col('.')
-  %s/\s\+$//e
-  call cursor(l,c)
-endfun
-
-autocmd BufWritePre * :call <sid>striptrailingwhitespaces()
-
-function! s:home()
-  let start_col = col('.')
-  normal! ^
-  if col('.') == start_col
-    normal! 0
-  endif
-  return ''
-endfunction
-
-function! s:kill_line()
-  let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
-  if len(text_after_cursor) == 0
-    normal! J
-  else
-    call setline(line('.'), text_before_cursor)
-  endif
-  return ''
-endfunction
-
-function! s:split_line_text_at_cursor()
-  let line_text = getline(line('.'))
-  let text_after_cursor  = line_text[col('.')-1 :]
-  let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
-  return [text_before_cursor, text_after_cursor]
-endfunction
-
-
 "------------------------------------------- P L U G I N S
-
 call plug#begin('~/.vim/plugged')
 
-"------------------------------------------- VIM++
+" stuff that really vIMPROVES vim.
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
+Plug 'suy/vim-context-commentstring' "allows for different commentstrings to be placed in different parts of the code (e.g. jsx)
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-eunuch'
-
-Plug 'wincent/loupe'
-Plug 'Yggdroot/indentLine'
-
-Plug 'bling/vim-bufferline'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'jiangmiao/auto-pairs' "{{{
-  au FileType clojure let b:autopairs_loaded=1
-"}}}
-Plug 'jpalardy/vim-slime' "{{{
-" let g:slime_target = "tmux"
-" let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.3"}
-"}}}
-Plug 'metakirby5/codi.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
-
-" snippets
 Plug 'SirVer/ultisnips'
-
-"deoplete
-" Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} "{{{
-"  let g:deoplete#enable_at_startup = 1
-"  " don't load deoplete with these files:
-"  autocmd FileType text call deoplete#custom#buffer_option('auto_complete', v:false)
-
+Plug 'terryma/vim-multiple-cursors'
+Plug 'jiangmiao/auto-pairs'
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 "Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
-"------------------------------------------- INTEGRATION
+"repl-like stuff
+Plug 'jpalardy/vim-slime'
+Plug 'metakirby5/codi.vim'
+
+" finding/jumping to places
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'wincent/loupe'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-projectionist'
+
+" with ack
+Plug 'mileszs/ack.vim'
+
+" ui
+Plug 'Yggdroot/indentLine'
+Plug 'bling/vim-bufferline'
+
+" INTEGRATION
+" with unix
+Plug 'tpope/vim-eunuch'
+
 " with git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-" with fzf, silver searcher
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-Plug 'mileszs/ack.vim'
 
 "------------------------------------------- LANGUAGES
-
 Plug 'autozimu/LanguageClient-neovim', {'for': ['python'], 'branch': 'next', 'do': 'bash install.sh'}
 Plug 'dense-analysis/ale', { 'for': [ 'json', 'svelte', 'elixir']}
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['css', 'typescript.tsx']}
-
 
 " LISPs
 Plug 'kovisoft/paredit', { 'for': ['scheme', 'clojure'] }
@@ -185,22 +126,15 @@ endfunction
 
 Plug 'euclio/vim-markdown-composer', {
       \'for': 'markdown',
-      \'do': function('BuildComposer') } "{{{
-  let g:vim_markdown_folding_disabled = 1
-"}}}
+      \'do': function('BuildComposer') }
 
 Plug 'junegunn/goyo.vim', { 'for': 'text' }
 
 call plug#end()
 
 "auto-source virmc
-autocmd! BufWritePost $MYVIMRC so %
-nnoremap <silent> ,s :so $MYVIMRC<CR>:e<CR>
-
-autocmd BufNewFile,BufRead * :call mappings#langserver()
-
-source ~/dotfiles/vim/syntax/svg.vim
+" autocmd! BufWritePost $MYVIMRC so %
+" nnoremap <silent> ,s :so $MYVIMRC<CR>:e<CR>
 
 " auto save hidden buffers!
-:set hidden
 filetype plugin indent on

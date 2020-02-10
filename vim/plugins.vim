@@ -6,9 +6,6 @@ function! plugins#pluginsConfig()
     if executable('ag')
       let g:ackprg = 'ag --vimgrep'
     endif
-    " nmap <leader>a :tab split<CR>:Ack! ""<Left>
-    nnoremap <Leader>a :Ack!<Space>
-    " nmap <leader>A :Ack! <C-r><C-w><CR>
     let g:ackhighlight = 1
     let g:ackpreview = 1
     "let g:ack_autoclose = 1
@@ -54,8 +51,6 @@ function! plugins#pluginsConfig()
     let g:ale_elixir_elixir_ls_release=$HOME . '/.vim/plugged/elixir-ls/release'
     let g:ale_python_auto_pipenv=1
     let g:ale_completion_tsserver_autoimport = 1
-    " nnoremap <silent> <leader>e :ALEDetail <CR>
-    " nnoremap <silent> <leader>p :ALEFix <CR>
   endif
 
   if &runtimepath =~ "coc.nvim"
@@ -63,14 +58,19 @@ function! plugins#pluginsConfig()
     hi! CocErrorSign guifg=#ffe2d6
   endif
 
+  if &runtimepath =~ "deoplete"
+    let g:deoplete#enable_at_startup = 1
+    " don't load deoplete with these files:
+    autocmd FileType text call deoplete#custom#buffer_option('auto_complete', v:false)
+   endif
+
+
   if &runtimepath =~ "emmet-vim"
     let g:user_emmet_settings = {'javascript' : { 'extends':'javascript.jsx'}}
   endif
 
   if &runtimepath =~ "fzf.vim"
       " changes focus to main window if NERDTree is open
-    nnoremap <silent> <expr> <C-t> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZF\<cr>"
-    " noremap <C-t> :Files<CR>
     let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore-dir=bin --ignore-dir="*.pyc"'
     set rtp+=/usr/local/opt/fzf
   endif
@@ -112,7 +112,6 @@ function! plugins#pluginsConfig()
   endif
 
   if &runtimepath =~ "NERDTree"
-    noremap <c-\> :NERDTreeToggle<cr>
     " C changes directory and root directory
     let g:NERDTreeChDirMode = 2
     " open NERDTree on vim startup if no file is specified
@@ -142,6 +141,11 @@ function! plugins#pluginsConfig()
         \ 'typescript.tsx': ['tsconfig.json', 'package.json'],
         \ }
     let g:LanguageClient_diagnosticsList='Location'
+  endif
+
+  if &runtimepath =~ "vim-slime"
+    let g:slime_target = "tmux"
+    let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.3"}
   endif
 
   if &runtimepath =~ "vim-projectionist"
