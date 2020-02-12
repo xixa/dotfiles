@@ -113,8 +113,8 @@ function! xixa#mappings#plugins() abort
   endif
 
   if &runtimepath =~ "ack.vim"
-    " nmap <leader>a :tab split<CR>:Ack! ""<Left>
     nnoremap <Leader>a :Ack!<Space>
+    " nmap <leader>a :tab split<CR>:Ack! ""<Left>
     " nmap <leader>A :Ack! <C-r><C-w><CR>
   endif
 endfunction
@@ -123,9 +123,7 @@ endfunction
 function! xixa#mappings#langserver()
   if &runtimepath =~ 'coc.nvim'
     source ~/dotfiles/vim/xixa/mappings-coc.vim
-    echo "coc mappings loaded!"
   elseif &runtimepath =~ 'ale'
-    echo "ale mappings loaded!"
     nnoremap <silent> K :ALEHover <CR>
     nnoremap <silent> gd :ALEGoToDefinitionInSplit <CR>
     nnoremap <silent> <leader>r :ALERename <CR>
@@ -136,4 +134,4 @@ function! xixa#mappings#langserver()
 endfunction
 
 autocmd BufEnter * :call xixa#mappings#plugins()
-autocmd BufEnter,BufNewFile,BufRead * :call xixa#mappings#langserver()
+autocmd BufEnter * :call xixa#mappings#langserver()

@@ -1,0 +1,12 @@
+{
+    "extends": [
+      "/usr/local/lib/node_modules/stylelint-config-recommended",
+      "/usr/local/lib/node_modules/stylelint-config-css-modules"
+    ],
+    "args": [
+        "--formatter",
+        "unix",
+        "--stdin-filename",
+        "%filename"
+      ],
+}

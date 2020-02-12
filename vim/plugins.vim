@@ -70,8 +70,14 @@ function! plugins#pluginsConfig()
   endif
 
   if &runtimepath =~ "fzf.vim"
-      " changes focus to main window if NERDTree is open
-    let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore-dir=bin --ignore-dir="*.pyc"'
+    let $FZF_DEFAULT_COMMAND = 'ag -g ""
+          \ --ignore-dir=bin
+          \ --ignore-dir="*.pyc"
+          \ --ignore-dir="*.lock"
+          \ --ignore-dir="*.woff"
+          \ --ignore-dir="*.png"
+          \ --ignore-dir="*.jpg"
+          \ --ignore-dir="*.jpeg"'
     set rtp+=/usr/local/opt/fzf
   endif
 

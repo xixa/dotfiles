@@ -1,37 +1,30 @@
-╱ ╱ ╱ ╱ ╱ ╱ ╱ ╱ ╱<br>
-╱ T H E ╱ ╱ ╱ ╱ ╱ ╱<br>
-╱┳┳╮╭╮┳╮╱╭╮┳╭╮╱ ╱ ╱<br>
-╱┋┋┋┣┫┣┻╮┋╱┋┋┋╱ ╱ ╱ ╱ ╱<br>
-╱┛┛┛┻┗┻╱┗╰╯┻╰╯╱ ╱ ╱<br>
-╱┳┳╭┛┳┓┳┳╮╭╮┏┳┓╭╮┳┏<br>
-╱┋┣┻╮┣╱┋┋┋┣┫╱┋╱╰╮┋┋<br>
-╱┻┗╱┗┗┛┛┛┛┛┗╱┻╱╰╯╰┻<br>
-╱ ╱ ╱ ╱ ╱ ╱ ╱ DOTFILES ♡ ╱<br>
-╱ ╱ ╱ ╱ ╱ ╱ ╱  ╱ ╱ ╱<br>
-╱ ╱ ╱ ╱ ╱ ╱ ╱<br>
-╱ ╱ ╱ ╱ ╱ ╱ ╱<br>
-╱ ╱ ╱ ╱ ╱<br>
-╱ ╱ ╱              marcio.ikematsu@usp.br<br>
-╱<br>
+        ╱ ╱ ╱ ╱ ╱ ╱ ╱ ╱ ╱
+         ╱ T H E ╱ ╱ ╱ ╱ ╱ ╱
+        ╱┳┳╮╭╮┳╮╱╭╮┳╭╮╱ ╱ ╱
+         ┋┋┋┣┫┣┻╮┋╱┋┋┋ ╱ ╱ ╱ ╱ ╱
+        ╱┛┛┛┻┗┻╱┗╰╯┻╰╯╱ ╱ ╱ ╱ ╱
+         ┳┳╭┛┳┓┳┳╮╭╮┏┳┓╭╮┳┏  ╱ ╱
+        ╱┋┣┻╮┣╱┋┋┋┣┫╱┋╱╰╮┋┋ ╱ ╱
+         ┻┗╱┗┗┛┛┛┛┛┗╱┻╱╰╯╰┻╱ ╱
+        ╱ ╱ ╱ ╱ ╱ ╱ ╱ DOTFILES ♡ ╱
+         ╱ ╱ ╱ ╱ ╱ ╱ ╱ ╱ ╱ ╱
+        ╱ ╱ ╱ ╱ ╱ ╱ ╱
+       ╱ ╱ ╱ ╱ ╱ ╱ ╱
+        ╱ ╱ ╱ ╱ ╱
+       ╱ ╱ ╱              marcio.ikematsu@usp.br
+        ╱
 
-### Dependencies
-pygments
-### MacOS
-#### Filters
-Custom quartz filters, used by, for instance, Preview and ColorSync Utility
-```
-~/Library/Filters/
-```
+What this?
+==========
 
-#### KeyBindings
-Personal key bindings for the Mac.
-```
-~/Library/KeyBindings/
-```
-<br>
-___
+A not at all one size fits all bunch of config files for my own needs.
 
-### vi/Vim
-#### .vimrc
-#### snippets
-#### themes
+Makefile
+========
+
+Top command will check if on MacOS or different Linux distros and install all the stuff I need to
+exist, accordingly.
+
+
+
+
