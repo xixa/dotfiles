@@ -109,8 +109,16 @@ function! xixa#mappings#plugins() abort
 
   if &runtimepath =~ "fzf.vim"
     " changes focus to main window if NERDTree is open
-    nnoremap <silent> <expr> <C-t> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZF\<cr>"
+    nnoremap <silent> <expr> <C-t> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
   endif
+
+  if &runtimepath =~ "UltiSnips"
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsJumpForwardTrigger= "<Tab>"
+    let g:UltiSnipsListSnippets='<c-tab>'
+    let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
+  endif
+
 
   if &runtimepath =~ "ack.vim"
     nnoremap <Leader>a :Ack!<Space>

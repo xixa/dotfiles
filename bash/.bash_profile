@@ -43,6 +43,7 @@ export TERM=screen-256color
 #export $TERM
 
 export EDITOR=nvim
+export MYVIMRC="~/.vimrc"
 
 # Python
 export PYTHONSTARTUP=$HOME/.pythonrc

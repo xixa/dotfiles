@@ -79,6 +79,9 @@ function! plugins#pluginsConfig()
           \ --ignore-dir="*.jpg"
           \ --ignore-dir="*.jpeg"'
     set rtp+=/usr/local/opt/fzf
+    " preview with bat
+    command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
   endif
 
   if &runtimepath =~ "goyo"
@@ -157,6 +160,30 @@ function! plugins#pluginsConfig()
   if &runtimepath =~ "vim-projectionist"
     let g:projectionist_heuristics = {
       \   '*': {
+      \     '*.tsx': {
+      \       'alternate': [
+      \         'test/{}.test.tsx',
+      \       ],
+      \       'type': 'source'
+      \     },
+      \     'test/*.test.tsx': {
+      \       'alternate': [
+      \         '{}.tsx',
+      \       ],
+      \       'type': 'test'
+      \     },
+      \     'pages/*.tsx': {
+      \       'alternate': [
+      \         'test/pages/{}.test.tsx',
+      \       ],
+      \       'type': 'source'
+      \     },
+      \     'test/pages/*.test.tsx': {
+      \       'alternate': [
+      \         'pages/{}.tsx',
+      \       ],
+      \       'type': 'test'
+      \     },
       \     'lib/*.ex': {
       \       'alternate': [
       \         'test/{}_test.exs',
@@ -167,6 +194,7 @@ function! plugins#pluginsConfig()
       \       'alternate': [
       \         'lib/{}.ex',
       \       ],
+      \       'type': 'test'
       \     }
       \   }
       \ }
@@ -175,9 +203,6 @@ function! plugins#pluginsConfig()
   if &runtimepath =~ "UltiSnips"
     let g:UltiSnipsUsePythonVersion = 3
     let g:UltiSnipsSnippetDirectories=["~/dotfiles/vim/my_snippets"]
-    let g:UltiSnipsJumpForwardTrigger= "<Tab>"
-    " let g:UltiSnipsListSnippets='<c-tab>'
-    let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
     let g:UltiSnipsEditSplit='vertical'
   endif
 endfunction
