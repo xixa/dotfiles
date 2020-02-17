@@ -6316,12 +6316,14 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 294 592 584 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-254 900 1920 1080 -254 900 1920 1057 </string>
+	<string>0 0 1440 878 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
 			<key>ASCII Anti Aliased</key>
 			<true/>
+			<key>Allow Paste Bracketing</key>
+			<false/>
 			<key>Allow Title Reporting</key>
 			<false/>
 			<key>Allow Title Setting</key>
@@ -7141,7 +7143,7 @@
 			<key>Tags</key>
 			<array/>
 			<key>Terminal Type</key>
-			<string>xterm-256color-italic</string>
+			<string>xterm-256color</string>
 			<key>Transparency</key>
 			<real>0.48977440828402369</real>
 			<key>Triggers</key>
@@ -7221,7 +7223,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>62F75FFB-CAF1-4540-A106-D432516641C6</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>255</integer>
+	<integer>258</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -8019,7 +8021,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-02-14T04:28:24Z</date>
+	<date>2020-02-17T04:28:28Z</date>
 	<key>SUUpdateGroupIdentifier</key>
 	<integer>3281781464</integer>
 	<key>SUUpdateRelaunchingMarker</key>

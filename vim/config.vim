@@ -1,20 +1,8 @@
 syntax on
 language en_US
-set t_Co=258
-let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-" hi clear
-" let g:dracula_italic = 0
-" colorscheme dracula
-color agathe
-" highlight Normal ctermbg=None
-set background=dark
-syntax on
 
-set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+colorscheme agatheo
 
-" set guifont=Monaco:h14
 set timeoutlen=1000 ttimeoutlen=0                 " pensa rapido!
 set backspace=2                                   " so backspace works normally on tmux
 set cursorcolumn                                  " highlights cursor column
@@ -41,7 +29,6 @@ set scrolloff=12                                  " n lines margin when scrollin
 
 "tabs & indentation
 let tabsize=2
-autocmd filetype python let tabsize=4
 let &tabstop=tabsize                              " tab = 2 spaces
 let &shiftwidth=tabsize                           " spaces used by autoindeting
 let &softtabstop=tabsize                          " backspace remove tabs
@@ -55,7 +42,6 @@ set tw=79
 set wrap linebreak nolist                         " soft line breaking
 set formatoptions-=t
 
-highlight TermCursor ctermfg=red guifg=red        " colors terminal cursor
 set splitbelow
 set splitright
 
@@ -63,6 +49,11 @@ set splitright
 set noswapfile
 set nobackup
 set nowb
+
+" tmux termguicolor
+" (has to go after colorscheme is set)
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 
 " providers
 " let g:python3_host_prog='/usr/local/bin/python3'

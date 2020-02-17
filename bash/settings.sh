@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# bash completion
+if [ -f /sw/etc/bash_completion ]; then
+   . /sw/etc/bash_completion
+fi
+
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
 # Mac settings
 if [[ $(uname) == "Darwin" ]]; then
     source $HOME/dotfiles/bash/macos.sh
@@ -8,11 +15,11 @@ elif [ $(uname) == "Linux" ]; then
     source $HOME/dotfiles/bash/linux.sh
 fi
 
-
 # fzf
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+# export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # cdfile: cd to the a given file's directory
 cdf() {

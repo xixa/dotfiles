@@ -31,6 +31,19 @@ alias l="ls -lF ${colorflag}" # all files, in long format
 alias la="ls -laF ${colorflag}" # all files inc dotfiles, in long format
 alias lsd='ls -lF ${colorflag} | grep "^d"' # only directories
 
+truecolor() {
+  for ((i = 0; i <= 79; i++)); do
+    b=$(($i*255/79))
+    g=$((2*$b))
+    r=$((255-$b))
+    if [[ $g -gt 255  ]]; then
+      g=$((2*255 - $g))
+    fi
+    printf '\e[48;2;%d;%d;%dm \e[0m' $r $g $b
+  done
+  printf '\n'
+}
+
 #mkdir
 alias mkdir='mkdir -p' #forces mkdir to create intermediate directories if a path is specified
 

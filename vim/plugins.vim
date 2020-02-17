@@ -6,6 +6,9 @@ function! plugins#pluginsConfig()
     if executable('ag')
       let g:ackprg = 'ag --vimgrep'
     endif
+    if executable('rg')
+      let g:ackprg = 'rg --vimgrep'
+    endif
     let g:ackhighlight = 1
     let g:ackpreview = 1
     "let g:ack_autoclose = 1
@@ -22,7 +25,7 @@ function! plugins#pluginsConfig()
          \ }
     let g:ale_fixers = {
          \ '*': ['trim_whitespace'],
-         \ 'json': ['fixjson'],
+         \ 'json': ['prettier'],
          \ 'css': ['prettier'],
          \ 'javascript': ['eslint', 'prettier'],
          \ 'typescript': ['tslint', 'eslint', 'prettier'],
@@ -55,7 +58,9 @@ function! plugins#pluginsConfig()
 
   if &runtimepath =~ "coc.nvim"
     command! -nargs=0 Prettier :CocCommand prettier.formatFile
-    hi! CocErrorSign guifg=#ffe2d6
+
+    " visual
+    hi! CocErrorSign ctermfg=218 ctermbg=NONE guifg=#ffffff guibg=#000000
   endif
 
   if &runtimepath =~ "deoplete"
@@ -79,9 +84,13 @@ function! plugins#pluginsConfig()
           \ --ignore-dir="*.jpg"
           \ --ignore-dir="*.jpeg"'
     set rtp+=/usr/local/opt/fzf
+    let g:fzf_buffers_jump = 1
     " preview with bat
+    " command! -bang -nargs=? -complete=dir Files
+    " \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+    " preview normal
     command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
   endif
 
   if &runtimepath =~ "goyo"
@@ -160,25 +169,21 @@ function! plugins#pluginsConfig()
   if &runtimepath =~ "vim-projectionist"
     let g:projectionist_heuristics = {
       \   '*': {
-      \     '*.tsx': {
-      \       'alternate': [
-      \         'test/{}.test.tsx',
-      \       ],
+      \     'components/*.tsx': {
+      \       'alternate': '__tests__/components/{}.test.tsx',
       \       'type': 'source'
       \     },
-      \     'test/*.test.tsx': {
-      \       'alternate': [
-      \         '{}.tsx',
-      \       ],
+      \     '__tests__/components/*.test.tsx': {
+      \       'alternate': 'components/{}.tsx',
       \       'type': 'test'
       \     },
       \     'pages/*.tsx': {
       \       'alternate': [
-      \         'test/pages/{}.test.tsx',
+      \         '__tests__/pages/{}.test.tsx',
       \       ],
       \       'type': 'source'
       \     },
-      \     'test/pages/*.test.tsx': {
+      \     '__tests__/pages/*.test.tsx': {
       \       'alternate': [
       \         'pages/{}.tsx',
       \       ],

@@ -12,7 +12,10 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "noEmit": true,
-    // Checks
+    "esModuleInterop": true,
+
+    // CHECKS
+
     "strict": true,
     "strictNullChecks": false,
     "noImplicitAny": true,
@@ -25,8 +28,7 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    // Needed for Babel to work
-    "isolatedModules": true
+    "isolatedModules": true                         // needed for Babel to work
   },
   "exclude": [
     "node_modules"

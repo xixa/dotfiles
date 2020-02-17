@@ -20,8 +20,12 @@ au BufRead,BufNewFile *.svelte set filetype=svelte
 " au BufRead,BufNewFile *.svelte set syntax=html filetype svelte
 
 " LANGUAGE SPECIFIC CONFIG
-autocmd FileType clojure source ~/dotfiles/vim/xixa/languages/lisp.vim
-autocmd FileType typescript.tsx,typescriptreact,javascript.jsx,javascriptreact source ~/dotfiles/vim/xixa/languages/react.vim
+autocmd! FileType clojure source ~/dotfiles/vim/xixa/languages/lisp.vim
+autocmd! FileType typescript.tsx,typescriptreact,javascript.jsx,javascriptreact source ~/dotfiles/vim/xixa/languages/react.vim
+autocmd! FileType python let tabsize=4
+autocmd! FileType json set commentstring=//%s
+autocmd! FileType json syntax match Comment +\/\/.\+$+
+" autocmd FileType json echoerr 'This autocmd ran!'
 
 " packadd! matchit
 
@@ -78,14 +82,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mileszs/ack.vim'
 
 " with make
-Plug 'neomake/neomake'
+" Plug 'neomake/neomake'
 
 
 "------------------------------------------- LANGUAGE SPECIFIC PLUGINS
 " LangServs
 Plug 'autozimu/LanguageClient-neovim', {'for': ['python'], 'branch': 'next', 'do': 'bash install.sh'}
-Plug 'dense-analysis/ale', { 'for': [ 'json', 'svelte', 'elixir']}
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['css',  'typescript', 'typescript.tsx']}
+Plug 'dense-analysis/ale', { 'for': [ 'svelte', 'elixir']}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['css', 'typescript', 'typescript.tsx']}
 
 " LISPs
 Plug 'kovisoft/paredit', { 'for': ['scheme', 'clojure'] }
@@ -113,7 +117,7 @@ Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
 Plug 'peitalin/vim-jsx-typescript', { 'for': [ 'javascript.jsx', 'typescript.tsx'] }
 " Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript.tsx' }
 " Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript.jsx', 'typescript.tsx'] }
-Plug 'alampros/vim-styled-jsx', { 'for': ['javascript.jsx', 'typescript.tsx'] }
+" Plug 'alampros/vim-styled-jsx', { 'for': ['javascript.jsx', 'typescript.tsx'] }
 
 " html
 Plug 'othree/html5.vim'

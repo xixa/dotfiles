@@ -29,16 +29,9 @@ elif [ $(uname) == "Linux" ]; then
   export PATH=$PATH
 fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-if [ -f /sw/etc/bash_completion ]; then
-   . /sw/etc/bash_completion
-fi
-
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 export CLICOLOR=1
-export TERM=screen-256color
+# export TERM=screen-256color
 #TERM=xterm-256color
 #export $TERM
 
