@@ -17,6 +17,8 @@
 set -o emacs
 
 export LC_ALL=en_US.UTF-8
+# export TERM=screen-256color
+export TERM=xterm-256color
 
 source $HOME/dotfiles/bash/prompt.sh
 source $HOME/dotfiles/tmux/tmuxinator.bash
@@ -29,11 +31,7 @@ elif [ $(uname) == "Linux" ]; then
   export PATH=$PATH
 fi
 
-
 export CLICOLOR=1
-# export TERM=screen-256color
-#TERM=xterm-256color
-#export $TERM
 
 export EDITOR=nvim
 export MYVIMRC="~/.vimrc"

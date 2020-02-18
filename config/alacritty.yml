@@ -1,0 +1,17 @@
+env:
+  TERM: xterm-256color-italic
+font:
+  normal:
+    family: Droid Sans Mono for Powerline
+    style: Regular
+
+colors:
+  normal:
+    black:   '0x000000'
+    red:     '0xBB2222'
+    green:   '0x22BB22'
+    yellow:  '0xBBBB22'
+    blue:    '0x2222BB'
+    magenta: '0xBB22BB'
+    cyan:    '0x22BBBB'
+    white:   '0xDDDDDD'

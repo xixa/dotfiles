@@ -130,11 +130,19 @@ function! plugins#pluginsConfig()
   endif
 
   if &runtimepath =~ "NERDTree"
+    " ignore stuff
+    let g:NERDTreeIgnore=['node_modules']
+
     " C changes directory and root directory
-    let g:NERDTreeChDirMode = 2
-    " open NERDTree on vim startup if no file is specified
+    let g:NERDTreeChDirMode=2
+
+    " Removes help message
+    let g:NERDTreeMinimalUI=1
+
+    " opens NERDTree on vim startup if no file is specified
     " autocmd StdinReadPre * let s:std_in=1
     " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
     " closes Vim if NERDTree is the only window open
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   endif
@@ -161,10 +169,10 @@ function! plugins#pluginsConfig()
     let g:LanguageClient_diagnosticsList='Location'
   endif
 
-  if &runtimepath =~ "vim-slime"
-    let g:slime_target = "tmux"
-    let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.3"}
-  endif
+  " if &runtimepath =~ "vim-slime"
+  "   let g:slime_target = "tmux"
+  "   let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.3"}
+  " endif
 
   if &runtimepath =~ "vim-projectionist"
     let g:projectionist_heuristics = {

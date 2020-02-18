@@ -3,12 +3,12 @@ language en_US
 
 colorscheme agatheo
 
+set hidden
+set bufhidden=hide
+set autowrite                                     " gets rid of 'no write since last change'
+
 set timeoutlen=1000 ttimeoutlen=0                 " pensa rapido!
 set backspace=2                                   " so backspace works normally on tmux
-set cursorcolumn                                  " highlights cursor column
-set number                                        " show current line number
-set relativenumber                                " show line numbers relative to position
-set cmdheight=1
 
 " search
 set ignorecase                                    " ignore case when search
@@ -21,11 +21,13 @@ set hlsearch
 set visualbell                                    " prevents buzz
 "set nowrap                                        " don't wrap lines
 set mouse=a                                       " enables mouse
-set clipboard=unnamed                             " OS clipboard
-set autoread                                      " auto-reloads files changed outside vi
-autocmd FocusGained * silent! checktime
+" set clipboard=unnamed                             " OS clipboard
 set showmatch                                     " shows matching parenthesis
 set scrolloff=12                                  " n lines margin when scrolling
+
+" auto-reload
+set autoread                                      " auto-reloads files changed outside vi
+autocmd FocusGained * silent! checktime
 
 "tabs & indentation
 let tabsize=2
@@ -52,8 +54,21 @@ set nowb
 
 " tmux termguicolor
 " (has to go after colorscheme is set)
-let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+
+set t_ut=                " fix 256 colors in tmux http://sunaku.github.io/vim-256color-bce.html
+
+if has("termguicolors")  " set true colors
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  " set termguicolors
+endif
+
+" supposedly gives you italics. doesn't seem like it
+" let &t_ZH="\<Esc>[3m"
+" let &t_ZR="\<Esc>[23m"
+
+" set t_ZH=^[[3m
+" set t_ZR=^[[23m
 
 " providers
 " let g:python3_host_prog='/usr/local/bin/python3'

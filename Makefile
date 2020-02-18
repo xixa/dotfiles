@@ -84,7 +84,7 @@ iterm-shell-integration:
 		source ~/.iterm2_shell_integration.bash
 
 # tmux
-tmux: .tmux.conf tpm
+tmux: .tmux.conf tpm tmux-colors
 
 .tmux.conf: $(MY_DIR)/tmux/.tmux.conf
 	ln -s $(MY_DIR)/tmux/.tmux.conf ~
@@ -92,6 +92,11 @@ tmux: .tmux.conf tpm
 
 tpm:
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+tmux-colors:
+	tic -x $(MY_DIR)/tmux/xterm-256color-italic.terminfo
+	tic -x $(MY_DIR)/tmux/tmux-256color.terminfo
+	tic -x $(MY_DIR)/tmux/tmux.terminfo
 
 # vim & neovim
 NEOVIM := ~/.config/nvim
