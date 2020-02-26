@@ -26,7 +26,6 @@
     //"removeComments": false,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true                         // needed for Babel to work
   },

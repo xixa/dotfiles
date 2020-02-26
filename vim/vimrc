@@ -82,13 +82,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mileszs/ack.vim'
 
 " with make
-" Plug 'neomake/neomake'
+Plug 'neomake/neomake'
 
 
 "------------------------------------------- LANGUAGE SPECIFIC PLUGINS
 " LangServs
 Plug 'autozimu/LanguageClient-neovim', {'for': ['python'], 'branch': 'next', 'do': 'bash install.sh'}
-Plug 'dense-analysis/ale', { 'for': [ 'svelte', 'elixir']}
+Plug 'dense-analysis/ale', { 'for': [ 'svelte', 'elixir', 'haskell']}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['json', 'yaml', 'css',  'typescript', 'typescript.tsx']}
 
 " LISPs
@@ -98,6 +98,13 @@ Plug 'kovisoft/paredit', { 'for': ['scheme', 'clojure'] }
 " Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 " Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
 " Plug 'clojure-vim/async-clj-omni', { 'for': 'clojure' }
+
+" haskell
+Plug 'Shougo/vimproc.vim', {'do' : 'make', 'for': ['haskell']}
+Plug 'eagletmt/ghcmod-vim', { 'do': 'cabal install ghc-mod', 'for': 'haskell' }
+" Plug 'ujihisa/unite-haskellimport', { 'for': 'haskell' }
+" Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' ,'for': 'haskell' }
+" Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
 
 " elixir
 Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
@@ -125,11 +132,6 @@ Plug 'mattn/emmet-vim', {'for': ['html', 'eelixir', 'svelte', 'typescript', 'typ
 
 " graphql
 Plug 'jparise/vim-graphql', { 'for': ['graphql'] }
-
-" haskell
-" Plug 'ujihisa/unite-haskellimport', { 'for': 'haskell' }
-" Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' ,'for': 'haskell' }
-" Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
 
 "------------------------------------------- VIM FOR WRITING
 function! BuildComposer(info)

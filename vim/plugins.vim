@@ -56,7 +56,13 @@ function! plugins#pluginsConfig()
     let g:ale_completion_tsserver_autoimport = 1
   endif
 
+
+  if &runtimepath =~ "auto-pairs"
+   let g:AutoPairsFlyMode = 1
+  endif
+
   if &runtimepath =~ "coc.nvim"
+    "coc-prettier
     command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
     " visual
@@ -80,6 +86,8 @@ function! plugins#pluginsConfig()
           \ --ignore-dir="*.pyc"
           \ --ignore-dir="*.lock"
           \ --ignore-dir="*.woff"
+          \ --ignore-dir="*.webm"
+          \ --ignore-dir="*.mp4"
           \ --ignore-dir="*.png"
           \ --ignore-dir="*.jpg"
           \ --ignore-dir="*.jpeg"'

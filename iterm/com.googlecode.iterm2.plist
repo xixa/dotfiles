@@ -6316,7 +6316,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 294 592 584 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1440 878 0 0 1440 877 </string>
+	<string>0 0 1440 900 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -6658,7 +6658,7 @@
 			<key>HotKey Window Animates</key>
 			<false/>
 			<key>HotKey Window AutoHides</key>
-			<false/>
+			<true/>
 			<key>HotKey Window Dock Click Action</key>
 			<integer>0</integer>
 			<key>HotKey Window Floats</key>
@@ -7005,7 +7005,7 @@
 			<key>Rows</key>
 			<integer>25</integer>
 			<key>Screen</key>
-			<integer>1</integer>
+			<integer>0</integer>
 			<key>Scrollback Lines</key>
 			<integer>0</integer>
 			<key>Scrollback With Status Bar</key>
@@ -7231,7 +7231,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>62F75FFB-CAF1-4540-A106-D432516641C6</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>266</integer>
+	<integer>275</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -8029,7 +8029,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-02-18T04:28:29Z</date>
+	<date>2020-02-23T04:28:31Z</date>
 	<key>SUUpdateGroupIdentifier</key>
 	<integer>3281781464</integer>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -8096,6 +8096,8 @@
 	<integer>0</integer>
 	<key>WordCharacters</key>
 	<string></string>
+	<key>disableMetalWhenUnplugged</key>
+	<true/>
 	<key>findIgnoreCase_iTerm</key>
 	<true/>
 	<key>findMode_iTerm</key>

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 alias srcit='source $HOME/.bashrc'
-alias edbash='$EDITOR $HOME/dotfiles/bash/.bash_profile'
+alias edbash='$EDITOR $HOME/.bash_profile'
 alias edalias='$EDITOR $HOME/dotfiles/bash/aliases.sh'
 alias edtmux='$EDITOR ~/.tmux.conf'
 function sk {
@@ -10,7 +10,12 @@ function sk {
 alias edvimrc='$EDITOR ~/.vimrc'
 alias eddotfiles='(cd ~/dotfiles && v)'
 
-alias ipl='ifconfig en0 | grep inet | grep -v inet6 | awk "{print \$2}"'
+# MacOS / Debian
+if [[ $(uname) == Darwin ]]; then
+  alias ipl='ifconfig en0 | grep inet | grep -v inet6 | awk "{print \$2}"'
+elif [[ $(uname -v) == *Debian* ]]; then
+  alias ipl="xa@daileon:~$ ip addr | grep inet | grep -v inet6 | grep -v 127.0.0.1 |  awk "{print \$2}" | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'"
+fi
 
 # tests GUI for available colors, italics, etc
 guitest() {
@@ -24,7 +29,7 @@ guitest() {
     printf '\e[48;2;%d;%d;%dm \e[0m' $r $g $b
   done
   printf '\n'
-  echo `tput sitm`italics`tput ritm` `tput smso`bold`tput rmso` `tput smul`underline`tput rmul` `tput bold`guide`tput sgr0`
+  echo `tput sitm`italics`tput ritm` `tput smso`highlight`tput rmso` `tput smul`underline`tput rmul` `tput bold`bold`tput sgr0`
 }
 
 # ls
@@ -46,13 +51,8 @@ alias l="ls -lF ${colorflag}" # all files, in long format
 alias la="ls -laF ${colorflag}" # all files inc dotfiles, in long format
 alias lsd='ls -lF ${colorflag} | grep "^d"' # only directories
 
-
 #mkdir
 alias mkdir='mkdir -p' #forces mkdir to create intermediate directories if a path is specified
-
-# pi
-alias sshpi='ssh pi@192.168.1.100'
-alias sshfspi_ext='sshfs pi@192.168.1.100:/home/pi/mnt'
 
 #git
 alias git='LANG=en_US git'
@@ -92,3 +92,8 @@ function ffmpeg_convert_to_vp9webm {
 alias towebm=ffmpeg_convert_to_vp9webm
 
 alias towebm8="ffmpeg -c:v libvpx -b:v 1M -c:a libvorbis outpute.webm -i "
+
+# servers
+alias sshpi='ssh pi@192.168.1.100'
+alias sshfspi_ext='sshfs pi@192.168.1.100:/home/pi/mnt'
+alias sshdeb='ssh xixa@192.168.1.107'

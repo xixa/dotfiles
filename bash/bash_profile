@@ -19,41 +19,37 @@ set -o emacs
 export LC_ALL=en_US.UTF-8
 # export TERM=screen-256color
 export TERM=xterm-256color
-
-source $HOME/dotfiles/bash/prompt.sh
-source $HOME/dotfiles/tmux/tmuxinator.bash
-
-#PATH
-if [[ $(uname) == "Darwin" ]]; then
-  export PATH=$PATH
-# Linux settings
-elif [ $(uname) == "Linux" ]; then
-  export PATH=$PATH
-fi
-
 export CLICOLOR=1
-
 export EDITOR=nvim
 export MYVIMRC="~/.vimrc"
 
-# Python
-export PYTHONSTARTUP=$HOME/.pythonrc
-export PATH=$PATH:/usr/local/bin/python3
-# alias python=/usr/local/bin/python3
+source $HOME/.bash_prompt
+source $HOME/dotfiles/tmux/tmuxinator.bash
+source $HOME/dotfiles/bash/settings.sh
+source $HOME/dotfiles/bash/aliases.sh
 
-# Ruby
-export PATH="$PATH:$HOME/.rvm/bin"
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+#PATH
+if [[ $(uname) == Darwin ]]; then
+  # Python
+  export PYTHONSTARTUP=$HOME/.pythonrc
+  export PATH=$PATH:/usr/local/bin/python3
+  # alias python=/usr/local/bin/python3
 
-# Go
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+  # Ruby
+  export PATH="$PATH:$HOME/.rvm/bin"
+  # Load RVM into a shell session *as a function*
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+  # Go
+  export GOPATH=$HOME/go
+  export GOROOT=/usr/local/opt/go/libexec
+  export PATH=$PATH:$GOPATH/bin
+  export PATH=$PATH:$GOROOT/bin
+# Linux settings
+elif [[ $(uname -v) == *Debian* ]]; then
+  # Rust
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
 
 # vertical bar cursor
 #echo -e -n "\x1b[\x35 q"
-
-source $HOME/dotfiles/bash/settings.sh
-source $HOME/dotfiles/bash/aliases.sh

@@ -4,7 +4,11 @@ font:
   normal:
     family: Droid Sans Mono for Powerline
     style: Regular
-
+  bold:
+    family: Droid Sans Mono for Powerline
+  italic:
+    family: Droid Sans Mono for Powerline
+  size: 13.0
 colors:
   normal:
     black:   '0x000000'

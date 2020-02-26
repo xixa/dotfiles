@@ -1,10 +1,12 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [
-    "yaml",
-    "json",
     "css",
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "typescript.tsx"
   ],
   "codeLens.enable": false
 }
