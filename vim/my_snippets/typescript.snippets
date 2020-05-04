@@ -28,7 +28,7 @@ const ${1:ComponentName}:React.FC = (${2}):JSX.Element => {
 endsnippet
 
 snippet nc "creates a new react component file with its Moldule CSS import" b
-import styles from './${1}.module.css'
+import styles from './${1}.module.scss'
 
 const ${1/(\W)/\l$1/}:React.FC${2:<>} = (${3}):JSX.Element => {
 	return (
@@ -89,4 +89,8 @@ endsnippet
 
 snippet br "non-breaking space shorthand"
 ,&nbsp;
+endsnippet
+
+snippet dev "dev only" b
+process.env.NODE_ENV === 'development' && $0
 endsnippet

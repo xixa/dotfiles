@@ -7,7 +7,7 @@ set hidden
 set bufhidden=hide
 set autowrite                                     " gets rid of 'no write since last change'
 
-set timeoutlen=1000 ttimeoutlen=0                 " pensa rapido!
+set timeoutlen=400 ttimeoutlen=0                 " pensa rapido!
 set backspace=2                                   " so backspace works normally on tmux
 
 " search

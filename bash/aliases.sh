@@ -13,9 +13,17 @@ alias eddotfiles='(cd ~/dotfiles && v)'
 # MacOS / Debian
 if [[ $(uname) == Darwin ]]; then
   alias ipl='ifconfig en0 | grep inet | grep -v inet6 | awk "{print \$2}"'
+  alias shutit='osascript -e "tell app \"System Events\" to shut down"'
+  alias restartit='osascript -e "tell app \"System Events\" to restart"'
+  alias sleepit='osascript -e "tell app \"System Events\" to sleep"'
+  alias displayoff='pmset displaysleepnow'
+  alias imout='(sleep 30 && shutit &) && tmux detach-client'
 elif [[ $(uname -v) == *Debian* ]]; then
   alias ipl="xa@daileon:~$ ip addr | grep inet | grep -v inet6 | grep -v 127.0.0.1 |  awk "{print \$2}" | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'"
 fi
+
+# apps
+alias firefox-dev='(/Applications/Firefox\ Developer\ Edition.app/Contents/MacOs/firefox &)'
 
 # tests GUI for available colors, italics, etc
 guitest() {
@@ -67,6 +75,7 @@ alias dockimgclean="docker rmi -f \$(docker images -f dangling=true -q)"
 
 #postgresql
 alias fixpostgres="rm -f /usr/local/var/postgres/postmaster.pid && brew services restart postgres"
+alias postgresps="lsof -n -i4TCP:5432"
 
 #kubernetes
 alias k8="kubectl"

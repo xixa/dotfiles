@@ -60,7 +60,7 @@ $0
 endsnippet
 
 snippet fn "creates an anonymous function"
-	fn ${1:<params>} -> ${2:<return>} end
+fn ${1:<params>} -> ${2:<return>} end$0
 endsnippet
 
 snippet do "creates a do/end"
@@ -70,5 +70,43 @@ end
 endsnippet
 
 snippet insp "creates inspection"
-IO.inspect $0
+IO.inspect $1, label: "$2"
+endsnippet
+
+snippet gqlt "Creates a GraphQL test" b
+defmodule BackendWen.Schema.${1:<Path>}Test do
+  use BackendWeb.ConnCase, async: true
+
+  setup do
+    Backend.Seeds.run()
+  end
+
+
+  describe "GraphQL" do
+		test "" do
+			$0
+		end
+	end
+end
+endsnippet
+
+
+snippet test "Test boilerplate" b
+defmodule BackendWeb.${1:<Context>}Test.${2:<Model>} do
+	use BackendWeb.ConnCase, async: true
+
+	setup do
+		Backend.Seeds.run()
+	end
+
+	describe "${2/(\W)/\l${/}" do
+		test "exists" do
+			$0
+		end
+	end
+end
+endsnippet
+
+snippet td "creates TODO"
+# TODO: $0
 endsnippet

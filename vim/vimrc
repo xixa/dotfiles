@@ -53,6 +53,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'gcmt/taboo.vim'
 "Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " repl-like stuff
@@ -88,8 +89,8 @@ Plug 'neomake/neomake'
 "------------------------------------------- LANGUAGE SPECIFIC PLUGINS
 " LangServs
 Plug 'autozimu/LanguageClient-neovim', {'for': ['python'], 'branch': 'next', 'do': 'bash install.sh'}
-Plug 'dense-analysis/ale', { 'for': [ 'svelte', 'elixir', 'haskell']}
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['json', 'yaml', 'css',  'typescript', 'typescript.tsx']}
+Plug 'dense-analysis/ale', { 'for': [ 'svelte', 'haskell']}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['elixir', 'json', 'yaml', 'css',  'scss', 'javascript', 'typescript', 'typescript.tsx']}
 
 " LISPs
 Plug 'kovisoft/paredit', { 'for': ['scheme', 'clojure'] }
@@ -128,7 +129,10 @@ Plug 'alampros/vim-styled-jsx', { 'for': ['javascript.jsx', 'typescript.tsx'] }
 
 " html
 Plug 'othree/html5.vim'
-Plug 'mattn/emmet-vim', {'for': ['html', 'eelixir', 'svelte', 'typescript', 'typescript.tsx']}
+Plug 'mattn/emmet-vim', {'for': ['html', 'eelixir', 'svelte', 'typescript', 'typescript.tsx', 'typescriptreact']}
+
+" sass
+Plug 'cakebaker/scss-syntax.vim'
 
 " graphql
 Plug 'jparise/vim-graphql', { 'for': ['graphql'] }

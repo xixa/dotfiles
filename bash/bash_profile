@@ -45,6 +45,10 @@ if [[ $(uname) == Darwin ]]; then
   export GOROOT=/usr/local/opt/go/libexec
   export PATH=$PATH:$GOPATH/bin
   export PATH=$PATH:$GOROOT/bin
+
+  # k8s
+  # Krew
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # Linux settings
 elif [[ $(uname -v) == *Debian* ]]; then
   # Rust

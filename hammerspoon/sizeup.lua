@@ -48,11 +48,11 @@ end)
 
 --- Multiple Monitor Actions ---
 -- Send Window Prev Monitor
-hs.hotkey.bind({ "ctrl", "alt" }, "Left", function()
+hs.hotkey.bind({ "ctrl", "alt" }, "P", function()
   sizeup.send_window_prev_monitor()
 end)
 -- Send Window Next Monitor
-hs.hotkey.bind({ "ctrl", "alt" }, "Right", function()
+hs.hotkey.bind({ "ctrl", "alt" }, "N", function()
   sizeup.send_window_next_monitor()
 end)
 
@@ -77,7 +77,6 @@ hs.hotkey.bind({"cmd","alt","ctrl"}, "C", function()
   sizeup.move_to_center_absolute({w=800, h=600})
   -- sizeup.move_to_center_relative({w=0.75, h=0.75})
 end)
-
 
 -------------------
 -- Configuration --

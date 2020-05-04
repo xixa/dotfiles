@@ -1,12 +1,14 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
+    "scss",
+    "sass",
     "javascript",
     "javascriptreact",
-    "javascript.jsx",
     "typescript",
     "typescriptreact",
-    "typescript.tsx"
+    "elixir",
+    "graphql"
   ],
   "codeLens.enable": false
 }

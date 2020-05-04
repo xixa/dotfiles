@@ -58,7 +58,7 @@ function! plugins#pluginsConfig()
 
 
   if &runtimepath =~ "auto-pairs"
-   let g:AutoPairsFlyMode = 1
+   let g:AutoPairsFlyMode = 0
   endif
 
   if &runtimepath =~ "coc.nvim"
@@ -82,15 +82,14 @@ function! plugins#pluginsConfig()
 
   if &runtimepath =~ "fzf.vim"
     let $FZF_DEFAULT_COMMAND = 'ag -g ""
-          \ --ignore-dir=bin
-          \ --ignore-dir="*.pyc"
-          \ --ignore-dir="*.lock"
-          \ --ignore-dir="*.woff"
-          \ --ignore-dir="*.webm"
-          \ --ignore-dir="*.mp4"
-          \ --ignore-dir="*.png"
-          \ --ignore-dir="*.jpg"
-          \ --ignore-dir="*.jpeg"'
+          \ --ignore-dir={
+          \bin,
+          \"*.pyc",
+          \"*.lock",
+          \"*.woff",
+          \"*.mp4","*.webm",
+          \"*.jpg","*.jpeg","*.gif","*.png"
+          \}'
     set rtp+=/usr/local/opt/fzf
     let g:fzf_buffers_jump = 1
     " preview with bat
@@ -139,6 +138,7 @@ function! plugins#pluginsConfig()
 
   if &runtimepath =~ "NERDTree"
     " ignore stuff
+    let g:NERDTreeShowHidden=1
     let g:NERDTreeIgnore=['node_modules']
 
     " C changes directory and root directory
@@ -182,28 +182,48 @@ function! plugins#pluginsConfig()
   "   let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.3"}
   " endif
 
+      " \     'components/*.tsx': {
+      " \       'alternate': '__tests__/components/{}.test.tsx',
+      " \       'type': 'source'
+      " \     },
+      " \     '__tests__/components/*.test.tsx': {
+      " \       'alternate': 'components/{}.tsx',
+      " \       'type': 'test'
+      " \     },
+      " \     'pages/*.tsx': {
+      " \       'alternate': [
+      " \         '__tests__/pages/{}.test.tsx',
+      " \       ],
+      " \       'type': 'source'
+      " \     },
+      " \     '__tests__/pages/*.test.tsx': {
+      " \       'alternate': [
+      " \         'pages/{}.tsx',
+      " \       ],
+      " \       'type': 'test'
+
   if &runtimepath =~ "vim-projectionist"
     let g:projectionist_heuristics = {
       \   '*': {
       \     'components/*.tsx': {
-      \       'alternate': '__tests__/components/{}.test.tsx',
+      \       'alternate': 'components/{}.module.scss',
       \       'type': 'source'
       \     },
-      \     '__tests__/components/*.test.tsx': {
+      \     'components/*.module.scss': {
       \       'alternate': 'components/{}.tsx',
-      \       'type': 'test'
+      \       'type': 'style'
       \     },
       \     'pages/*.tsx': {
       \       'alternate': [
-      \         '__tests__/pages/{}.test.tsx',
+      \         'pages/{}.module.scss',
       \       ],
       \       'type': 'source'
       \     },
-      \     '__tests__/pages/*.test.tsx': {
+      \     'pages/*.module.scss': {
       \       'alternate': [
       \         'pages/{}.tsx',
       \       ],
-      \       'type': 'test'
+      \       'type': 'style'
       \     },
       \     'lib/*.ex': {
       \       'alternate': [

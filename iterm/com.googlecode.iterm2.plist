@@ -19,7 +19,7 @@
 	<key>AppleWindowTabbingMode</key>
 	<string>manual</string>
 	<key>AutoHideTmuxClientSession</key>
-	<true/>
+	<false/>
 	<key>CGFontRenderingFontSmoothingDisabled</key>
 	<false/>
 	<key>CheckTestRelease</key>
@@ -6035,6 +6035,8 @@
 	<true/>
 	<key>DimOnlyText</key>
 	<false/>
+	<key>DisableAdaptiveFrameRateInInteractiveApps</key>
+	<false/>
 	<key>DisableFullscreenTransparency</key>
 	<true/>
 	<key>DisableWindowSizeSnap</key>
@@ -6232,6 +6234,8 @@
 	<integer>4</integer>
 	<key>JobName</key>
 	<true/>
+	<key>KillSessionsOnLogout</key>
+	<true/>
 	<key>LeftCommand</key>
 	<integer>7</integer>
 	<key>LeftOption</key>
@@ -6271,8 +6275,6 @@
 		<string>0.000000, 0.000000, 224.000000, 258.000000, NO, NO</string>
 		<string>0.000000, 259.000000, 224.000000, 48.000000, NO, NO</string>
 	</array>
-	<key>NSStatusItem Preferred Position Item-0</key>
-	<real>487</real>
 	<key>NSTableView Columns v2 KeyBingingTable</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGNjdYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -6305,6 +6307,8 @@
 	<string>746 122 445 220 0 0 1440 877 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>516 401 606 456 0 0 1440 877 </string>
+	<key>NSWindow Frame ProfilesPanel</key>
+	<string>-2029 773 735 382 -2560 -184 2560 1417 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>1023 57 400 129 0 0 1440 878 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
@@ -6316,7 +6320,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 294 592 584 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1440 900 0 0 1440 877 </string>
+	<string>0 0 2560 1418 0 0 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -6658,7 +6662,7 @@
 			<key>HotKey Window Animates</key>
 			<false/>
 			<key>HotKey Window AutoHides</key>
-			<true/>
+			<false/>
 			<key>HotKey Window Dock Click Action</key>
 			<integer>0</integer>
 			<key>HotKey Window Floats</key>
@@ -7222,16 +7226,16 @@
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1440, 900}}</string>
+		<string>{{0, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{447, 750}</string>
+		<string>{294, 784}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>62F75FFB-CAF1-4540-A106-D432516641C6</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>275</integer>
+	<integer>360</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -7964,7 +7968,7 @@
 	<key>OpenNoWindowsAtStartup</key>
 	<true/>
 	<key>OpenTmuxWindowsIn</key>
-	<integer>2</integer>
+	<integer>1</integer>
 	<key>OptimumTabWidth</key>
 	<integer>175</integer>
 	<key>PMPrintingExpandedStateForPrint2</key>
@@ -8029,7 +8033,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-02-23T04:28:31Z</date>
+	<date>2020-04-29T03:05:11Z</date>
 	<key>SUUpdateGroupIdentifier</key>
 	<integer>3281781464</integer>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -8068,12 +8072,16 @@
 	<real>0.20000000298023224</real>
 	<key>TmuxDashboardLimit</key>
 	<integer>10</integer>
+	<key>TmuxVariableWindowSizesSupported</key>
+	<true/>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<true/>
 	<key>UKCrashReporterLastCrashReportDate</key>
 	<real>1495436160</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
+	<key>UseBlackFillerColorForTmuxInFullScreen</key>
+	<true/>
 	<key>UseBorder</key>
 	<false/>
 	<key>UseCompactLabel</key>
@@ -8082,6 +8090,8 @@
 	<true/>
 	<key>UseSystemCursorWhenPossible</key>
 	<true/>
+	<key>UseTmuxStatusBar</key>
+	<false/>
 	<key>UseUnevenTabs</key>
 	<false/>
 	<key>VisualIndicatorForEsc</key>

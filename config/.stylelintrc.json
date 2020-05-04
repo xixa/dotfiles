@@ -1,12 +1,8 @@
 {
-    "extends": [
-      "/usr/local/lib/node_modules/stylelint-config-recommended",
-      "/usr/local/lib/node_modules/stylelint-config-css-modules"
-    ],
-    "args": [
-        "--formatter",
-        "unix",
-        "--stdin-filename",
-        "%filename"
-      ],
+  "plugins": ["stylelint-scss"],
+  "rules": {
+    "at-rule-blacklist": ["import"],
+    "scss/dollar-variable-pattern": "^foo",
+    "scss/selector-no-redundant-nesting-selector": true
+  }
 }

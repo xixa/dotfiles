@@ -9,7 +9,8 @@ highlight Folded guibg=NONE guifg=grey
 "fold starts open
 " set foldlevelstart=20
 
-function! DocstringFold()
+" Defines how the fold block looks like when folded
+function! FoldLayout()
     let first_line = getline(v:foldstart)
     let second_line = getline(v:foldstart + 1)
 
@@ -19,16 +20,16 @@ function! DocstringFold()
     "if is test
     elseif match(first_line, '^\s*test\|@.* ') > -1
       let doc_txt = substitute(first_line, '^\s*\| do', '', 'g')
-    "if is function
-    elseif match(first_line, '^\s*def[ |p ]') > -1
-      let function_def = substitute(first_line, '^\s*\|).*\| do', '', 'g')
-      "checks arity
-      if match(function_def, '(') > - 1
-        let arity = len(split(function_def, ',', 1))
-      else
-        let arity = 0
-      endif
-      let doc_txt = substitute(function_def, 'defp \|def \|(.*', '', 'g') . '/' . arity
+    ""if is function
+    "elseif match(first_line, '^\s*def[ |p ]') > -1
+    "  let function_def = substitute(first_line, '^\s*\|).*\| do', '', 'g')
+    "  "checks arity
+    "  if match(function_def, '(') > - 1
+    "    let arity = len(split(function_def, ',', 1))
+    "  else
+    "    let arity = 0
+    "  endif
+    "  let doc_txt = substitute(function_def, 'defp \|def \|(.*', '', 'g') . '/' . arity
     endif
 
     let indent_len = indent(v:foldstart)
@@ -42,16 +43,19 @@ function! DocstringFold()
     let filler = repeat(' ', winwidth(0) - indent_len - len(prefix) - len(end_filler) - len(text) - offset + 1)
     return indent . prefix . text . filler . end_filler
 endfunction
-set foldtext=DocstringFold()
+set foldtext=FoldLayout()
 
-" elixir
+" ELIXIR
 function! ElixirDocsFold()
+  let docstrings = ['^ .@doc """\|@moduledoc """', '^ ."""']
+  let tests = ['^ .test ', '^ .end']
+
   let line = getline(v:lnum)
-  " starts block if starts with a docstring, def, defp or test
-  if match(line, '^ .test\|^ .@.* """\|^ .def[ |p ]') > -1
+  " starts block
+  if match(line, get(docstrings, 0)) > -1
     return ">1"
-  " end block if ends with docstrings or end
-  elseif match(line, '^ ."""\|^ .end') > -1
+  " end block
+  elseif match(line, get(docstrings, 1)) > -1
     return "<1"
   else
     return "="
