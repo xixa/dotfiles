@@ -69,8 +69,12 @@ do
 end
 endsnippet
 
+snippet map "Wraps highlighted content into map"
+%{${0:${VISUAL}}}
+endsnippet
+
 snippet insp "creates inspection"
-IO.inspect $1, label: "$2"
+IO.inspect(${1: ${2}, label: "${3}"})
 endsnippet
 
 snippet gqlt "Creates a GraphQL test" b

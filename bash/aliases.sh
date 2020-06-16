@@ -10,6 +10,9 @@ function sk {
 alias edvimrc='$EDITOR ~/.vimrc'
 alias eddotfiles='(cd ~/dotfiles && v)'
 
+# Remove executable
+alias noexec='chmod -R -x+X'
+
 # MacOS / Debian
 if [[ $(uname) == Darwin ]]; then
   alias ipl='ifconfig en0 | grep inet | grep -v inet6 | awk "{print \$2}"'

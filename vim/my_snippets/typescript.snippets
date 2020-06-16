@@ -18,7 +18,7 @@ type ${1:TypeName} = {
 endsnippet
 
 snippet comp "creates a react component" b
-const ${1:ComponentName}:React.FC = (${2}):JSX.Element => {
+const ${1:ComponentName}:React.FC = (${2}) => {
 	return (
 		${3:<>
 			$0
@@ -28,9 +28,9 @@ const ${1:ComponentName}:React.FC = (${2}):JSX.Element => {
 endsnippet
 
 snippet nc "creates a new react component file with its Moldule CSS import" b
-import styles from './${1}.module.scss'
+import css from '@stylesheets/${1}.module.scss'
 
-const ${1/(\W)/\l$1/}:React.FC${2:<>} = (${3}):JSX.Element => {
+const ${1/(\W)/\l$1/}:React.FC${2:<>} = (${3}) => {
 	return (
 		${4:<>
 			$0
@@ -91,6 +91,10 @@ snippet br "non-breaking space shorthand"
 ,&nbsp;
 endsnippet
 
-snippet dev "dev only" b
+snippet dev "dev only shorthand" b
 process.env.NODE_ENV === 'development' && $0
+endsnippet
+
+snippet env "process.env shorthand" b
+process.env
 endsnippet

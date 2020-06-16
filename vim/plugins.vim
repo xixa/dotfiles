@@ -77,7 +77,6 @@ function! plugins#pluginsConfig()
 
 
   if &runtimepath =~ "emmet-vim"
-    let g:user_emmet_settings = {'javascript' : { 'extends':'javascript.jsx'}}
   endif
 
   if &runtimepath =~ "fzf.vim"
@@ -206,10 +205,10 @@ function! plugins#pluginsConfig()
     let g:projectionist_heuristics = {
       \   '*': {
       \     'components/*.tsx': {
-      \       'alternate': 'components/{}.module.scss',
+      \       'alternate': 'stylesheets/{}.module.scss',
       \       'type': 'source'
       \     },
-      \     'components/*.module.scss': {
+      \     'stylesheets/*.module.scss': {
       \       'alternate': 'components/{}.tsx',
       \       'type': 'style'
       \     },
@@ -245,6 +244,10 @@ function! plugins#pluginsConfig()
     let g:UltiSnipsUsePythonVersion = 3
     let g:UltiSnipsSnippetDirectories=["~/dotfiles/vim/my_snippets"]
     let g:UltiSnipsEditSplit='vertical'
+  endif
+
+  if &runtimepath =~ "gimoji-selector"
+    nmap <Leader>j "=system('gitmoji-selector')"<c-m>P
   endif
 endfunction
 

@@ -141,5 +141,7 @@ function! xixa#mappings#langserver()
 
 endfunction
 
+nmap <Leader>j "=system('gitmoji-selector')"<c-m>P
+
 autocmd BufEnter * :call xixa#mappings#plugins()
 autocmd BufEnter * :call xixa#mappings#langserver()

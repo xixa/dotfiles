@@ -2,6 +2,7 @@ syntax on
 language en_US
 
 colorscheme agatheo
+set noemoji
 
 set hidden
 set bufhidden=hide

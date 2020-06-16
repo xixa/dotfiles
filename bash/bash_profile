@@ -46,6 +46,10 @@ if [[ $(uname) == Darwin ]]; then
   export PATH=$PATH:$GOPATH/bin
   export PATH=$PATH:$GOROOT/bin
 
+  # Rust
+  export RUSTPATH=/Users/xixa/.cargo/bin
+  export PATH=$PATH:$RUSTPATH
+
   # k8s
   # Krew
   export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

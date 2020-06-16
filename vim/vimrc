@@ -129,7 +129,7 @@ Plug 'alampros/vim-styled-jsx', { 'for': ['javascript.jsx', 'typescript.tsx'] }
 
 " html
 Plug 'othree/html5.vim'
-Plug 'mattn/emmet-vim', {'for': ['html', 'eelixir', 'svelte', 'typescript', 'typescript.tsx', 'typescriptreact']}
+Plug 'mattn/emmet-vim', {'for': ['html',  'css', 'scss', 'eelixir', 'svelte', 'typescript.tsx', 'typescriptreact', 'tsx']}
 
 " sass
 Plug 'cakebaker/scss-syntax.vim'
