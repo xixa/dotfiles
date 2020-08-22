@@ -15,8 +15,15 @@ elif [ $(uname) == "Linux" ]; then
     source $HOME/dotfiles/bash/linux.sh
 fi
 
+. /usr/local/opt/asdf/asdf.sh
 # fzf
-[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+if [[ "${CURR_SHELL}" == "bash"  ]]; then
+  . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+  [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+elif [[ "${CURR_SHELL}" == "zsh"  ]]; then
+  [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+fi
+
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 # export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

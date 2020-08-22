@@ -6,43 +6,44 @@ set noemoji
 
 set hidden
 set bufhidden=hide
-set autowrite                                     " gets rid of 'no write since last change'
+set autowrite                                 " gets rid of 'no write since last change'
+set conceallevel=0                            " prevents annoying auto hidden quotes in json files
 
-set timeoutlen=400 ttimeoutlen=0                 " pensa rapido!
-set backspace=2                                   " so backspace works normally on tmux
+set timeoutlen=400 ttimeoutlen=0              " pensa rapido!
+set backspace=2                               " so backspace works normally on tmux
 
 " search
-set ignorecase                                    " ignore case when search
-set smartcase                                     " ignore case when the query is lowercase
-set wildmenu                                      " bash-like auto-completion
-set incsearch                                     " show search matches
+set ignorecase                                " ignore case when search
+set smartcase                                 " ignore case when the query is lowercase
+set wildmenu                                  " bash-like auto-completion
+set incsearch                                 " show search matches
 set hlsearch
 
 " behavior
-set visualbell                                    " prevents buzz
-"set nowrap                                        " don't wrap lines
-set mouse=a                                       " enables mouse
-" set clipboard=unnamed                             " OS clipboard
-set showmatch                                     " shows matching parenthesis
-set scrolloff=12                                  " n lines margin when scrolling
+set visualbell                                " prevents buzz
+"set nowrap                                   " don't wrap lines
+set mouse=a                                   " enables mouse
+" set clipboard=unnamed                       " OS clipboard
+set showmatch                                 " shows matching parenthesis
+set scrolloff=12                              " n lines margin when scrolling
 
 " auto-reload
-set autoread                                      " auto-reloads files changed outside vi
+set autoread                                  " auto-reloads files changed outside vi
 autocmd FocusGained * silent! checktime
 
 "tabs & indentation
 let tabsize=2
-let &tabstop=tabsize                              " tab = 2 spaces
-let &shiftwidth=tabsize                           " spaces used by autoindeting
-let &softtabstop=tabsize                          " backspace remove tabs
+let &tabstop=tabsize                          " tab = 2 spaces
+let &shiftwidth=tabsize                       " spaces used by autoindeting
+let &softtabstop=tabsize                      " backspace remove tabs
 set autoindent
 set cindent
-set smarttab                                      " behaves according to context
-set smartindent                                   "
-set expandtab                                     " converts tabs into spaces
+set smarttab                                  " behaves according to context
+set smartindent
+set expandtab                                 " converts tabs into spaces
 retab
 set tw=79
-set wrap linebreak nolist                         " soft line breaking
+set wrap linebreak nolist                     " soft line breaking
 set formatoptions-=t
 
 set splitbelow

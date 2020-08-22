@@ -4,7 +4,8 @@
 #
 
 GEMS="
-  rake
+  tmuxinator
+  neovim
 "
 
 gems install $GEMS

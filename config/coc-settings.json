@@ -8,27 +8,40 @@
     "typescript",
     "typescriptreact",
     "elixir",
-    "graphql"
+    "graphql",
+    "json",
+    "elm",
+    "haskell"
   ],
+  "elixir.pathToElixirLS": "~/.vim/plugged/elixir-ls/release/language_server.sh",
   "codeLens.enable": false,
   "languageserver": {
     "haskell": {
-      "command" : "ghcide",
-      "args": [
-        "--lsp"
-      ],
+      "command": "hie-wrapper",
+      "args": ["--lsp"],
+      "filetypes": ["hs", "lhs", "haskell"],
       "rootPatterns": [
+        "*.cabal",
         ".stack.yaml",
-        ".hie-bios",
-        "BUILD.bazel",
-        "cabal.config",
+        "cabal.project",
         "package.yaml"
       ],
-      "filetypes": [
-        "hs",
-        "lhs",
-        "haskell"
-      ]
+      "initializationOptions": {
+        "languageServerHaskell": {}
+      },
+      "settings": {
+        "hlintOn": true,
+        "maxNumberOfProblems": 10,
+        "completionSnippetsOn": true
+      }
+    },
+    "elmLS": {
+      "command": "elm-language-server",
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"],
+      "initializationOptions": {
+        "elmAnalyseTrigger": "change"
+      }
     }
   }
 }

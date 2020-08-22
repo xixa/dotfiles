@@ -28,36 +28,17 @@ source $HOME/dotfiles/tmux/tmuxinator.bash
 source $HOME/dotfiles/bash/settings.sh
 source $HOME/dotfiles/bash/aliases.sh
 
-#PATH
-if [[ $(uname) == Darwin ]]; then
-  # Python
-  export PYTHONSTARTUP=$HOME/.pythonrc
-  export PATH=$PATH:/usr/local/bin/python3
-  # alias python=/usr/local/bin/python3
-
-  # Ruby
-  export PATH="$PATH:$HOME/.rvm/bin"
-  # Load RVM into a shell session *as a function*
-  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-  # Go
-  export GOPATH=$HOME/go
-  export GOROOT=/usr/local/opt/go/libexec
-  export PATH=$PATH:$GOPATH/bin
-  export PATH=$PATH:$GOROOT/bin
-
-  # Rust
-  export RUSTPATH=/Users/xixa/.cargo/bin
-  export PATH=$PATH:$RUSTPATH
+  # Haskell
+  # export PATH=$PATH:$HOME/.ghcup/bin
+  export PATH=$PATH:$HOME/.cabal/bin
 
   # k8s
   # Krew
-  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-# Linux settings
-elif [[ $(uname -v) == *Debian* ]]; then
-  # Rust
-  export PATH="$HOME/.cargo/bin:$PATH"
-fi
+  # export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+# . /usr/local/opt/asdf/asdf.sh
+
+# . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
 
 # vertical bar cursor
 #echo -e -n "\x1b[\x35 q"
+

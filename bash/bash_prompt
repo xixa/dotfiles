@@ -65,10 +65,16 @@ VENV="\$(virtualenv_info)";
 # disable the default virtualenv prompt change
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
+CURR_SHELL=$(ps -p $$ | awk 'END{print $NF}')
 #prompt
 # PS1="${VENV}\w$(__git_ps1)\n▲ "
-PS1="\u ▲ \h [\w]\n▲ "
-export PS1;
+if [[ "${CURR_SHELL}" == "bash" ]]; then
+  export PS1="\u ▲ \h [\w]\n▲ "
+elif [[ "${CURR_SHELL}" == "zsh" ]]; then
+  export PS1="%2~ ▲ "
+else
+  export PS1="~ "
+fi
 
 # PS2="\[${yellow}\]→ \[${reset}\]";
 # export PS2;

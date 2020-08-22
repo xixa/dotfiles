@@ -77,8 +77,9 @@ alias dockip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress
 alias dockimgclean="docker rmi -f \$(docker images -f dangling=true -q)"
 
 #postgresql
-alias fixpostgres="rm -f /usr/local/var/postgres/postmaster.pid && brew services restart postgres"
+alias fixpostgres="rm -f /usr/local/var/postgres/postmaster.pid && pg_ctl restart"
 alias postgresps="lsof -n -i4TCP:5432"
+alias sqlproxy="mkdir -p /tmp/cloudsql && ~/cloud_sql_proxy -dir=/tmp/cloudsql"
 
 #kubernetes
 alias k8="kubectl"

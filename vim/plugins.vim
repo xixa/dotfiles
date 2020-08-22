@@ -138,7 +138,7 @@ function! plugins#pluginsConfig()
   if &runtimepath =~ "NERDTree"
     " ignore stuff
     let g:NERDTreeShowHidden=1
-    let g:NERDTreeIgnore=['node_modules']
+    let g:NERDTreeIgnore=['node_modules', '.DS_Store']
 
     " C changes directory and root directory
     let g:NERDTreeChDirMode=2

@@ -89,8 +89,8 @@ Plug 'neomake/neomake'
 "------------------------------------------- LANGUAGE SPECIFIC PLUGINS
 " LangServs
 Plug 'autozimu/LanguageClient-neovim', {'for': ['python'], 'branch': 'next', 'do': 'bash install.sh'}
-Plug 'dense-analysis/ale', { 'for': [ 'svelte', 'haskell']}
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['elixir', 'json', 'yaml', 'css',  'scss', 'javascript', 'typescript', 'typescript.tsx']}
+Plug 'dense-analysis/ale', { 'for': [ 'svelte']}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['elixir',  'haskell', 'elm', 'json', 'yaml', 'css',  'scss',  'scala', 'javascript', 'typescript', 'typescript.tsx']}
 
 " LISPs
 Plug 'kovisoft/paredit', { 'for': ['scheme', 'clojure'] }
@@ -100,6 +100,14 @@ Plug 'kovisoft/paredit', { 'for': ['scheme', 'clojure'] }
 " Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
 " Plug 'clojure-vim/async-clj-omni', { 'for': 'clojure' }
 
+" elm
+Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
+
+" elixir
+Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
+" Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
+Plug 'elixir-lsp/elixir-ls', {'for': ['elixir'], 'do': 'mix deps.get && mix compile && mix elixir_ls.release -o release'}
+
 " haskell
 Plug 'Shougo/vimproc.vim', {'do' : 'make', 'for': ['haskell']}
 Plug 'eagletmt/ghcmod-vim', { 'do': 'cabal install ghc-mod', 'for': 'haskell' }
@@ -107,19 +115,14 @@ Plug 'eagletmt/ghcmod-vim', { 'do': 'cabal install ghc-mod', 'for': 'haskell' }
 " Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' ,'for': 'haskell' }
 " Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
 
-" elixir
-Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
-" Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
-Plug 'elixir-lsp/elixir-ls', {'for': ['elixir'], 'do': 'mix deps.get && mix compile && mix elixir_ls.release -o release'}
+" javascript/typescript
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
 
 " python
 " Plug 'mitsuhiko/vim-python-combined', { 'for': 'python' }
 " Plug 'nvie/vim-flake8', { 'for': ['python'] }
 " Plug 'davidhalter/jedi', { 'for': 'python' }
 " Plug 'deoplete-plugins/deoplete-jedi'
-
-" javascript/typescript
-Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
 
 " react
 Plug 'peitalin/vim-jsx-typescript', { 'for': [ 'javascript.jsx', 'typescript.tsx'] }
@@ -133,6 +136,9 @@ Plug 'mattn/emmet-vim', {'for': ['html',  'css', 'scss', 'eelixir', 'svelte', 't
 
 " sass
 Plug 'cakebaker/scss-syntax.vim'
+
+" scala
+Plug 'derekwyatt/vim-scala'
 
 " graphql
 Plug 'jparise/vim-graphql', { 'for': ['graphql'] }

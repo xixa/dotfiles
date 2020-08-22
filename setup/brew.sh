@@ -20,22 +20,25 @@ TOOLS="
   fzf
   tree
   tmux
-  tmuxinator
   neovim
   jq
   youtube-dl
+  ffmpeg
 "
 
 DEV="
-  python3
-  node
-  yarn
-  ghc
-  cabal-install
-  postgresql
+  asdf
+"
+
+OSX="
+  qlstephen
+  qlvideo
+  qlmarkdown
+  osxfuse
 "
 
 brew install \
   $GNU\
   $TOOLS\
-  $DEV
+  $DEV\
+  $OSX
