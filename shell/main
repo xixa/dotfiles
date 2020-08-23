@@ -22,21 +22,11 @@ export TERM=xterm-256color
 export CLICOLOR=1
 export EDITOR=nvim
 export MYVIMRC="~/.vimrc"
+export CURR_SHELL=$(ps -p $$ | awk 'END{print $NF}')
 
 source $HOME/dotfiles/shell/prompt
 source $HOME/dotfiles/shell/settings
 source $HOME/dotfiles/shell/aliases
-
-  # Haskell
-  # export PATH=$PATH:$HOME/.ghcup/bin
-  export PATH=$PATH:$HOME/.cabal/bin
-
-  # k8s
-  # Krew
-  # export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-# . /usr/local/opt/asdf/asdf.sh
-
-# . /usr/local/opt/asdf/etc/shell_completion.d/asdf.shell
 
 # vertical bar cursor
 #echo -e -n "\x1b[\x35 q"

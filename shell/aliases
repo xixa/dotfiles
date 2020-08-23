@@ -2,7 +2,7 @@
 
 alias srcit='source $HOME/.bashrc'
 alias edbash='$EDITOR $HOME/.bash_profile'
-alias edalias='$EDITOR $HOME/dotfiles/shell/aliases.sh'
+alias edalias='$EDITOR $HOME/dotfiles/shell/aliases'
 alias edtmux='$EDITOR ~/.tmux.conf'
 function sk {
   tmux send-keys -t bottom-right $@ Enter
