@@ -1,28 +1,29 @@
-#!/bin/bash
-
-# bash completion
-if [ -f /sw/etc/bash_completion ]; then
-   . /sw/etc/bash_completion
-fi
-
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-
-# Mac settings
-if [[ $(uname) == "Darwin" ]]; then
-    source $HOME/dotfiles/bash/macos.sh
-# Linux settings
-elif [ $(uname) == "Linux" ]; then
-    source $HOME/dotfiles/bash/linux.sh
-fi
-
 . /usr/local/opt/asdf/asdf.sh
-# fzf
+
+# bash
 if [[ "${CURR_SHELL}" == "bash"  ]]; then
+  # bash completion
+  if [ -f /sw/etc/bash_completion ]; then
+     . /sw/etc/bash_completion
+  fi
+
+  [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+  source $HOME/dotfiles/tmux/tmuxinator.bash
   . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
   [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+# zsh
 elif [[ "${CURR_SHELL}" == "zsh"  ]]; then
   [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 fi
+
+# Mac settings
+if [[ $(uname) == "Darwin" ]]; then
+    source $HOME/dotfiles/shell/macos
+# Linux settings
+elif [ $(uname) == "Linux" ]; then
+    source $HOME/dotfiles/shell/linux
+fi
+
 
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 # export FZF_DEFAULT_COMMAND='rg --files'
@@ -54,4 +55,4 @@ else
   alias v='/usr/local/bin/vim'
 fi
 
-source $HOME/dotfiles/bash/path.sh
+source $HOME/dotfiles/shell/path

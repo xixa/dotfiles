@@ -63,9 +63,10 @@ Plug 'metakirby5/codi.vim'
 " finding stuff & jumping to places
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'wincent/loupe'
+" Plug 'wincent/loupe'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-projectionist'
+Plug 'easymotion/vim-easymotion'
 
 " ui
 Plug 'Yggdroot/indentLine'
@@ -93,12 +94,15 @@ Plug 'dense-analysis/ale', { 'for': [ 'svelte']}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['elixir',  'haskell', 'elm', 'json', 'yaml', 'css',  'scss',  'scala', 'javascript', 'typescript', 'typescript.tsx']}
 
 " LISPs
-Plug 'kovisoft/paredit', { 'for': ['scheme', 'clojure'] }
+" Plug 'kovisoft/paredit', { 'for': ['scheme', 'clojure'] }
+
 " clojure
-" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 " Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
 " Plug 'clojure-vim/async-clj-omni', { 'for': 'clojure' }
+Plug 'guns/vim-sexp', {'for': 'clojure'}
+Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 
 " elm
 Plug 'ElmCast/elm-vim', { 'for': ['elm'] }

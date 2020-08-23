@@ -1,4 +1,4 @@
-#!/bin/bash  ╱  ╱  ╱ ╱ ╱
+#!/bin/shell  ╱  ╱  ╱ ╱ ╱
 # ╱ ╱ ╱ ╱  A   ╱ ╱ ╱ ╱ ╱
 # ╱┳┳╮╭╮┳╮╱╭╮┳╭╮╱ ╱ ╱
 # ╱┃┃┃┣┫┣┻╮┃╱┃┃┃╱ ╱ ╱ ╱ ╱
@@ -23,10 +23,9 @@ export CLICOLOR=1
 export EDITOR=nvim
 export MYVIMRC="~/.vimrc"
 
-source $HOME/.bash_prompt
-source $HOME/dotfiles/tmux/tmuxinator.bash
-source $HOME/dotfiles/bash/settings.sh
-source $HOME/dotfiles/bash/aliases.sh
+source $HOME/dotfiles/shell/prompt
+source $HOME/dotfiles/shell/settings
+source $HOME/dotfiles/shell/aliases
 
   # Haskell
   # export PATH=$PATH:$HOME/.ghcup/bin
@@ -37,7 +36,7 @@ source $HOME/dotfiles/bash/aliases.sh
   # export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # . /usr/local/opt/asdf/asdf.sh
 
-# . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+# . /usr/local/opt/asdf/etc/shell_completion.d/asdf.shell
 
 # vertical bar cursor
 #echo -e -n "\x1b[\x35 q"

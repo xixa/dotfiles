@@ -68,13 +68,17 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 CURR_SHELL=$(ps -p $$ | awk 'END{print $NF}')
 #prompt
 # PS1="${VENV}\w$(__git_ps1)\n▲ "
-if [[ "${CURR_SHELL}" == "bash" ]]; then
-  export PS1="\u ▲ \h [\w]\n▲ "
-elif [[ "${CURR_SHELL}" == "zsh" ]]; then
-  export PS1="%2~ ▲ "
-else
-  export PS1="~ "
-fi
+
+function make_ps1(){
+  if [[ "$1" == "bash" ]]; then
+    # echo "\u ▲ \h [\w]\n▲ "
+    echo "\w ▲ "
+  elif [[ "$1" == "zsh" ]]; then
+    echo "%~ ▲ "
+  fi
+}
+
+export PS1=$(make_ps1 ${CURR_SHELL})
 
 # PS2="\[${yellow}\]→ \[${reset}\]";
 # export PS2;

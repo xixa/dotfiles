@@ -10,4 +10,8 @@ elif [ $(uname) == "Linux" ]; then
   export PATH="$HOME/.linuxbrew/bin:$PATH"
 fi
 
+# Haskell
+# export PATH=$PATH:$HOME/.ghcup/bin
+export PATH=$PATH:$HOME/.cabal/bin
+
 #export PYTHONSTARTUP=$HOME/xixa.py #runs a script when an interactive interpreter session starts
