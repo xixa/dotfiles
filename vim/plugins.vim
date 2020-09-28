@@ -205,22 +205,22 @@ function! plugins#pluginsConfig()
     let g:projectionist_heuristics = {
       \   '*': {
       \     'components/*.tsx': {
-      \       'alternate': 'stylesheets/{}.module.scss',
+      \       'alternate': 'stylesheets/components/{}.module.scss',
       \       'type': 'source'
       \     },
-      \     'stylesheets/*.module.scss': {
+      \     'stylesheets/components/*.module.scss': {
       \       'alternate': 'components/{}.tsx',
       \       'type': 'style'
       \     },
-      \     'pages/*.tsx': {
+      \     'pages/**/*.tsx': {
       \       'alternate': [
-      \         'pages/{}.module.scss',
+      \         'pages/**/{}.module.scss',
       \       ],
       \       'type': 'source'
       \     },
-      \     'pages/*.module.scss': {
+      \     'pages/**/*.module.scss': {
       \       'alternate': [
-      \         'pages/{}.tsx',
+      \         'pages/**/{}.tsx',
       \       ],
       \       'type': 'style'
       \     },
@@ -238,6 +238,21 @@ function! plugins#pluginsConfig()
       \     }
       \   }
       \ }
+  endif
+
+  if &runtimepath =~ "vim-surround"
+    " swaps ASCII chars for surrounds
+    " (you can find the ASCII code with :echo char2nr("<symbol>"))
+    " % or 37
+    autocmd FileType elixir let b:surround_37 = "%{ \r }"
+
+    " <, > or 60, 62
+    autocmd FileType typescript,typescript.tsx let b:surround_60 = "< \r >"
+    autocmd FileType typescript,typescript.tsx let b:surround_62 = "< \r >"
+  endif
+
+  if &runtimepath =~ "nvim-treesitter"
+    " lua require"treesitter"
   endif
 
   if &runtimepath =~ "UltiSnips"

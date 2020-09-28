@@ -14,6 +14,9 @@ imap <C-e> <End>
 imap <C-d> <Del>
 imap <C-h> <BS>
 
+"search 'n' replace
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>N
+
 function! s:home()
   let start_col = col('.')
   normal! ^
@@ -119,11 +122,14 @@ function! xixa#mappings#plugins() abort
     let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
   endif
 
-
   if &runtimepath =~ "ack.vim"
     nnoremap <Leader>a :Ack!<Space>
     " nmap <leader>a :tab split<CR>:Ack! ""<Left>
     " nmap <leader>A :Ack! <C-r><C-w><CR>
+  endif
+
+  if &runtimepath =~ "vim-clap"
+    nnoremap <Leader>g :Clap grep +<Space>
   endif
 endfunction
 
@@ -142,6 +148,7 @@ function! xixa#mappings#langserver()
 endfunction
 
 nmap <Leader>j "=system('gitmoji-selector')"<c-m>P
+
 
 autocmd BufEnter * :call xixa#mappings#plugins()
 autocmd BufEnter * :call xixa#mappings#langserver()

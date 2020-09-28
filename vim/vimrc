@@ -14,8 +14,8 @@ source ~/dotfiles/vim/xixa/mappings.vim
 source ~/dotfiles/vim/syntax/svg.vim
 
 " RECOGNIZING FILETYPES
-au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
-au BufRead,BufNewFile *.eex set filetype=eelixir
+" au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
+" au BufRead,BufNewFile *.eex set filetype=eelixir
 au BufRead,BufNewFile *.svelte set filetype=svelte
 " au BufRead,BufNewFile *.svelte set syntax=html filetype svelte
 
@@ -56,6 +56,7 @@ Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'gcmt/taboo.vim'
 "Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
+
 " repl-like stuff
 Plug 'jpalardy/vim-slime'
 Plug 'metakirby5/codi.vim'
@@ -89,9 +90,26 @@ Plug 'neomake/neomake'
 
 "------------------------------------------- LANGUAGE SPECIFIC PLUGINS
 " LangServs
-Plug 'autozimu/LanguageClient-neovim', {'for': ['python'], 'branch': 'next', 'do': 'bash install.sh'}
+" Plug 'autozimu/LanguageClient-neovim', {'for': ['python'], 'branch': 'next', 'do': 'bash install.sh'}
 Plug 'dense-analysis/ale', { 'for': [ 'svelte']}
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['elixir',  'haskell', 'elm', 'json', 'yaml', 'css',  'scss',  'scala', 'javascript', 'typescript', 'typescript.tsx']}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': [
+      \ 'elixir',
+      \ 'haskell',
+      \ 'purescript',
+      \ 'elm',
+      \ 'json',
+      \ 'yaml',
+      \ 'css',
+      \ 'scss',
+      \ 'scala',
+      \ 'javascript',
+      \ 'typescript',
+      \ 'typescriptreact',
+      \ 'typescript.tsx',
+      \ 'tsx']}
+
+" Plug 'nvim-treesitter/nvim-treesitter', {'for': ['typescript', 'typescriptreact', 'typescript.tsx', 'elm']}
+Plug 'nvim-treesitter/nvim-treesitter'
 
 " LISPs
 " Plug 'kovisoft/paredit', { 'for': ['scheme', 'clojure'] }
@@ -103,9 +121,6 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " Plug 'clojure-vim/async-clj-omni', { 'for': 'clojure' }
 Plug 'guns/vim-sexp', {'for': 'clojure'}
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
-
-" elm
-Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
 
 " elixir
 Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
@@ -122,6 +137,9 @@ Plug 'eagletmt/ghcmod-vim', { 'do': 'cabal install ghc-mod', 'for': 'haskell' }
 " javascript/typescript
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
 
+" purescript
+Plug 'purescript-contrib/purescript-vim', { 'for': ['purescript'] }
+
 " python
 " Plug 'mitsuhiko/vim-python-combined', { 'for': 'python' }
 " Plug 'nvie/vim-flake8', { 'for': ['python'] }
@@ -130,8 +148,6 @@ Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
 
 " react
 Plug 'peitalin/vim-jsx-typescript', { 'for': [ 'javascript.jsx', 'typescript.tsx'] }
-" Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript.tsx' }
-" Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript.jsx', 'typescript.tsx'] }
 Plug 'alampros/vim-styled-jsx', { 'for': ['javascript.jsx', 'typescript.tsx'] }
 
 " html

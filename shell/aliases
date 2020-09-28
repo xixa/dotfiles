@@ -62,26 +62,29 @@ alias l="ls -lF ${colorflag}" # all files, in long format
 alias la="ls -laF ${colorflag}" # all files inc dotfiles, in long format
 alias lsd='ls -lF ${colorflag} | grep "^d"' # only directories
 
-#mkdir
+# mkdir
 alias mkdir='mkdir -p' #forces mkdir to create intermediate directories if a path is specified
 
-#git
+# git
 alias git='LANG=en_US git'
 alias glog='git log --oneline'
 
-#docker
+# tmux
+alias mux=tmuxinator
+
+# docker
 alias dockill="docker rm -f \$(docker ps -aq)"
 alias dockup='docker-compose up -d'
 alias dcomp='docker-compose'
 alias dockip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 alias dockimgclean="docker rmi -f \$(docker images -f dangling=true -q)"
 
-#postgresql
+# postgresql
 alias fixpostgres="rm -f /usr/local/var/postgres/postmaster.pid && pg_ctl restart"
 alias postgresps="lsof -n -i4TCP:5432"
 alias sqlproxy="mkdir -p /tmp/cloudsql && ~/cloud_sql_proxy -dir=/tmp/cloudsql"
 
-#kubernetes
+# kubernetes
 alias k8="kubectl"
 
 # npm
@@ -95,18 +98,10 @@ alias bpyarn="yarn add -D eslint babel-eslint eslint-config-prettier eslint-plug
 alias bpeslint="ln -s $HOME/dotfiles/rc/.eslintrc.json ."
 alias bpjs='bpyarn; bpeslint'
 
-#fake s3
-alias fs3="fakes3 -r /mnt/fakes3_root -p 4567 --license 6690125985"
-
-#ffmpeg
+# ffmpeg
 function ffmpeg_convert_to_vp9webm {
   ffmpeg -i $1 -c:v libvpx-vp9 -b:v 2M output.webm
 }
 alias towebm=ffmpeg_convert_to_vp9webm
 
 alias towebm8="ffmpeg -c:v libvpx -b:v 1M -c:a libvorbis outpute.webm -i "
-
-# servers
-alias sshpi='ssh pi@192.168.1.100'
-alias sshfspi_ext='sshfs pi@192.168.1.100:/home/pi/mnt'
-alias sshdeb='ssh xixa@192.168.1.107'

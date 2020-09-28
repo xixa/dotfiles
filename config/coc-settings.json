@@ -1,6 +1,8 @@
 {
+  "coc.preferences.snippets.enable": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
+    "html",
     "scss",
     "sass",
     "javascript",
@@ -13,7 +15,13 @@
     "elm",
     "haskell"
   ],
+  "eslint.enable": true,
+  //"eslint.run": "onSave",
+  "eslint.options": {
+    "configFile": ".eslintrc.js"
+  },
   "elixir.pathToElixirLS": "~/.vim/plugged/elixir-ls/release/language_server.sh",
+  "elixirLS.dialyzerEnabled": true,
   "codeLens.enable": false,
   "languageserver": {
     "haskell": {
@@ -42,6 +50,12 @@
       "initializationOptions": {
         "elmAnalyseTrigger": "change"
       }
+    },
+    "purescript": {
+      "command": "purescript-language-server",
+      "args": ["--stdio", "--config {}"],
+      "filetypes": ["purescript"],
+      "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall"]
     }
   }
 }
