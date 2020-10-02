@@ -1,4 +1,3 @@
-"nap
 " nnoremap <silent> <leader>c :e <cfile><CR>
 " map <silent> <leader>cf :call writefile([], expand("<cfile>"), "t")<cr>
 map <silent> <leader>cf :!touch <c-r><c-p><cr><cr>
@@ -68,26 +67,6 @@ endfunction
 
 nnoremap <silent> <Leader>l :call mappings#cycle_numbering()<CR>
 
-" command line mode
-" adds/remove lines above/below (if empty) from normal mode
-"nmap <silent><C-j> o<Esc>
-"nmap <silent><C-k> O<Esc>
-"nmap <silent><A-j> :set paste<Return>m`o<Esc>``:set nopaste<CR>
-"nmap <silent><A-k> :set paste<Return>m`O<Esc>``:set nopaste<CR>
-imap <silent><C-l> <right>
-" nnoremap <CR>:noh<CR><CR>
-" shift+tab to jump outside enclosing chars
-imap <silent><S-Tab> <C-o>A
-" cmap <C-p> <Up>
-" cmap <C-n> <Down>
-cmap <C-b> <Left>
-cmap <C-f> <Right>
-cmap <C-a> <Home>
-cmap <C-e> <End>
-cnoremap <C-d> <Del>
-cnoremap <C-h> <BS>
-cnoremap <C-k> <C-f>D<C-c><C-c>:<Up>
-
 " V I S U A L  M O D E
 xnoremap <C-h> <C-w>h
 xnoremap <C-j> <C-w>j
@@ -125,7 +104,7 @@ function! xixa#mappings#plugins() abort
   if &runtimepath =~ "ack.vim"
     nnoremap <Leader>a :Ack!<Space>
     " nmap <leader>a :tab split<CR>:Ack! ""<Left>
-    " nmap <leader>A :Ack! <C-r><C-w><CR>
+    nmap <leader>aa :Ack! <C-r><C-w><CR>
   endif
 
   if &runtimepath =~ "vim-clap"

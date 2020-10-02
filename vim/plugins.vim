@@ -77,6 +77,11 @@ function! plugins#pluginsConfig()
 
 
   if &runtimepath =~ "emmet-vim"
+    let g:user_emmet_settings = {
+          \ 'typescript.tsx': {
+          \ 'extends' :'jsx'
+          \  }
+          \ }
   endif
 
   if &runtimepath =~ "fzf.vim"
@@ -247,12 +252,12 @@ function! plugins#pluginsConfig()
     autocmd FileType elixir let b:surround_37 = "%{ \r }"
 
     " <, > or 60, 62
-    autocmd FileType typescript,typescript.tsx let b:surround_60 = "< \r >"
-    autocmd FileType typescript,typescript.tsx let b:surround_62 = "< \r >"
+    " autocmd FileType typescript,typescript.tsx let b:surround_60 = "< \r >"
+    " autocmd FileType typescript,typescript.tsx let b:surround_62 = "< \r >"
   endif
 
   if &runtimepath =~ "nvim-treesitter"
-    " lua require"treesitter"
+     lua require"treesitter"
   endif
 
   if &runtimepath =~ "UltiSnips"
