@@ -77,3 +77,5 @@ execute 'highlight link EndOfBuffer ColorColumn'
 
 " highlight TermCursor ctermfg=red guifg=red        " colors terminal cursor
 
+" fold style
+highlight Folded guibg=NONE guifg=grey

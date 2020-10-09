@@ -1,6 +1,6 @@
 " nnoremap <silent> <leader>c :e <cfile><CR>
 " map <silent> <leader>cf :call writefile([], expand("<cfile>"), "t")<cr>
-map <silent> <leader>cf :!touch <c-r><c-p><cr><cr>
+map <silent> <Leader>cf :!touch <c-r><c-p><cr><cr>
 " inoremap <Nul> <C-x><C-o>
 inoremap <Nul> <C-N>
 "Be a little more like Emacs when on insert mode, will you?
@@ -12,9 +12,15 @@ inoremap <C-a> <esc>
 imap <C-e> <End>
 imap <C-d> <Del>
 imap <C-h> <BS>
+imap <A-BS> <C-w>
 
 "search 'n' replace
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>N
+
+if has('macunix')
+  xmap <Leader>c :w !pbcopy<cr><cr>
+  nmap <Leader>v :r !pbpaste<cr>
+endif
 
 function! s:home()
   let start_col = col('.')
@@ -78,7 +84,7 @@ xnoremap K :move '<-2<CR>gv=gv
 xnoremap J :move '>+1<CR>gv=gv
 
 " make
-nnoremap <leader>m :w<CR> :silent make\|redraw!\|cc<CR>
+nnoremap <Leader>m :w<CR> :silent make\|redraw!\|cc<CR>
 :command! Makenode :set makeprg=tmux\ send-key\ -t\ 1\ node\\\ %\ Enter
 :command! Makejasmine :set makeprg=tmux\ send-key\ -t\ 1\ npm\\\ test\ Enter
 
@@ -103,8 +109,8 @@ function! xixa#mappings#plugins() abort
 
   if &runtimepath =~ "ack.vim"
     nnoremap <Leader>a :Ack!<Space>
-    " nmap <leader>a :tab split<CR>:Ack! ""<Left>
-    nmap <leader>aa :Ack! <C-r><C-w><CR>
+    " nmap <Leader>a :tab split<CR>:Ack! ""<Left>
+    nmap <Leader>aa :Ack! <C-r><C-w><CR>
   endif
 
   if &runtimepath =~ "vim-clap"

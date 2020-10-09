@@ -75,3 +75,6 @@ endif
 " providers
 " let g:python3_host_prog='/usr/local/bin/python3'
 " let g:loaded_python3_provider=1
+
+"fold starts open
+" set foldlevelstart=20

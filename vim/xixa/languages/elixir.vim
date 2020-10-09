@@ -1,16 +1,5 @@
-"TODO
-"- fix line breaking for one line functions
-"- switch on and off different types of folds (docstrings, functions, etc)
-"
-
-"fold styling
-highlight Folded guibg=NONE guifg=grey
-
-"fold starts open
-" set foldlevelstart=20
-
-" Defines how the fold block looks like when folded
-function! FoldLayout()
+" Folds
+function! ElixirFoldLayout()
     let first_line = getline(v:foldstart)
     let second_line = getline(v:foldstart + 1)
 
@@ -43,9 +32,7 @@ function! FoldLayout()
     let filler = repeat(' ', winwidth(0) - indent_len - len(prefix) - len(end_filler) - len(text) - offset + 1)
     return indent . prefix . text . filler . end_filler
 endfunction
-set foldtext=FoldLayout()
 
-" ELIXIR
 function! ElixirDocsFold()
   let docstrings = ['^ .@doc """\|@moduledoc """', '^ ."""']
   let tests = ['^ .test ', '^ .end']
@@ -62,4 +49,4 @@ function! ElixirDocsFold()
   endif
 endfunction
 
-autocmd FileType elixir setlocal foldmethod=expr foldexpr=ElixirDocsFold()
+setlocal foldtext=ElixirFoldLayout() foldmethod=expr foldexpr=ElixirDocsFold()

@@ -8,7 +8,6 @@ let mapleader=","
 " GENERAL CONFIG
 source ~/dotfiles/vim/config.vim
 source ~/dotfiles/vim/layout.vim
-source ~/dotfiles/vim/folds.vim
 source ~/dotfiles/vim/plugins.vim
 source ~/dotfiles/vim/xixa/mappings.vim
 source ~/dotfiles/vim/syntax/svg.vim
@@ -20,12 +19,11 @@ au BufRead,BufNewFile *.svelte set filetype=svelte
 " au BufRead,BufNewFile *.svelte set syntax=html filetype svelte
 
 " LANGUAGE SPECIFIC CONFIG
+autocmd! FileType elixir source ~/dotfiles/vim/xixa/languages/elixir.vim
 autocmd! FileType clojure source ~/dotfiles/vim/xixa/languages/lisp.vim
+autocmd! FileType python source ~/dotfiles/vim/xixa/languages/python.vim
+autocmd! FileType json source ~/dotfiles/vim/xixa/languages/json.vim
 autocmd! FileType typescript.tsx,typescriptreact,javascript.jsx,javascriptreact source ~/dotfiles/vim/xixa/languages/react.vim
-autocmd! FileType python let tabsize=4
-autocmd! FileType json set commentstring=//%s
-autocmd! FileType json syntax match Comment +\/\/.\+$+
-" autocmd FileType json echoerr 'This autocmd ran!'
 
 " packadd! matchit
 
@@ -38,7 +36,7 @@ autocmd! FileType json syntax match Comment +\/\/.\+$+
 " set completeopt+=noinsert
 
 
-"------------------------------------------- GENERAL PLUGINS
+" GENERAL PLUGINS
 call plug#begin('~/.vim/plugged')
 
 " stuff that really vIMPROVES vim.
@@ -88,7 +86,7 @@ Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
 
 
-"------------------------------------------- LANGUAGE SPECIFIC PLUGINS
+" LANGUAGE SPECIFIC PLUGINS
 " LangServs
 " Plug 'autozimu/LanguageClient-neovim', {'for': ['python'], 'branch': 'next', 'do': 'bash install.sh'}
 Plug 'dense-analysis/ale', { 'for': [ 'svelte']}
