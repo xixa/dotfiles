@@ -44,6 +44,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-dispatch'
 Plug 'suy/vim-context-commentstring' "allows for different commentstrings to be placed in different parts of the code (e.g. jsx)
 Plug 'tpope/vim-unimpaired'
 Plug 'SirVer/ultisnips'
@@ -75,6 +76,9 @@ Plug 'bling/vim-bufferline'
 " with unix
 Plug 'tpope/vim-eunuch'
 
+" with tmux
+Plug 'christoomey/vim-tmux-runner'
+
 " with git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -85,12 +89,15 @@ Plug 'mileszs/ack.vim'
 " with make
 Plug 'neomake/neomake'
 
+" test
+Plug 'vim-test/vim-test'
 
 " LANGUAGE SPECIFIC PLUGINS
 " LangServs
 " Plug 'autozimu/LanguageClient-neovim', {'for': ['python'], 'branch': 'next', 'do': 'bash install.sh'}
 Plug 'dense-analysis/ale', { 'for': [ 'svelte']}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': [
+      \ 'cpp',
       \ 'elixir',
       \ 'haskell',
       \ 'purescript',
@@ -123,7 +130,7 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 " elixir
 Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
 " Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
-Plug 'elixir-lsp/elixir-ls', {'for': ['elixir'], 'do': 'mix deps.get && mix compile && mix elixir_ls.release -o release'}
+Plug 'elixir-lsp/elixir-ls', {'for': ['elixir'], 'do': 'mix do deps.get, compile, elixir_ls.release -o release'}
 
 " haskell
 Plug 'Shougo/vimproc.vim', {'do' : 'make', 'for': ['haskell']}

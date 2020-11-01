@@ -71,7 +71,7 @@ function! mappings#cycle_numbering() abort
   endif
 endfunction
 
-nnoremap <silent> <Leader>l :call mappings#cycle_numbering()<CR>
+" nnoremap <silent> <Leader>l :call mappings#cycle_numbering()<CR>
 
 " V I S U A L  M O D E
 xnoremap <C-h> <C-w>h
@@ -117,6 +117,10 @@ function! xixa#mappings#plugins() abort
     nnoremap <Leader>g :Clap grep +<Space>
   endif
 endfunction
+
+" vim-test
+nmap <leader>t :TestFile -strategy=terminal<cr>
+nmap <leader>l :TestLast -strategy=terminal<cr>
 
 " langclients
 function! xixa#mappings#langserver()
