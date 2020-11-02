@@ -1,24 +1,5 @@
 . /usr/local/opt/asdf/asdf.sh
 
-# bash
-if [[ "${CURR_SHELL}" == "bash"  ]]; then
-  # bash completion
-  if [ -f /sw/etc/bash_completion ]; then
-     . /sw/etc/bash_completion
-  fi
-
-  [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-  [[ -f $HOME/dotfiles/shell/completion/tmuxinator.bash ]] && source $HOME/dotfiles/shell/completion/tmuxinator.bash
-  . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
-  [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
-# zsh
-elif [[ "${CURR_SHELL}" == "zsh"  ]]; then
-  [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-
-  [[ -f $HOME/dotfiles/shell/completion/tmuxinator.zsh ]] && source $HOME/dotfiles/shell/completion/tmuxinator.zsh
-  . $HOME/dotfiles/shell/completion/_asdf
-fi
-
 # Mac settings
 if [[ $(uname) == "Darwin" ]]; then
     source $HOME/dotfiles/shell/macos
@@ -27,6 +8,23 @@ elif [ $(uname) == "Linux" ]; then
     source $HOME/dotfiles/shell/linux
 fi
 
+# Bash stuff
+if [[ "${CURR_SHELL}" == "bash"  ]]; then
+  # bash completion
+  if [ -f /sw/etc/bash_completion ]; then
+     . /sw/etc/bash_completion
+  fi
+
+  [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+  [[ -f $HOME/dotfiles/shell/completion/tmuxinator.bash ]] && source $HOME/dotfiles/shell/completion/tmuxinator.bash
+  [[ -f $HOME/dotfiles/shell/completion/asdf.bash ]] && source $HOME/dotfiles/shell/completion/asdf.bash
+  [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+# Shell stuff
+elif [[ "${CURR_SHELL}" == "zsh"  ]]; then
+  [[ -f $HOME/dotfiles/shell/completion/tmuxinator.zsh ]] && source $HOME/dotfiles/shell/completion/tmuxinator.zsh
+  . $HOME/dotfiles/shell/completion/_asdf
+  [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+fi
 
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 # export FZF_DEFAULT_COMMAND='rg --files'
