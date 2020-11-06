@@ -116,11 +116,15 @@ function! xixa#mappings#plugins() abort
   if &runtimepath =~ "vim-clap"
     nnoremap <Leader>g :Clap grep +<Space>
   endif
+
+  if &runtimepath =~ "vim-test"
+    nmap <leader>t :TestFile<cr>
+    nmap <leader>T :TestNearest<cr>
+    nmap <leader>l :TestLast<cr>
+    nmap <leader>s :TestSuite<cr>
+  endif
 endfunction
 
-" vim-test
-nmap <leader>t :TestFile -strategy=terminal<cr>
-nmap <leader>l :TestLast -strategy=terminal<cr>
 
 " langclients
 function! xixa#mappings#langserver()

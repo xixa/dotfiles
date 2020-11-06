@@ -90,7 +90,7 @@ Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
 
 " test
-Plug 'vim-test/vim-test'
+Plug 'vim-test/vim-test', {'for': ['elixir', 'haskell', 'clojure',  'scala', 'javascript', 'typescript', 'typescript.tsx']}
 
 " LANGUAGE SPECIFIC PLUGINS
 " LangServs

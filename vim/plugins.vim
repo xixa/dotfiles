@@ -256,6 +256,26 @@ function! plugins#pluginsConfig()
     " autocmd FileType typescript,typescript.tsx let b:surround_62 = "< \r >"
   endif
 
+  if &runtimepath =~ "vim-test"
+    let g:test#enabled_runners=[
+          \'elixir#exunit',
+          \'javascript#jest',
+          \'scala#sbttest',
+          \'haskell#stacktest',
+          \'clojure#fireplacetest'
+          \]
+    let g:test#runner_commands=['ExUnit']
+
+    let g:test#preserve_screen=1
+    let g:test#strategy="terminal"
+
+    let g:test#elixir#runner='exunit'
+    let g:test#elixir#exunit#options={
+          \'all': '--trace',
+          \'last': '--stale',
+          \}
+  endif
+
   if &runtimepath =~ "nvim-treesitter"
      lua require"treesitter"
   endif
