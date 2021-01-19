@@ -13,7 +13,6 @@ source ~/dotfiles/vim/xixa/mappings.vim
 source ~/dotfiles/vim/syntax/svg.vim
 
 " RECOGNIZING FILETYPES
-" au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
 " au BufRead,BufNewFile *.eex set filetype=eelixir
 au BufRead,BufNewFile *.svelte set filetype=svelte
 " au BufRead,BufNewFile *.svelte set syntax=html filetype svelte
@@ -111,10 +110,10 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': [
       \ 'typescript',
       \ 'typescriptreact',
       \ 'typescript.tsx',
-      \ 'tsx']}
+      \ 'tsx',
+      \ 'xml']}
 
 " Plug 'nvim-treesitter/nvim-treesitter', {'for': ['typescript', 'typescriptreact', 'typescript.tsx', 'elm']}
-Plug 'nvim-treesitter/nvim-treesitter'
 
 " LISPs
 " Plug 'kovisoft/paredit', { 'for': ['scheme', 'clojure'] }
@@ -167,6 +166,9 @@ Plug 'derekwyatt/vim-scala'
 
 " graphql
 Plug 'jparise/vim-graphql', { 'for': ['graphql'] }
+
+" csv
+Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
 "------------------------------------------- VIM FOR WRITING
 function! BuildComposer(info)
