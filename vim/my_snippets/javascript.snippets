@@ -1,12 +1,36 @@
-snippet async "create async function"
-async ${1:<args>} => {
-	try {
-		${0}
-	} catch (err) {
-		throw err
-	}
-}
+snippet imp "Creates import" b
+import ${2:{${3:...}}} from '${1:lib}'
+endsnippet
 
+snippet pi "ignore prettier"
+// prettier-ignore
+endsnippet
+
+snippet log "console.log shorthand"
+console.log($0)
+endsnippet
+
+snippet err "console.err shorthand"
+console.error($0)
+endsnippet
+
+snippet doc "creates doc"
+/**
+ * $0
+ */
+endsnippet
+
+snippet bc "Block comment"
+/* $1 */
+endsnippet
+
+snippet sw "Switch block"
+switch (${1}) {
+	case ${2}:
+		$0
+	default:
+		break
+}
 endsnippet
 
 snippet if "Creates an if statement"
@@ -21,7 +45,7 @@ snippet try "creates a try"
 try {
 	${0:<...>}
 } catch (err) {
-	${1:<throw error>}
+	${1:(err) => console.error(err)}
 }
 endsnippet
 
@@ -36,81 +60,6 @@ snippet $ "surrounds a selection in ${}"
 ${${VISUAL}}
 endsnippet
 
-snippet time "creates a setTimeout"
-setTimeout((${VISUAL:<args>}) => ${2:<something>}, ${3:<time>})
-endsnippet
-
-snippet log "creates a console.log"
-console.log($1)$0
-endsnippet
-# shorthand
-# snippet "(\w+)\)\)" "Parenthesis (postfix)" r
-# (`!p snip.rv = match.group(1)`$1)$0
-# endsnippet
-
-snippet aphro "Imports aphrodite" b
-import { StyleSheet, css } from 'aphrodite'
-endsnippet
-
-snippet style "Creates an aphrodite style" b
-const styles = StyleSheet.create({
-	${1:<...>}: {
-		${2:...}
-	}
-})
-endsnippet
-
-# graphql stuff
-snippet graphql "Imports graphQL stuff" b
-import {
-	GraphQLObjectType,
-	GraphQLSchema,
-	${1:GraphQLInt,}
-	${2:GraphQLString,}
-	${3:GraphQLBoolean,}
-} from 'graphql'
-endsnippet
-
-snippet gtype "Creates a graphQL type" b
-const ${1:<TypeName>} = new GraphQLObjectType({
-	name: '$1',
-	description: '${2:...}',
-	fields: () => {
-		return {
-			${3:gfield}$0
-		}
-	}
-})
-endsnippet
-
-snippet gfield "Creates a graphQL field"
-${1:<field>}: {
-	type: `!p if "(" in t[2]: snip.rv = "new "`GraphQL${2:<Type>},
-	resolve(${3:<type>}) {
-		return $4`!p
-if "root" in t[3]:
-	snip.rv = ""
-else:
-	snip.rv = "%s.%s" % (t[3],t[1])`
-	}
-}${5:,}$0
-endsnippet
-
-# importing & exporting
-snippet exportclass "Description" b
-export default ${1:ClassName} {
-	${2:...}
-}
-endsnippet
-
-snippet exp
-export default ${1:ClassName}
-endsnippet
-
-snippet expc
-module.exports $0
-endsnippet
-
 snippet imp "automatize imports" b
 import $1 from '${2:./}${1/(\w)/\l$1/}'
 endsnippet
@@ -121,26 +70,4 @@ endsnippet
 
 snippet req. "automatize commonjs 'import'" b
 const $1 = require("./${2:${1/(\w)/\l$1/}}")
-endsnippet
-
-# functions, classes and objects
-snippet -> "arrow function" i
-(${1:args}) => {
-	${2:...}
-}
-endsnippet
-
-snippet ob "creates an object"
-{
-	${1:content}
-}
-endsnippet
-
-# react
-snippet comp "create a component" b
-export default function ${1:ComponentName}() {
-	return (
-		${2}
-	)
-}
 endsnippet

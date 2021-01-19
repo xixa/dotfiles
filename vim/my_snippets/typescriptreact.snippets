@@ -1,0 +1,42 @@
+extends typescript
+
+snippet dev "Shorthand for dev"
+process.env.NODE_ENV === 'development' $0
+endsnippet
+
+snippet prod "Shorthand for prod"
+process.env.NODE_ENV === 'prod' $0
+endsnippet
+
+snippet ws "non-breaking space shorthand"
+,&nbsp;
+endsnippet
+
+snippet br "non-breaking space shorthand"
+,&nbsp;
+endsnippet
+
+snippet comp "creates a react component" b
+const ${1:ComponentName}:React.FC${2:<$3>} = ($4) => {
+	return (
+		${5:<>
+			$0
+		</>}
+	)
+}
+endsnippet
+
+snippet ncomp "Creates a functional component React boilerplate" b
+const ${1:ComponentName}:React.FC${2:<$3>} = ($4) =>
+	return (
+		$0
+	)
+
+export default ${1/(\W)/\l$1/}
+endsnippet
+
+snippet < "Description"
+<>
+	$0
+</>
+endsnippet

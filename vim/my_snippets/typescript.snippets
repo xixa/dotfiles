@@ -1,74 +1,19 @@
-snippet err "adds ts-expect-ignore" b
-// @ts-expect-error
-endsnippet
-
-snippet react "Creates a functional component React boilerplate" b
-type ${1/(\W)/\l$1/}Type = {
-
-}
-
-const ${1:<ComponentName>} = (props:${1/(\W)/\l$1/}Type) =>
-	return (
-		$0
-	)
-
-export default ${1/(\W)/\l$1/}
-endsnippet
-
-snippet type "Creates a type definition"
-type ${1:TypeName} = {
-	$0
-}
-endsnippet
-
-snippet comp "creates a react component" b
-const ${1:ComponentName}:React.FC = (${2}) => {
-	return (
-		${3:<>
-			$0
-		</>}
-	)
-}
-endsnippet
-
-snippet nc "creates a new react component file with its Moldule CSS import" b
-import css from '@stylesheets/${1}.module.scss'
-
-const ${1/(\W)/\l$1/}:React.FC${2:<>} = (${3}) => {
-	return (
-		${4:<>
-			$0
-		</>}
-	)
-}
-
-export default ${1/(\W)/\l$1/}
-endsnippet
-
-snippet main "creates the main component of the file" b
-export default function ${1:ComponentName}() {
-	return (
-		$0
-	)
-}
-endsnippet
-
-snippet < "Description"
-<>
-	$0
-</>
-endsnippet
+extends javascript
 
 snippet imp "Creates import" b
 import ${2:{${3:...}}} from '${1:lib}'
 endsnippet
 
-snippet log "console.log it!"
+snippet pi "ignore prettier"
+// prettier-ignore
+endsnippet
+
+snippet log "console.log shorthand"
 console.log($0)
 endsnippet
 
-snippet info "console.info it!"
-console.info("${1}", ${2})$0
+snippet err "console.err shorthand"
+console.error($0)
 endsnippet
 
 snippet doc "creates doc"
@@ -77,32 +22,15 @@ snippet doc "creates doc"
  */
 endsnippet
 
-snippet pi "ignore prettier"
-// prettier-ignore
-endsnippet
-
-snippet sjsx "creates a style jsx tag"
-<style jsx>{\`
-	$0
-\`}</style>
-endsnippet
-
-snippet ws "non-breaking space shorthand"
-,&nbsp;
-endsnippet
-
-snippet br "non-breaking space shorthand"
-,&nbsp;
-endsnippet
-
-snippet dev "dev only shorthand" b
-process.env.NODE_ENV === 'development' && $0
-endsnippet
-
-snippet env "process.env shorthand" b
-process.env
-endsnippet
-
 snippet bc "Block comment"
 /* $1 */
+endsnippet
+
+snippet sw "Switch block"
+switch (${1}) {
+	case ${2}:
+		$0
+	default:
+		break
+}
 endsnippet

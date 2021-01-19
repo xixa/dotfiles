@@ -1,55 +1,25 @@
+# Wrappers
+snippet do "creates a do/end"
+$1 do
+	${VISUAL}
+end
+endsnippet
+
+snippet map "Wraps highlighted content into map"
+%{${VISUAL}}
+endsnippet
+
+# Rest
+snippet end "closes a structure"
+
+	$0
+end
+endsnippet
+
 snippet mod "declares a module" b
 defmodule ${1:<module_name>} do
 	${2:use ${3:<module>}}
   $0
-end
-endsnippet
-
-snippet def "declares a function within a module"
-def ${1:<function_name & condition>} do
-	$0
-end
-endsnippet
-
-snippet defp "declares a private function within a module"
-defp ${1:<function_name & condition>} do
-	$0
-end
-endsnippet
-
-snippet if "if/2 structure"
-if ${1:<condition>} do
-	$0
-else
-
-end
-endsnippet
-
-snippet cond "cond/1 structure"
-cond do
-	${1:<cond>} -> ${2:<return>}
-end
-endsnippet
-
-snippet case "case/2 structure"
-case ${1:<condition>} do
-	$0
-end
-endsnippet
-
-snippet tr "try/rescue|catch structure"
-try do
-
-end
-endsnippet
-
-snippet match "match structure"
-${1:<condition>} -> ${2:<result>}
-endsnippet
-
-snippet end "closes a structure"
-
-	$0
 end
 endsnippet
 
@@ -59,56 +29,12 @@ $0
 """
 endsnippet
 
-snippet fn "creates an anonymous function"
-fn ${1:<params>} -> ${2:<return>} end$0
-endsnippet
-
-snippet do "creates a do/end"
-do
-	$0
-end
-endsnippet
-
-snippet map "Wraps highlighted content into map"
-%{${0:${VISUAL}}}
+snippet fn "creates an anonymous function" w
+fn ${1:params} -> ${2:.} end$0
 endsnippet
 
 snippet insp "creates inspection"
-IO.inspect(${1:label}: ${2:object})$0
-endsnippet
-
-snippet gqlt "Creates a GraphQL test" b
-defmodule BackendWen.Schema.${1:<Path>}Test do
-  use BackendWeb.ConnCase, async: true
-
-  setup do
-    Backend.Seeds.run()
-  end
-
-
-  describe "GraphQL" do
-		test "" do
-			$0
-		end
-	end
-end
-endsnippet
-
-
-snippet test "Test boilerplate" b
-defmodule BackendWeb.${1:<Context>}Test.${2:<Model>} do
-	use BackendWeb.ConnCase, async: true
-
-	setup do
-		Backend.Seeds.run()
-	end
-
-	describe "${2/(\W)/\l${/}" do
-		test "exists" do
-			$0
-		end
-	end
-end
+IO.inspect(${1:label: "${2:object}"})$0
 endsnippet
 
 snippet td "creates TODO"
