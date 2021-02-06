@@ -85,7 +85,7 @@ alias mkdir='mkdir -p' #forces mkdir to create intermediate directories if a pat
 
 # git
 alias git='LANG=en_US git'
-alias glog='git log --oneline'
+alias glog='git log --oneline --graph'
 
 # tmux
 alias mux=tmuxinator
