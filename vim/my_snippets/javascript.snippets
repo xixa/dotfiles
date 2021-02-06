@@ -60,10 +60,6 @@ snippet $ "surrounds a selection in ${}"
 ${${VISUAL}}
 endsnippet
 
-snippet imp "automatize imports" b
-import $1 from '${2:./}${1/(\w)/\l$1/}'
-endsnippet
-
 snippet req "automatize commonjs 'import'" b
 const $1 = require("${2:${1/(\w)/\l$1/}}")
 endsnippet

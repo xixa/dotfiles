@@ -14,8 +14,17 @@ imap <C-d> <Del>
 imap <C-h> <BS>
 imap <A-BS> <C-w>
 
-"search 'n' replace
+"move through wrapped lines
+noremap <silent> k gk
+noremap <silent> j gj
+noremap <silent> 0 g0
+noremap <silent> $ g$
+
+"search visually selected
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>N
+
+" * to stay stay on the word the cursor is at
+nnoremap * *``
 
 if has('macunix')
   xmap <Leader>c :w !pbcopy<cr><cr>

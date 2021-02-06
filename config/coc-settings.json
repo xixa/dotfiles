@@ -2,6 +2,7 @@
   "coc.preferences.snippets.enable": false,
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSaveFiletypes": [
+    "cpp",
     "css",
     "html",
     "scss",
@@ -14,9 +15,11 @@
     "graphql",
     "json",
     "elm",
-    "haskell"
+    "haskell",
+    "xml"
   ],
   "eslint.enable": true,
+  //"eslint.autoFixOnSave": true,
   //"eslint.run": "onSave",
   "eslint.options": {
     "configFile": ".eslintrc.js"

@@ -1,5 +1,11 @@
 # Wrappers
-snippet do "creates a do/end"
+snippet do "closes a do block"
+do
+	$0
+end
+endsnippet
+
+snippet d "creates a do/end"
 $1 do
 	${VISUAL}
 end
@@ -10,12 +16,6 @@ snippet map "Wraps highlighted content into map"
 endsnippet
 
 # Rest
-snippet end "closes a structure"
-
-	$0
-end
-endsnippet
-
 snippet mod "declares a module" b
 defmodule ${1:<module_name>} do
 	${2:use ${3:<module>}}
@@ -33,8 +33,8 @@ snippet fn "creates an anonymous function" w
 fn ${1:params} -> ${2:.} end$0
 endsnippet
 
-snippet insp "creates inspection"
-IO.inspect(${1:label: "${2:object}"})$0
+snippet ins "creates inspection" w
+IO.inspect(${1:label: "${2:(づ｡◕‿‿◕｡)づ}"})$0
 endsnippet
 
 snippet td "creates TODO"

@@ -47,13 +47,12 @@ Plug 'tpope/vim-commentary'
 Plug 'suy/vim-context-commentstring' "allows for different commentstrings to be placed in different parts of the code (e.g. jsx)
 Plug 'tpope/vim-unimpaired'
 Plug 'SirVer/ultisnips'
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+" Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'gcmt/taboo.vim'
 "Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-
 
 " repl-like stuff
 Plug 'jpalardy/vim-slime'
@@ -168,7 +167,8 @@ Plug 'derekwyatt/vim-scala'
 Plug 'jparise/vim-graphql', { 'for': ['graphql'] }
 
 " csv
-Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
+" Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
 "------------------------------------------- VIM FOR WRITING
 function! BuildComposer(info)
