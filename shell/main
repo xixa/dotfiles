@@ -24,6 +24,9 @@ export EDITOR=nvim
 export MYVIMRC="~/.vimrc"
 export CURR_SHELL=$(ps -p $$ | awk 'END{print $NF}')
 
+# enables IEx shell history between sessions
+export ERL_AFLAGS='-kernel shell_history enabled'
+
 source $HOME/dotfiles/shell/prompt
 source $HOME/dotfiles/shell/settings
 source $HOME/dotfiles/shell/aliases
