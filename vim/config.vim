@@ -73,8 +73,10 @@ endif
 " set t_ZR=^[[23m
 
 " providers
-" let g:python3_host_prog='/usr/local/bin/python3'
-" let g:loaded_python3_provider=1
+let g:python_host_prog=''
+let g:python3_host_prog='/usr/local/bin/python3'
+" let g:python3_host_prog=system('which python')
+" let g:python3_host_prog=system('/Users/xixa/.asdf/shims/python')
 
 "fold starts open
 " set foldlevelstart=20

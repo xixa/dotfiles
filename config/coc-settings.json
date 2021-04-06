@@ -84,5 +84,8 @@
       "filetypes": ["purescript"],
       "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall"]
     }
+  },
+  "diagnostic-languageserver.filetypes": {
+    "elixir": ["mix_credo", "mix_credo_compile"]
   }
 }

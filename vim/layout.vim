@@ -33,11 +33,12 @@ set cmdheight=1                                     " cmd line bit size
 " NORMAL/INSERT MODES
 autocmd InsertEnter * call MyInsertMode()
 autocmd InsertLeave * call MyNormalMode()
+autocmd BufEnter * call MyNormalMode()
 
 function! MyNormalMode()
   set cursorcolumn
   set nocursorline
-  hi statusline ctermfg=7 guifg=#c0c0c0 ctermbg=0
+  hi statusline ctermfg=7 guifg=#66cc33 ctermbg=0
 endfunction
 
 function! MyInsertMode()
@@ -52,12 +53,15 @@ endfunction
 " hi InactiveWindow guibg=#ffffff
 " hi PreviewWindow guibg=#000000
 
-augroup WindowManagement
-  autocmd!
-  autocmd WinEnter * call Handle_Win_Enter()
-augroup END
+" augroup WindowManagement
+"   autocmd!
+"   autocmd WinEnter * call Handle_Win_Enter()
+" augroup END
+
+  autocmd BufEnter,WinEnter,FocusGained,VimEnter * call Handle_Win_Enter()
 
 " change highlight group of active/inactive windows
+"
 function! Handle_Win_Enter()
   if &previewwindow
     setlocal winhighlight=Normal:PreviewWindow

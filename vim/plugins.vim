@@ -96,9 +96,11 @@ function! plugins#pluginsConfig()
           \}'
     set rtp+=/usr/local/opt/fzf
     let g:fzf_buffers_jump = 1
+
     " preview with bat
     " command! -bang -nargs=? -complete=dir Files
     " \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
     " preview normal
     command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -286,8 +288,9 @@ function! plugins#pluginsConfig()
     let g:UltiSnipsEditSplit='vertical'
   endif
 
-  if &runtimepath =~ "gimoji-selector"
-    nmap <Leader>j "=system('gitmoji-selector')"<c-m>P
+  if &runtimepath =~ "delimitMate"
+    let g:delimitMate_expand_cr=1
+    let g:delimitMate_matchpairs="(:),[:],{:},<:>"
   endif
 endfunction
 

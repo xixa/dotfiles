@@ -1,27 +1,31 @@
-snippet imp "Creates import" b
-import ${2:{${3:...}}} from '${1:lib}'
-endsnippet
-
 snippet pi "ignore prettier"
 // prettier-ignore
 endsnippet
 
-snippet log "console.log shorthand"
-console.log($0)
+snippet "t(d|odo)?" "Description" !r
+// TODO:
 endsnippet
 
-snippet err "console.err shorthand"
-console.error($0)
+snippet log "console.log shorthand" w
+console.log(${1})
 endsnippet
 
-snippet doc "creates doc"
+snippet "err(o|or)?" "console.err shorthand" !r
+console.error(${1})
+endsnippet
+
+snippet "imp(o|or|ort)?" "Creates import" !br
+import ${2:{${3}}} from '${1}'
+endsnippet
+
+snippet doc "creates doc block" b
 /**
- * $0
+${VISUAL:/((?m)^)/ * /g}$0
  */
 endsnippet
 
 snippet bc "Block comment"
-/* $1 */
+/* ${VISUAL}$0 */
 endsnippet
 
 snippet sw "Switch block"
@@ -34,8 +38,8 @@ switch (${1}) {
 endsnippet
 
 snippet if "Creates an if statement"
-if ($1) {
-
+if (${1}) {
+	$0
 } else {
 
 }
@@ -43,9 +47,9 @@ endsnippet
 
 snippet try "creates a try"
 try {
-	${0:<...>}
+	${1}
 } catch (err) {
-	${1:(err) => console.error(err)}
+	${2:(err) => ${3}}
 }
 endsnippet
 
@@ -55,15 +59,36 @@ it('${1:description}', () => {
 })
 endsnippet
 
-# to use this, 'viw' to select a word, then tab, then the snippet!
 snippet $ "surrounds a selection in ${}"
 ${${VISUAL}}
 endsnippet
 
-snippet req "automatize commonjs 'import'" b
-const $1 = require("${2:${1/(\w)/\l$1/}}")
+snippet "req(u|ui|uir|uire)?" "automatize commonjs 'import'" br
+const ${1} = require("${3}${2:$1}")
 endsnippet
 
 snippet req. "automatize commonjs 'import'" b
 const $1 = require("./${2:${1/(\w)/\l$1/}}")
+endsnippet
+
+snippet fn "Creates a function"
+function ${1:identifier}(${2:args}) {
+	$0
+}
+endsnippet
+
+snippet lm "Creates a lambda" w
+(${1}) => $0
+endsnippet
+
+snippet "arr(n)?" "Creates an array of n elements" !wr
+[...Array(${1})]
+endsnippet
+
+snippet dev "Shorthand for dev"
+process.env.NODE_ENV === 'development' $0
+endsnippet
+
+snippet prod "Shorthand for prod"
+process.env.NODE_ENV === 'production' $0
 endsnippet

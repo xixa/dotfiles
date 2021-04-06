@@ -1,7 +1,7 @@
 # Wrappers
 snippet do "closes a do block"
 do
-	$0
+	$1
 end
 endsnippet
 
@@ -11,21 +11,30 @@ $1 do
 end
 endsnippet
 
-snippet map "Wraps highlighted content into map"
-%{${VISUAL}}
+snippet % "Wraps highlighted content into map"
+%{${VISUAL}$1}
+endsnippet
+
+snippet k "creates a field" w
+${1:key}: $1, $0
 endsnippet
 
 # Rest
 snippet mod "declares a module" b
 defmodule ${1:<module_name>} do
-	${2:use ${3:<module>}}
-  $0
+  $2
 end
 endsnippet
 
-snippet doc "creates a module doc"
+snippet mdoc "creates a module doc"
 @moduledoc """
-$0
+$1
+"""
+endsnippet
+
+snippet doc "creates a doc"
+@doc """
+$1
 """
 endsnippet
 
@@ -38,5 +47,9 @@ IO.inspect(${1:label: "${2:(づ｡◕‿‿◕｡)づ}"})$0
 endsnippet
 
 snippet td "creates TODO"
-# TODO: $0
+# TODO: $1
+endsnippet
+
+snippet w "atom sigil" b
+~w/${VISUAL}$1/a
 endsnippet

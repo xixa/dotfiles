@@ -4,15 +4,15 @@ map <silent> <Leader>cf :!touch <c-r><c-p><cr><cr>
 " inoremap <Nul> <C-x><C-o>
 inoremap <Nul> <C-N>
 "Be a little more like Emacs when on insert mode, will you?
-imap <C-p> <Up>
-imap <C-n> <Down>
-imap <C-b> <Left>
-imap <C-f> <Right>
-inoremap <C-a> <esc>
-imap <C-e> <End>
-imap <C-d> <Del>
-imap <C-h> <BS>
-imap <A-BS> <C-w>
+" imap <C-p> <Up>
+" imap <C-n> <Down>
+" imap <C-b> <Left>
+" imap <C-f> <Right>
+" inoremap <C-a> <esc>
+" imap <C-e> <End>
+" imap <C-d> <Del>
+" imap <C-h> <BS>
+" imap <A-BS> <C-w>
 
 "move through wrapped lines
 noremap <silent> k gk
@@ -148,9 +148,6 @@ function! xixa#mappings#langserver()
   endif
 
 endfunction
-
-nmap <Leader>j "=system('gitmoji-selector')"<c-m>P
-
 
 autocmd BufEnter * :call xixa#mappings#plugins()
 autocmd BufEnter * :call xixa#mappings#langserver()

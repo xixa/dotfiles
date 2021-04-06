@@ -7,10 +7,13 @@ let mapleader=","
 
 " GENERAL CONFIG
 source ~/dotfiles/vim/config.vim
-source ~/dotfiles/vim/layout.vim
 source ~/dotfiles/vim/plugins.vim
 source ~/dotfiles/vim/xixa/mappings.vim
 source ~/dotfiles/vim/syntax/svg.vim
+
+if !(&runtimepath =~ "goyo")
+  source ~/dotfiles/vim/layout.vim
+endif
 
 " RECOGNIZING FILETYPES
 " au BufRead,BufNewFile *.eex set filetype=eelixir
@@ -43,15 +46,19 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-rsi'
 " Plug 'tpope/vim-dispatch'
 Plug 'suy/vim-context-commentstring' "allows for different commentstrings to be placed in different parts of the code (e.g. jsx)
 Plug 'tpope/vim-unimpaired'
 Plug 'SirVer/ultisnips'
 " Plug 'terryma/vim-multiple-cursors'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
+Plug 'Raimondi/delimitMate'
 " Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'gcmt/taboo.vim'
+Plug 'duggiefresh/vim-easydir'
+Plug 'kshenoy/vim-signature'
 "Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " repl-like stuff
@@ -60,7 +67,9 @@ Plug 'metakirby5/codi.vim'
 
 " finding stuff & jumping to places
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
 " Plug 'wincent/loupe'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-projectionist'
@@ -93,7 +102,7 @@ Plug 'vim-test/vim-test', {'for': ['elixir', 'haskell', 'clojure',  'scala', 'ja
 " LANGUAGE SPECIFIC PLUGINS
 " LangServs
 " Plug 'autozimu/LanguageClient-neovim', {'for': ['python'], 'branch': 'next', 'do': 'bash install.sh'}
-Plug 'dense-analysis/ale', { 'for': [ 'svelte']}
+" Plug 'dense-analysis/ale', { 'for': [ 'svelte']}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': [
       \ 'cpp',
       \ 'elixir',
@@ -112,7 +121,8 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': [
       \ 'tsx',
       \ 'xml']}
 
-" Plug 'nvim-treesitter/nvim-treesitter', {'for': ['typescript', 'typescriptreact', 'typescript.tsx', 'elm']}
+" Plug 'nvim-treesitter/nvim-treesitter', {'for': ['typescript', 'typescriptreact', 'typescript.tsx', 'elm'], 'do': ':TSUpdate'}
+" Plug  'nvim-treesitter/playground'
 
 " LISPs
 " Plug 'kovisoft/paredit', { 'for': ['scheme', 'clojure'] }
@@ -150,8 +160,8 @@ Plug 'purescript-contrib/purescript-vim', { 'for': ['purescript'] }
 " Plug 'deoplete-plugins/deoplete-jedi'
 
 " react
-Plug 'peitalin/vim-jsx-typescript', { 'for': [ 'javascript.jsx', 'typescript.tsx'] }
-Plug 'alampros/vim-styled-jsx', { 'for': ['javascript.jsx', 'typescript.tsx'] }
+Plug 'peitalin/vim-jsx-typescript', { 'for': [ 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact'] }
+Plug 'alampros/vim-styled-jsx', { 'for': ['javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescrptreact'] }
 
 " html
 Plug 'othree/html5.vim'

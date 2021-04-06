@@ -1,13 +1,5 @@
 extends typescript
 
-snippet dev "Shorthand for dev"
-process.env.NODE_ENV === 'development' $0
-endsnippet
-
-snippet prod "Shorthand for prod"
-process.env.NODE_ENV === 'prod' $0
-endsnippet
-
 snippet ws "non-breaking space shorthand"
 ,&nbsp;
 endsnippet
@@ -38,6 +30,10 @@ endsnippet
 
 snippet < "Description"
 <>
-	$0
+	${VISUAL}
 </>
+endsnippet
+
+snippet jc "JSX comment block"
+{/*${VISUAL}*/}
 endsnippet
