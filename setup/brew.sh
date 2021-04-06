@@ -38,7 +38,41 @@ OSX="
 "
 
 brew install \
-  $GNU\
-  $TOOLS\
-  $DEV\
+  $GNU \
+  $TOOLS \
+  $DEV \
   $OSX
+
+TAPS="
+  caskroom/cask
+  homebrew/cask-versions
+"
+
+brew tap \
+  $TAPS
+
+APPS="
+  iterm2
+  hammerspoon
+  vlc
+  transmission
+  keka
+  nvalt
+  firefox
+  google-chrome
+  google-chrome-canary
+  docker
+"
+
+DEV_APPS="
+  visual-studio-code
+  postman
+  graphiql
+  figma
+  firefox-developer-edition
+  google-chorme-dev
+"
+
+brew cask install \
+  $APPS \
+  $DEV_APPS
