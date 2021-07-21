@@ -1,0 +1,19 @@
+snippet comp "creates a react component" b
+const ${1:ComponentName}:React.FC${2:<$3>} = ($4) => {
+	return (
+		${5:<>
+			$0
+		</>}
+	)
+}
+endsnippet
+
+snippet ncomp "Creates a functional component React boilerplate" b
+const ${1:ComponentName}:React.FC${2:<$3>} = ($4) => {
+	return (
+		$0
+	)
+}
+
+export default ${1/(\W)/\l$1/}
+endsnippet

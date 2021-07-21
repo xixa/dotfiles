@@ -1,5 +1,4 @@
 {
-  "coc.preferences.snippets.enable": false,
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "cpp",
@@ -12,13 +11,13 @@
     "typescript",
     "typescriptreact",
     "elixir",
+    "eelixir",
     "graphql",
     "json",
     "elm",
     "haskell",
     "xml"
   ],
-  "eslint.enable": true,
   //"eslint.autoFixOnSave": true,
   //"eslint.run": "onSave",
   "eslint.options": {

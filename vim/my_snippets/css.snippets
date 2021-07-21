@@ -1,5 +1,5 @@
-snippet bc "Background color"
-background-color: $1;$0
+snippet bc "Block comment"
+/* ${VISUAL}$0 */
 endsnippet
 
 snippet todo "Creates TODO"
@@ -9,5 +9,16 @@ endsnippet
 snippet media "Create Media Query" b
 @media (${1:rule}) {
 	$0
+}
+endsnippet
+
+snippet key "Description" b
+@keyframes ${1:name} {
+	0% {
+		$0
+	}
+	100% {
+
+	}
 }
 endsnippet

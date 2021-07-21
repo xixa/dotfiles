@@ -123,3 +123,5 @@ function ffmpeg_convert_to_vp9webm {
 alias towebm=ffmpeg_convert_to_vp9webm
 
 alias towebm8="ffmpeg -c:v libvpx -b:v 1M -c:a libvorbis outpute.webm -i "
+
+alias listen="sudo lsof -i -P -n | grep LISTEN"

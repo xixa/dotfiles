@@ -7,7 +7,7 @@ set noemoji
 set hidden
 set bufhidden=hide
 set autowrite                                 " gets rid of 'no write since last change'
-set conceallevel=0                            " prevents annoying auto hidden quotes in json files
+" set conceallevel=0                            " prevents annoying auto hidden quotes in json files
 
 set timeoutlen=400 ttimeoutlen=0              " pensa rapido!
 set backspace=2                               " so backspace works normally on tmux

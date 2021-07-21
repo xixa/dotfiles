@@ -41,3 +41,4 @@ function! ElixirDocsFold()
 endfunction
 
 setlocal foldtext=ElixirFoldLayout() foldmethod=expr foldexpr=ElixirDocsFold()
+

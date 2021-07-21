@@ -1,7 +1,13 @@
 # Wrappers
 snippet do "closes a do block"
 do
-	$1
+	$0
+end
+endsnippet
+
+snippet def "creates a function"
+def $1${2:($3)} do
+	$0
 end
 endsnippet
 
@@ -43,7 +49,7 @@ fn ${1:params} -> ${2:.} end$0
 endsnippet
 
 snippet ins "creates inspection" w
-IO.inspect(${1:label: "${2:(づ｡◕‿‿◕｡)づ}"})$0
+IO.inspect(${1:label: "${2:🔥}"})$0
 endsnippet
 
 snippet td "creates TODO"
@@ -52,4 +58,8 @@ endsnippet
 
 snippet w "atom sigil" b
 ~w/${VISUAL}$1/a
+endsnippet
+
+snippet now "naive datetime" w
+NaiveDateTime.utc_now()
 endsnippet

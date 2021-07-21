@@ -283,7 +283,7 @@ function! plugins#pluginsConfig()
   endif
 
   if &runtimepath =~ "UltiSnips"
-    let g:UltiSnipsUsePythonVersion = 3
+    let g:UltiSnipsUsePythonVersion=3
     let g:UltiSnipsSnippetDirectories=["~/dotfiles/vim/my_snippets"]
     let g:UltiSnipsEditSplit='vertical'
   endif

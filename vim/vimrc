@@ -16,7 +16,7 @@ if !(&runtimepath =~ "goyo")
 endif
 
 " RECOGNIZING FILETYPES
-" au BufRead,BufNewFile *.eex set filetype=eelixir
+au BufRead,BufNewFile *.eex set filetype=eelixir
 au BufRead,BufNewFile *.svelte set filetype=svelte
 " au BufRead,BufNewFile *.svelte set syntax=html filetype svelte
 
@@ -106,6 +106,7 @@ Plug 'vim-test/vim-test', {'for': ['elixir', 'haskell', 'clojure',  'scala', 'ja
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': [
       \ 'cpp',
       \ 'elixir',
+      \ 'eelixir',
       \ 'haskell',
       \ 'purescript',
       \ 'elm',

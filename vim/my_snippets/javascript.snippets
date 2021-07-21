@@ -2,12 +2,12 @@ snippet pi "ignore prettier"
 // prettier-ignore
 endsnippet
 
-snippet "t(d|odo)?" "Description" !r
+snippet todo "Description"
 // TODO:
 endsnippet
 
 snippet log "console.log shorthand" w
-console.log(${1})
+console.log(${VISUAL}$1)
 endsnippet
 
 snippet "err(o|or)?" "console.err shorthand" !r
@@ -59,8 +59,8 @@ it('${1:description}', () => {
 })
 endsnippet
 
-snippet $ "surrounds a selection in ${}"
-${${VISUAL}}
+snippet $ "surrounds a selection in ${}" w
+${${VISUAL}$0}
 endsnippet
 
 snippet "req(u|ui|uir|uire)?" "automatize commonjs 'import'" br
@@ -91,4 +91,12 @@ endsnippet
 
 snippet prod "Shorthand for prod"
 process.env.NODE_ENV === 'production' $0
+endsnippet
+
+snippet dot "Dot symbol"
+•
+endsnippet
+
+snippet json "Pretty JSON stringify" w
+JSON.stringify($1, null, 2)
 endsnippet
